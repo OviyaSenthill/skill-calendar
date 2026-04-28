@@ -14,6 +14,7 @@
   --safe:#f77c6a;--safe-bg:rgba(247,124,106,0.1);
   --py:#4fcf8e;--py-bg:rgba(79,207,142,0.1);
   --ai:#a78bfa;--ai-bg:rgba(167,139,250,0.1);
+  --ng:#34d399;--ng-bg:rgba(52,211,153,0.1);
   --biz:#f7c84f;--biz-bg:rgba(247,200,79,0.1);
   --sc:#38bdf8;--sc-bg:rgba(56,189,248,0.1);
   --qc:#f472b6;--qc-bg:rgba(244,114,182,0.1);
@@ -25,13 +26,11 @@
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(79,142,247,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,0.02) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
 .wrap{max-width:1150px;margin:0 auto;padding:0 1.5rem 4rem;position:relative;z-index:1;}
-
 header{padding:2.5rem 0 2rem;border-bottom:1px solid var(--border);margin-bottom:2rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
 h1{font-family:'DM Serif Display',serif;font-size:2.1rem;color:var(--text);line-height:1.1;letter-spacing:-0.02em;}
 h1 span{color:var(--accent);font-style:italic;}
 .sub{font-size:12px;color:var(--text2);margin-top:6px;font-weight:300;line-height:1.7;}
 .today-badge{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.2);padding:4px 12px;border-radius:20px;white-space:nowrap;}
-
 .nav{display:flex;gap:6px;margin-bottom:2rem;flex-wrap:wrap;}
 .nb{font-size:12px;font-weight:500;padding:6px 14px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;transition:all .15s;letter-spacing:.02em;font-family:'DM Sans',sans-serif;}
 .nb:hover{border-color:var(--accent);color:var(--text);}
@@ -39,14 +38,20 @@ h1 span{color:var(--accent);font-style:italic;}
 .view{display:none;}.view.active{display:block;}
 
 /* MORNING BANNER */
-.morning-banner{background:linear-gradient(135deg,rgba(56,189,248,0.08),rgba(244,114,182,0.08),rgba(251,146,60,0.08));border:1px solid rgba(255,255,255,0.1);border-radius:var(--rl);padding:1.25rem 1.5rem;margin-bottom:1.75rem;}
+.morning-banner{background:linear-gradient(135deg,rgba(56,189,248,0.07),rgba(244,114,182,0.07),rgba(251,146,60,0.07));border:1px solid rgba(255,255,255,0.09);border-radius:var(--rl);padding:1.1rem 1.4rem;margin-bottom:1.5rem;}
 .mb-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;margin-bottom:.6rem;}
 .mb-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
 .mb-item{display:flex;align-items:center;gap:7px;background:var(--bg3);border-radius:8px;padding:6px 12px;border:1px solid var(--border);}
 .mb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .mb-label{font-size:12px;font-weight:500;color:var(--text);}
-.mb-desc{font-size:11px;color:var(--text2);}
-.mb-arrow{font-size:14px;color:var(--text3);}
+.mb-desc{font-size:11px;}
+.mb-arrow{font-size:13px;color:var(--text3);}
+
+/* NG BANNER */
+.ng-banner{background:var(--ng-bg);border:1px solid rgba(52,211,153,0.2);border-radius:var(--r);padding:.9rem 1.2rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:10px;}
+.ng-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px;}
+.ng-title{font-size:13px;font-weight:600;color:var(--ng);margin-bottom:3px;}
+.ng-desc{font-size:12px;color:var(--text2);line-height:1.55;}
 
 /* LEGEND */
 .legend{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem;}
@@ -54,6 +59,7 @@ h1 span{color:var(--accent);font-style:italic;}
 .bsafe{background:var(--safe-bg);color:var(--safe);border:1px solid rgba(247,124,106,.2);}
 .bpy{background:var(--py-bg);color:var(--py);border:1px solid rgba(79,207,142,.2);}
 .bai{background:var(--ai-bg);color:var(--ai);border:1px solid rgba(167,139,250,.2);}
+.bng{background:var(--ng-bg);color:var(--ng);border:1px solid rgba(52,211,153,.2);}
 .bbiz{background:var(--biz-bg);color:var(--biz);border:1px solid rgba(247,200,79,.2);}
 .bsc{background:var(--sc-bg);color:var(--sc);border:1px solid rgba(56,189,248,.2);}
 .bqc{background:var(--qc-bg);color:var(--qc);border:1px solid rgba(244,114,182,.2);}
@@ -73,20 +79,18 @@ h1 span{color:var(--accent);font-style:italic;}
 .dc.active{border-color:var(--accent);background:var(--bg3);}
 .dc.tday{border-color:rgba(79,142,247,.4);}
 .dc.tday::after{opacity:1;background:var(--accent);}
-
-/* Morning stripe at top of day card */
-.dc-morning{padding:5px 8px 5px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:4px;}
+.dc-morning{padding:5px 8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:4px;}
 .dc-morning-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
-.dc-morning-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.04em;opacity:.8;}
-.dc-main{padding:7px 8px 9px;}
+.dc-morning-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.04em;opacity:.85;}
+.dc-main{padding:7px 8px 9px;flex:1;}
 .dn{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);margin-bottom:4px;}
 .dn.t{color:var(--accent);}
 .dts{font-size:11px;font-weight:500;color:var(--text2);margin-bottom:5px;line-height:1.3;}
 .dots{display:flex;flex-wrap:wrap;gap:3px;}
 .dot{width:6px;height:6px;border-radius:50%;}
 .dsafe{background:var(--safe);}.dpy{background:var(--py);}.dai{background:var(--ai);}
-.dbiz{background:var(--biz);}.dsc{background:var(--sc);}.dqc{background:var(--qc);}
-.drb{background:var(--rb);}.drest{background:var(--rest);}
+.dng{background:var(--ng);}.dbiz{background:var(--biz);}.dsc{background:var(--sc);}
+.dqc{background:var(--qc);}.drb{background:var(--rb);}.drest{background:var(--rest);}
 
 /* PANEL */
 .panel{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rl);padding:1.5rem;margin-top:1rem;display:none;animation:fi .2s ease;}
@@ -95,39 +99,53 @@ h1 span{color:var(--accent);font-style:italic;}
 .ph{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--border);}
 .pt{font-family:'DM Serif Display',serif;font-size:1.35rem;color:var(--text);}
 .pm{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);background:var(--bg3);padding:3px 10px;border-radius:20px;}
-
-/* Morning block styling — special */
 .morning-section{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:1rem;}
 .ms-header{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:6px;}
 .ms-dot{width:7px;height:7px;border-radius:50%;}
-.ms-block{border-radius:8px;padding:10px 13px;border-left:3px solid transparent;margin-bottom:6px;}
-.ms-block:last-child{margin-bottom:0;}
-
 .blocks{display:flex;flex-direction:column;gap:7px;}
 .block{border-radius:var(--r);padding:11px 13px;border-left:3px solid transparent;}
 .blsafe{background:var(--safe-bg);border-left-color:var(--safe);}
 .blpy{background:var(--py-bg);border-left-color:var(--py);}
 .blai{background:var(--ai-bg);border-left-color:var(--ai);}
+.blng{background:var(--ng-bg);border-left-color:var(--ng);}
 .blbiz{background:var(--biz-bg);border-left-color:var(--biz);}
 .blsc{background:var(--sc-bg);border-left-color:var(--sc);}
 .blqc{background:var(--qc-bg);border-left-color:var(--qc);}
 .blrb{background:var(--rb-bg);border-left-color:var(--rb);}
 .blrest{background:var(--rest-bg);border-left-color:var(--rest);}
 .bl{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.06em;margin-bottom:3px;}
-.lsafe{color:var(--safe);}.lpy{color:var(--py);}.lai{color:var(--ai);}.lbiz{color:var(--biz);}
-.lsc{color:var(--sc);}.lqc{color:var(--qc);}.lrb{color:var(--rb);}.lrest{color:var(--rest);}
+.lsafe{color:var(--safe);}.lpy{color:var(--py);}.lai{color:var(--ai);}.lng{color:var(--ng);}
+.lbiz{color:var(--biz);}.lsc{color:var(--sc);}.lqc{color:var(--qc);}.lrb{color:var(--rb);}.lrest{color:var(--rest);}
 .bh{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;}
 .bb{font-size:13px;color:var(--text2);line-height:1.65;}
 .bres{font-size:11px;color:var(--text3);margin-top:4px;font-family:'DM Mono',monospace;}
 .tip{margin-top:1rem;background:rgba(79,142,247,.06);border:1px solid rgba(79,142,247,.15);border-radius:var(--r);padding:10px 14px;font-size:13px;color:var(--text2);line-height:1.6;}
-.tip strong{color:var(--accent);font-weight:500;}
+.tip strong{color:var(--accent);}
 .day-divider{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin:1rem 0 .75rem;padding-top:.75rem;border-top:1px solid var(--border);}
+
+/* NG PROGRESS TRACKER */
+.ng-tracker{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1.25rem;margin-bottom:1.5rem;}
+.ng-tracker-title{font-family:'DM Mono',monospace;font-size:11px;color:var(--ng);letter-spacing:.06em;margin-bottom:1rem;}
+.ng-modules{display:flex;flex-direction:column;gap:6px;}
+.ng-module{background:var(--bg3);border-radius:var(--r);padding:10px 14px;border-left:3px solid var(--border2);}
+.ng-module.current{border-left-color:var(--ng);}
+.ng-module.locked{opacity:.4;}
+.ng-mod-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.ng-mod-name{font-size:13px;font-weight:500;color:var(--text);}
+.ng-mod-status{font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:10px;}
+.status-current{background:var(--ng-bg);color:var(--ng);}
+.status-locked{background:var(--rest-bg);color:var(--rest);}
+.ng-lessons{display:flex;flex-direction:column;gap:3px;}
+.ng-lesson{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text2);}
+.ng-lesson-dot{width:5px;height:5px;border-radius:50%;background:var(--text3);flex-shrink:0;}
+.ng-lesson.done .ng-lesson-dot{background:var(--ng);}
+.ng-lesson.done{color:var(--text);}
 
 /* CURRICULUM */
 .cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:1rem;}
 .cc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1.25rem;}
 .ct{font-size:11px;font-weight:600;margin-bottom:1rem;padding-bottom:8px;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;letter-spacing:.05em;}
-.cr{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.cr{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);}
 .cr:last-child{border-bottom:none;}
 .cw{color:var(--text3);font-family:'DM Mono',monospace;min-width:44px;font-size:10px;padding-top:1px;flex-shrink:0;}
 .ctop{font-weight:500;color:var(--text);margin-bottom:2px;font-size:12px;}
@@ -163,7 +181,7 @@ h1 span{color:var(--accent);font-style:italic;}
       <h1>Poseidon <span>Fellows</span></h1>
       <p class="sub">
         ☀️ Morning (~30 min): Supercomputing → Quantum → Robotics → repeat<br>
-        📚 Day (1–2 hrs): AI Safety · Python · ML Foundations · Entrepreneurship
+        📚 Day (1–2 hrs): AI Safety · Python · ML Foundations · Andrew Ng · Entrepreneurship
       </p>
     </div>
     <div class="today-badge" id="tday">—</div>
@@ -171,34 +189,31 @@ h1 span{color:var(--accent);font-style:italic;}
 
   <div class="nav">
     <button class="nb active" onclick="tab('schedule',this)">Schedule</button>
+    <button class="nb" onclick="tab('ng',this)">Ng Course Tracker</button>
     <button class="nb" onclick="tab('curriculum',this)">Curriculum</button>
     <button class="nb" onclick="tab('resources',this)">Resources</button>
   </div>
 
+  <!-- SCHEDULE -->
   <div class="view active" id="view-schedule">
-
     <div class="morning-banner">
-      <div class="mb-title">☀️ Daily Morning Rotation — 25–30 min every day before everything else</div>
+      <div class="mb-title">☀️ Daily Morning Rotation — 25–30 min before everything else</div>
       <div class="mb-row">
-        <div class="mb-item">
-          <div class="mb-dot" style="background:var(--sc)"></div>
-          <div><div class="mb-label">Mon &amp; Thu</div><div class="mb-desc" style="color:var(--sc)">Supercomputing</div></div>
-        </div>
+        <div class="mb-item"><div class="mb-dot" style="background:var(--sc)"></div><div><div class="mb-label">Mon + Thu</div><div class="mb-desc" style="color:var(--sc)">Supercomputing</div></div></div>
         <div class="mb-arrow">→</div>
-        <div class="mb-item">
-          <div class="mb-dot" style="background:var(--qc)"></div>
-          <div><div class="mb-label">Tue &amp; Fri</div><div class="mb-desc" style="color:var(--qc)">Quantum Computing</div></div>
-        </div>
+        <div class="mb-item"><div class="mb-dot" style="background:var(--qc)"></div><div><div class="mb-label">Tue + Fri</div><div class="mb-desc" style="color:var(--qc)">Quantum Computing</div></div></div>
         <div class="mb-arrow">→</div>
-        <div class="mb-item">
-          <div class="mb-dot" style="background:var(--rb)"></div>
-          <div><div class="mb-label">Wed &amp; Sat</div><div class="mb-desc" style="color:var(--rb)">Robotics</div></div>
-        </div>
+        <div class="mb-item"><div class="mb-dot" style="background:var(--rb)"></div><div><div class="mb-label">Wed + Sat</div><div class="mb-desc" style="color:var(--rb)">Robotics</div></div></div>
         <div class="mb-arrow">→</div>
-        <div class="mb-item">
-          <div class="mb-dot" style="background:var(--rest)"></div>
-          <div><div class="mb-label">Sun</div><div class="mb-desc" style="color:var(--rest)">Review all three</div></div>
-        </div>
+        <div class="mb-item"><div class="mb-dot" style="background:var(--rest)"></div><div><div class="mb-label">Sun</div><div class="mb-desc" style="color:var(--rest)">Review all three</div></div></div>
+      </div>
+    </div>
+
+    <div class="ng-banner">
+      <div class="ng-icon">🎓</div>
+      <div>
+        <div class="ng-title">Andrew Ng — Advanced Learning Algorithms (Module 1 unlocked)</div>
+        <div class="ng-desc">Module 1 runs across Weeks 1–2, ~30 min/day on weekdays. Topics: NN intuition → NN model → TensorFlow → Python implementation → Vectorization. The 3-hr final lab lands on Saturday of Week 2. Modules 2+ unlock after completion — we'll plan those then.</div>
       </div>
     </div>
 
@@ -206,6 +221,7 @@ h1 span{color:var(--accent);font-style:italic;}
       <span class="badge bsafe">AI Safety</span>
       <span class="badge bpy">Python</span>
       <span class="badge bai">AI/ML</span>
+      <span class="badge bng">Andrew Ng</span>
       <span class="badge bbiz">Entrepreneurship</span>
       <span class="badge bsc">Supercomputing ☀️</span>
       <span class="badge bqc">Quantum ☀️</span>
@@ -214,10 +230,119 @@ h1 span{color:var(--accent);font-style:italic;}
     </div>
 
     <div id="cal"></div>
+    <div style="background:var(--biz-bg);border:1px solid rgba(247,200,79,0.2);border-radius:var(--r);padding:10px 16px;margin-bottom:1rem;display:flex;align-items:center;gap:10px;">
+      <span style="font-size:1.1rem;">📖</span>
+      <div>
+        <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--biz);font-weight:600;letter-spacing:.06em;">EVERY NIGHT WITHOUT EXCEPTION</span>
+        <span style="font-size:13px;color:var(--text2);margin-left:8px;">Zero to One — Peter Thiel · ~15 min before bed</span>
+      </div>
+    </div>
     <div class="panel" id="panel">
       <div class="ph"><span class="pt" id="ptitle"></span><span class="pm" id="pmeta"></span></div>
       <div id="pinner"></div>
       <div class="tip" id="ptip" style="display:none"></div>
+    </div>
+  </div>
+
+  <!-- NG TRACKER -->
+  <div class="view" id="view-ng">
+    <div class="ng-tracker">
+      <div class="ng-tracker-title">MODULE 1 — NEURAL NETWORKS (Unlocked)</div>
+      <div class="ng-modules">
+        <div class="ng-module current">
+          <div class="ng-mod-header">
+            <span class="ng-mod-name">Neural Networks Intuition</span>
+            <span class="ng-mod-status status-current">In Progress</span>
+          </div>
+          <div class="ng-lessons">
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Welcome! (2 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Neurons and the brain (10 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Demand Prediction (16 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Example: Recognizing Images (6 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Practice quiz: Neural networks intuition (10 min)</div>
+          </div>
+        </div>
+        <div class="ng-module current">
+          <div class="ng-mod-header">
+            <span class="ng-mod-name">Neural Network Model</span>
+            <span class="ng-mod-status status-current">Up Next</span>
+          </div>
+          <div class="ng-lessons">
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Neural network layer (9 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>More complex neural networks (8 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Inference: making predictions / forward propagation (5 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Lab: Neurons and Layers (10 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Practice quiz: Neural network model (10 min)</div>
+          </div>
+        </div>
+        <div class="ng-module current">
+          <div class="ng-mod-header">
+            <span class="ng-mod-name">TensorFlow Implementation</span>
+            <span class="ng-mod-status status-current">Up Next</span>
+          </div>
+          <div class="ng-lessons">
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Inference in Code (6 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Data in TensorFlow (11 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Building a neural network (8 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Lab: Coffee Roasting in TensorFlow (10 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Practice quiz: TensorFlow implementation (10 min)</div>
+          </div>
+        </div>
+        <div class="ng-module current">
+          <div class="ng-mod-header">
+            <span class="ng-mod-name">Neural Network Implementation in Python</span>
+            <span class="ng-mod-status status-current">Up Next</span>
+          </div>
+          <div class="ng-lessons">
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Forward prop in a single layer (5 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>General implementation of forward propagation (7 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Lab: CoffeeRoastingNumPy (1 hr)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Practice quiz: NN implementation in Python (10 min)</div>
+          </div>
+        </div>
+        <div class="ng-module current">
+          <div class="ng-mod-header">
+            <span class="ng-mod-name">Speculations on AGI</span>
+            <span class="ng-mod-status status-current">Up Next</span>
+          </div>
+          <div class="ng-lessons">
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Is there a path to AGI? (10 min) — connects directly to your AI safety reading group</div>
+          </div>
+        </div>
+        <div class="ng-module current">
+          <div class="ng-mod-header">
+            <span class="ng-mod-name">Vectorization (Optional but recommended)</span>
+            <span class="ng-mod-status status-current">Optional</span>
+          </div>
+          <div class="ng-lessons">
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>How neural networks are implemented efficiently (4 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Matrix multiplication (9 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Matrix multiplication rules (9 min)</div>
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Matrix multiplication code (6 min)</div>
+          </div>
+        </div>
+        <div class="ng-module current">
+          <div class="ng-mod-header">
+            <span class="ng-mod-name">🏆 Practice Lab: Neural Networks for Binary Classification</span>
+            <span class="ng-mod-status status-current">Final Lab — 3 hrs</span>
+          </div>
+          <div class="ng-lessons">
+            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Programming Assignment — build a neural network to classify data. Scheduled for Saturday of Week 2.</div>
+          </div>
+        </div>
+        <div class="ng-module locked">
+          <div class="ng-mod-header">
+            <span class="ng-mod-name">Module 2 — TBD</span>
+            <span class="ng-mod-status status-locked">Locked — unlocks after Module 1</span>
+          </div>
+        </div>
+        <div class="ng-module locked">
+          <div class="ng-mod-header">
+            <span class="ng-mod-name">Module 3+ — TBD</span>
+            <span class="ng-mod-status status-locked">Locked</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -226,64 +351,56 @@ h1 span{color:var(--accent);font-style:italic;}
     <div class="cg">
       <div class="cc">
         <div class="ct" style="color:var(--safe)">AI Safety Reading Group</div>
-        <div class="cr"><div class="cw">Wk 0</div><div><div class="ctop">3Blue1Brown Neural Networks — 6 chapters</div><div class="cd">Ch1 What is a NN · Ch2 Gradient descent · Ch3–4 Backprop · Ch5 Transformers · Ch6 Attention. Required before Week 1.</div><div class="chi" style="background:var(--ai-bg);color:var(--ai)">Required Wk 0</div></div></div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">Transformative AI & Trajectory</div><div class="cd">METR long tasks (2025) + Epoch AI Trends (2025)</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">Apr 20 — catch up</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Outer Alignment</div><div class="cd">Specification gaming · InstructGPT · LLMs mislead via RLHF · Apollo deception</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">Apr 27 — now</div></div></div>
+        <div class="cr"><div class="cw">Wk 0</div><div><div class="ctop">3Blue1Brown Neural Networks — 6 chapters</div><div class="cd">Required before Week 1 session.</div><div class="chi" style="background:var(--ai-bg);color:var(--ai)">Required Wk 0</div></div></div>
+        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">Transformative AI & Trajectory</div><div class="cd">METR long tasks + Epoch AI Trends</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">Apr 20 — catch up</div></div></div>
+        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Outer Alignment</div><div class="cd">Specification gaming · InstructGPT · LLMs mislead via RLHF · Apollo deception</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">Apr 27</div></div></div>
         <div class="cr"><div class="cw">Wk 3</div><div><div class="ctop">Inner Alignment</div><div class="cd">Mesa-optimizers · Alignment faking · Sleeper Agents · Shortcuts to sabotage</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">May 4</div></div></div>
-        <div class="cr"><div class="cw">Wk 4</div><div><div class="ctop">Threat Models</div><div class="cd">Statement on AI Risk · Instrumental Convergence · CAIS overview · AI 2027</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">May 11</div></div></div>
-        <div class="cr"><div class="cw">Wk 5</div><div><div class="ctop">Control & Scalable Oversight</div><div class="cd">Case for AI control · Ctrl-Z · Weak-to-strong oversight</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">May 18</div></div></div>
-        <div class="cr"><div class="cw">Wk 6</div><div><div class="ctop">Mechanistic Interpretability & Evals</div><div class="cd">Interpretability Dreams · Biology of a Large LLM · Gemma Scope</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">May 25</div></div></div>
+        <div class="cr"><div class="cw">Wk 4</div><div><div class="ctop">Threat Models</div><div class="cd">Statement on AI Risk · Instrumental Convergence · CAIS · AI 2027</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">May 11</div></div></div>
+        <div class="cr"><div class="cw">Wk 5</div><div><div class="ctop">Control & Scalable Oversight</div><div class="cd">Case for AI control · Ctrl-Z · Weak-to-strong</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">May 18</div></div></div>
+        <div class="cr"><div class="cw">Wk 6</div><div><div class="ctop">Mechanistic Interpretability</div><div class="cd">Interpretability Dreams · Biology of a Large LLM · Gemma Scope</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">May 25</div></div></div>
         <div class="cr"><div class="cw">Wk 7</div><div><div class="ctop">Policy, Governance & Careers</div><div class="cd">Export controls · Compute governance · Careers in alignment</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">Jun 1</div></div></div>
       </div>
-
       <div class="cc">
-        <div class="ct" style="color:var(--sc)">☀️ Supercomputing (Mon + Thu mornings)</div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">CPUs vs GPUs — what and why</div><div class="cd">Computerphile 'How GPUs Work'. Why AI needs massive parallel compute. FLOPS, memory bandwidth concepts.</div></div></div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">HPC architecture overview</div><div class="cd">TOP500 list context. Interconnects, NUMA, distributed memory. MIT 6.172 Lecture 1.</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">CUDA programming concepts</div><div class="cd">What a kernel is. Thread blocks. GPU memory hierarchy. First CUDA mental model.</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Parallel Python — multiprocessing</div><div class="cd">Python multiprocessing module. Joblib. How HPC jobs are structured.</div></div></div>
-        <div class="cr"><div class="cw">Wk 3</div><div><div class="ctop">MPI basics + LLNL tutorials</div><div class="cd">Message Passing Interface — how supercomputer nodes talk. Lawrence Livermore free tutorials.</div><div class="chi" style="background:var(--sc-bg);color:var(--sc)">hpc.llnl.gov/tutorials</div></div></div>
-        <div class="cr"><div class="cw">Wk 3+</div><div><div class="ctop">NumPy/CuPy — GPU arrays in Python</div><div class="cd">CuPy is NumPy but on GPU. Write your first GPU-accelerated Python code.</div></div></div>
+        <div class="ct" style="color:var(--ng)">Andrew Ng — Advanced Learning Algorithms</div>
+        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">NN Intuition + NN Model</div><div class="cd">Neurons, demand prediction, image recognition, forward propagation. ~30 min/day Mon–Wed.</div><div class="chi" style="background:var(--ng-bg);color:var(--ng)">Module 1 unlocked ✓</div></div></div>
+        <div class="cr"><div class="cw">Wk 1–2</div><div><div class="ctop">TensorFlow Implementation</div><div class="cd">Inference in code, data in TF, building NNs, Coffee Roasting lab. Your first real TF code.</div></div></div>
+        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Python Implementation + Vectorization</div><div class="cd">Forward prop in NumPy. Matrix multiplication — connects directly to your SC morning sessions on GPU/CUDA.</div></div></div>
+        <div class="cr"><div class="cw">Wk 2 Sat</div><div><div class="ctop">🏆 Final Lab — Neural Networks Binary Classification (3 hrs)</div><div class="cd">Full programming assignment. The capstone of Module 1. Saturday deep-work slot.</div><div class="chi" style="background:var(--ng-bg);color:var(--ng)">3-hr lab</div></div></div>
+        <div class="cr"><div class="cw">Wk 3+</div><div><div class="ctop">Module 2+ (TBD after completion)</div><div class="cd">Modules unlock sequentially. We'll plan once Module 1 is done.</div><div class="chi" style="background:var(--rest-bg);color:var(--rest)">locked</div></div></div>
       </div>
-
-      <div class="cc">
-        <div class="ct" style="color:var(--qc)">☀️ Quantum Computing (Tue + Fri mornings)</div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">Qubits, superposition, entanglement</div><div class="cd">IBM 'What is Quantum Computing?' (5 min). Microsoft Research intro (first 15 min). Pure concepts, no math.</div></div></div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">Quantum gates and circuits</div><div class="cd">How quantum gates work like classical logic gates but with amplitudes. Bloch sphere intuition.</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Qiskit — first quantum circuit</div><div class="cd">Install Qiskit. Build a Bell state (quantum entanglement in code). Run on IBM simulator.</div><div class="chi" style="background:var(--qc-bg);color:var(--qc)">learning.quantum.ibm.com</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Run on real quantum hardware</div><div class="cd">IBM gives free access to real quantum computers. Submit your circuit. See quantum noise in real results.</div></div></div>
-        <div class="cr"><div class="cw">Wk 3</div><div><div class="ctop">Grover's search + Shor's algorithm</div><div class="cd">Why quantum beats classical for specific problems. Conceptual understanding, not full proofs.</div></div></div>
-        <div class="cr"><div class="cw">Wk 3+</div><div><div class="ctop">Quantum ML — PennyLane</div><div class="cd">QML intro at pennylane.ai. The AI+quantum intersection. Very relevant to fellowship context.</div><div class="chi" style="background:var(--qc-bg);color:var(--qc)">pennylane.ai/qml</div></div></div>
-      </div>
-
-      <div class="cc">
-        <div class="ct" style="color:var(--rb)">☀️ Robotics (Wed + Sat mornings)</div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">What is ROS? Nodes and topics</div><div class="cd">'ROS for Beginners' intro video (15 min). Node/topic/publisher/subscriber mental model. Why ROS exists.</div></div></div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">Sensors, actuators, control loops</div><div class="cd">How robots perceive and act. IMUs, LiDAR, cameras. Basic PID control concept.</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">ROS 2 install + first node</div><div class="cd">Install ROS 2 (or Docker). Complete beginner CLI tutorials. Run your first publisher/subscriber pair.</div><div class="chi" style="background:var(--rb-bg);color:var(--rb)">docs.ros.org/tutorials</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Kinematics basics</div><div class="cd">Forward and inverse kinematics. How robot arms calculate position. MIT 6.832 Lecture 1.</div></div></div>
-        <div class="cr"><div class="cw">Wk 3</div><div><div class="ctop">RL for robotics + OpenAI Gym</div><div class="cd">Gymnasium simulation. CartPole environment. How RL agents learn to control robots.</div><div class="chi" style="background:var(--rb-bg);color:var(--rb)">gymnasium.farama.org</div></div></div>
-        <div class="cr"><div class="cw">Wk 3+</div><div><div class="ctop">Embodied AI — LLMs + Robots</div><div class="cd">How LLMs are being used to control robots. RT-2, SayCan, PaLM-E papers. Hottest intersection in AI.</div></div></div>
-      </div>
-
       <div class="cc">
         <div class="ct" style="color:var(--py)">Python Track</div>
-        <div class="cr"><div class="cw">Day 1</div><div><div class="ctop">Learn X in Y Minutes — Python</div><div class="cd">Read once. Keep open as reference.</div><div class="chi" style="background:var(--py-bg);color:var(--py)">learnxinyminutes.com/docs/python</div></div></div>
-        <div class="cr"><div class="cw">Daily</div><div><div class="ctop">python-course.eu</div><div class="cd">Tutorial → OOP → Advanced → Numerical → ML. One section per day.</div></div></div>
+        <div class="cr"><div class="cw">Day 1</div><div><div class="ctop">Learn X in Y Minutes</div><div class="cd">Read once, keep open as reference.</div><div class="chi" style="background:var(--py-bg);color:var(--py)">learnxinyminutes.com/docs/python</div></div></div>
+        <div class="cr"><div class="cw">Daily</div><div><div class="ctop">python-course.eu</div><div class="cd">Tutorial → OOP → Advanced → Numerical → ML.</div></div></div>
         <div class="cr"><div class="cw">Wk 1–2</div><div><div class="ctop">CS50P Lectures 0–3</div><div class="cd">Functions, conditionals, loops, exceptions.</div><div class="chi" style="background:var(--py-bg);color:var(--py)">cs50.harvard.edu/python</div></div></div>
-        <div class="cr"><div class="cw">Wk 2–3</div><div><div class="ctop">CS50P Lectures 4–6</div><div class="cd">Libraries, file I/O, regex. Libraries lecture unlocks AI APIs, Qiskit, ROS Python.</div></div></div>
-        <div class="cr"><div class="cw">Wk 3–4</div><div><div class="ctop">CS50P Lectures 7–8 + OOP</div><div class="cd">OOP used in PyTorch, sklearn, LangChain, ROS.</div></div></div>
-        <div class="cr"><div class="cw">Flex</div><div><div class="ctop">100 Days of Python — paused</div><div class="cd">Resume during longer breaks.</div></div></div>
+        <div class="cr"><div class="cw">Wk 2–3</div><div><div class="ctop">CS50P Lectures 4–6</div><div class="cd">Libraries, file I/O. Libraries unlock AI APIs, Qiskit, ROS.</div></div></div>
+        <div class="cr"><div class="cw">Wk 3–4</div><div><div class="ctop">CS50P Lectures 7–8 + OOP</div><div class="cd">OOP used in TensorFlow, PyTorch, LangChain, ROS.</div></div></div>
       </div>
-
+      <div class="cc">
+        <div class="ct" style="color:var(--sc)">☀️ Supercomputing (Mon + Thu)</div>
+        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">CPUs vs GPUs + HPC architecture</div><div class="cd">Computerphile GPU video. TOP500 list. FLOPS, memory bandwidth, interconnects.</div></div></div>
+        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">CUDA concepts + Parallel Python</div><div class="cd">CUDA kernel mental model. Python multiprocessing module.</div></div></div>
+        <div class="cr"><div class="cw">Wk 3</div><div><div class="ctop">MPI + CuPy GPU arrays</div><div class="cd">LLNL tutorials. CuPy: NumPy on GPU. Write first GPU Python code.</div></div></div>
+      </div>
+      <div class="cc">
+        <div class="ct" style="color:var(--qc)">☀️ Quantum Computing (Tue + Fri)</div>
+        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">Qubits, superposition, gates</div><div class="cd">IBM intro video. Microsoft Research lecture (first 15 min). Hadamard + CNOT gates.</div></div></div>
+        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Qiskit — first circuit + real hardware</div><div class="cd">Build Bell state. Run on IBM simulator then real quantum hardware.</div><div class="chi" style="background:var(--qc-bg);color:var(--qc)">learning.quantum.ibm.com</div></div></div>
+        <div class="cr"><div class="cw">Wk 3</div><div><div class="ctop">Grover's, Shor's + Quantum ML</div><div class="cd">Why quantum beats classical for specific problems. PennyLane intro.</div></div></div>
+      </div>
+      <div class="cc">
+        <div class="ct" style="color:var(--rb)">☀️ Robotics (Wed + Sat)</div>
+        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">ROS intro + sensors/control loops</div><div class="cd">ROS for Beginners video. Node/topic model. PID control concept.</div></div></div>
+        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">ROS 2 install + kinematics</div><div class="cd">First publisher/subscriber node. Forward vs inverse kinematics.</div><div class="chi" style="background:var(--rb-bg);color:var(--rb)">docs.ros.org</div></div></div>
+        <div class="cr"><div class="cw">Wk 3</div><div><div class="ctop">RL + Gymnasium + Embodied AI</div><div class="cd">CartPole environment. RT-2 paper. LLMs controlling robots.</div></div></div>
+      </div>
       <div class="cc">
         <div class="ct" style="color:var(--biz)">Entrepreneurship</div>
-        <div class="cr"><div class="cw">Nightly</div><div><div class="ctop">Zero to One — Peter Thiel</div><div class="cd">~15 min before bed every night.</div></div></div>
+        <div class="cr"><div class="cw">Nightly</div><div><div class="ctop">Zero to One — Peter Thiel</div><div class="cd">~15 min before bed.</div></div></div>
         <div class="cr"><div class="cw">✓ Done</div><div><div class="ctop">How to Start a Startup Ep 1 & 2</div><div class="cd">Complete.</div><div class="chi" style="background:var(--py-bg);color:var(--py)">done ✓</div></div></div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">Ep 3 — Paul Graham</div><div class="cd">Counterintuitive parts of startups. How to get ideas.</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Ep 4 — Adora Cheung</div><div class="cd">Building product, talking to users.</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">SaaS Metrics + PG essays</div><div class="cd">ARR, CAC, LTV. "Default Alive or Default Dead."</div></div></div>
-        <div class="cr"><div class="cw">Wk 3+</div><div><div class="ctop">Ep 5+ — one per week</div><div class="cd">Continue weekly. Notice Zero to One parallels.</div></div></div>
+        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">Ep 3 — Paul Graham</div><div class="cd">Counterintuitive parts of startups.</div></div></div>
+        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Ep 4 — Adora Cheung + SaaS Metrics</div><div class="cd">Building product + ARR, CAC, LTV.</div></div></div>
+        <div class="cr"><div class="cw">Wk 3+</div><div><div class="ctop">Ep 5+ — one per week</div><div class="cd">Continue weekly.</div></div></div>
       </div>
     </div>
   </div>
@@ -294,6 +411,7 @@ h1 span{color:var(--accent);font-style:italic;}
       <button class="rfb active" onclick="filt('all',this)">All</button>
       <button class="rfb" onclick="filt('safe',this)">AI Safety</button>
       <button class="rfb" onclick="filt('py',this)">Python</button>
+      <button class="rfb" onclick="filt('ng',this)">Andrew Ng</button>
       <button class="rfb" onclick="filt('ai',this)">AI/ML</button>
       <button class="rfb" onclick="filt('biz',this)">Entrepreneurship</button>
       <button class="rfb" onclick="filt('sc',this)">Supercomputing ☀️</button>
@@ -309,6 +427,7 @@ const TM={
   safe:{dot:'dsafe',block:'blsafe',label:'lsafe',text:'AI SAFETY'},
   py:  {dot:'dpy',  block:'blpy',  label:'lpy',  text:'PYTHON'},
   ai:  {dot:'dai',  block:'blai',  label:'lai',  text:'AI / ML'},
+  ng:  {dot:'dng',  block:'blng',  label:'lng',  text:'ANDREW NG'},
   biz: {dot:'dbiz', block:'blbiz', label:'lbiz', text:'ENTREPRENEURSHIP'},
   sc:  {dot:'dsc',  block:'blsc',  label:'lsc',  text:'SUPERCOMPUTING'},
   qc:  {dot:'dqc',  block:'blqc',  label:'lqc',  text:'QUANTUM COMPUTING'},
@@ -316,243 +435,239 @@ const TM={
   rest:{dot:'drest',block:'blrest',label:'lrest',text:'REVIEW'}
 };
 
-// Morning rotation: Mon=SC, Tue=QC, Wed=RB, Thu=SC, Fri=QC, Sat=RB, Sun=review all
-const MORNING_ROTATION={
-  Mon:{type:'sc',label:'Supercomputing'},
-  Tue:{type:'qc',label:'Quantum Computing'},
-  Wed:{type:'rb',label:'Robotics'},
-  Thu:{type:'sc',label:'Supercomputing'},
-  Fri:{type:'qc',label:'Quantum Computing'},
-  Sat:{type:'rb',label:'Robotics'},
-  Sun:{type:'rest',label:'Morning Review'}
-};
+const MC={sc:'var(--sc)',qc:'var(--qc)',rb:'var(--rb)',rest:'var(--rest)'};
+const MB={sc:'var(--sc-bg)',qc:'var(--qc-bg)',rb:'var(--rb-bg)',rest:'var(--rest-bg)'};
 
 const WEEKS=[
-  {label:"WEEK 0+1 — APR 27 · Restart + Outer Alignment",days:[
-    {date:"4/27",short:"Mon",title:"Restart Day",today:true,tags:["sc","safe","py","biz"],
-      morning:{type:'sc',time:"25 min",h:"Supercomputing — CPUs vs GPUs",b:"Watch Computerphile 'How Do Graphics Cards Work?' (9 min) on YouTube. Then watch 'Why GPUs are faster for AI' (5 min). Core question to answer: what is parallelism and why does it matter? Write 2 sentences after watching.",r:"→ youtube: 'computerphile how graphics cards work'"},
+  {label:"WEEK 0+1 — APR 27 · Outer Alignment + Ng Module 1 begins",days:[
+    {date:"4/27",short:"Mon",title:"Restart + Ng begins",today:true,tags:["sc","ng","safe","py","biz"],
+      morning:{type:'sc',time:"25 min",h:"Supercomputing — CPUs vs GPUs",b:"Watch Computerphile 'How Do Graphics Cards Work?' (9 min). Then watch 'Why GPUs are faster for AI' (5 min). Write 2 sentences: what is parallelism and why does it matter for AI training?",r:"→ youtube: 'computerphile how graphics cards work'"},
       blocks:[
-        {t:"safe",time:"35 min",h:"Week 0 — 3B1B Neural Networks Ch 1",b:"Watch 'But what is a neural network?' (19 min). Required Week 0 reading for the reading group. Don't skip.",r:"→ youtube: '3blue1brown what is a neural network'"},
-        {t:"py",time:"20 min",h:"Learn X in Y Minutes — Python",b:"Read the full page at learnxinyminutes.com/docs/python. Complete orientation in one sitting. Keep it open as a reference all week.",r:"→ learnxinyminutes.com/docs/python"},
-        {t:"biz",time:"15 min",h:"Zero to One — Preface + Ch 1 (tonight)",b:"0→1 is harder and more valuable than 1→n. This framing is the intellectual core of Poseidon Fellows.",r:""}
+        {t:"ng",time:"30 min",h:"Ng — Welcome + Neurons and the Brain",b:"Start the Coursera course. Watch 'Welcome!' (2 min) + 'Neurons and the Brain' (10 min) + 'Demand Prediction' (16 min). These three videos are the intuition layer — why neural networks are structured the way they are. Don't skip the demand prediction example, it's the clearest NN motivation you'll see.",r:"→ coursera.org → Advanced Learning Algorithms"},
+        {t:"safe",time:"30 min",h:"Week 0 — 3B1B Neural Networks Ch 1",b:"Watch 'But what is a neural network?' (19 min). Required Week 0 reading. Notice how it connects to what Ng just showed you — same concept, different angle.",r:"→ youtube: '3blue1brown what is a neural network'"},
+        {t:"py",time:"20 min",h:"Learn X in Y Minutes — Python",b:"Read the full page at learnxinyminutes.com/docs/python. Full orientation in one sitting. Keep it open all week.",r:"→ learnxinyminutes.com/docs/python"}
       ],
-      tip:"Three short blocks + a morning session. The GPU video directly connects to why your reading group papers talk about compute scaling. Everything is linked."
+      tip:"Ng and 3B1B are covering the same thing from different angles today — that's intentional. Two perspectives on neural networks in one day locks it in fast."
     },
-    {date:"4/28",short:"Tue",title:"Outer Alignment",tags:["qc","safe","ai"],
-      morning:{type:'qc',time:"25 min",h:"Quantum — Qubits and Superposition",b:"Watch IBM's 'What is Quantum Computing?' on YouTube (5 min). Then watch the first 15 min of Microsoft Research's 'Quantum Computing for Computer Scientists'. Today: pure concepts — qubits vs bits, superposition, entanglement. No math yet.",r:"→ youtube: 'quantum computing for computer scientists microsoft research'"},
+    {date:"4/28",short:"Tue",title:"Ng + Outer Alignment",tags:["qc","ng","safe","ai"],
+      morning:{type:'qc',time:"25 min",h:"Quantum — Qubits and Superposition",b:"Watch IBM's 'What is Quantum Computing?' (5 min) + first 15 min of Microsoft Research 'Quantum Computing for Computer Scientists'. Today: pure concepts — qubits vs bits, superposition, entanglement. No math.",r:"→ youtube: 'quantum computing for computer scientists microsoft'"},
       blocks:[
-        {t:"safe",time:"45 min",h:"Week 2 — Specification Gaming + Apollo Deception",b:"Read GDM 'Specification gaming' blog post (~15 min). Then read Apollo Research deception paper abstract + intro. Core concept: reward hacking means achieving the reward without doing what you actually wanted.",r:"→ search: 'specification gaming deepmind blog 2020'"},
-        {t:"ai",time:"25 min",h:"Week 0 — 3B1B Ch 2: Gradient Descent",b:"Watch 'Gradient descent, how neural networks learn' (21 min). After this you understand what training actually means.",r:"→ youtube: '3blue1brown gradient descent'"}
+        {t:"ng",time:"30 min",h:"Ng — Recognizing Images + NN Model section begins",b:"Watch 'Example: Recognizing Images' (6 min). Then start NN Model: watch 'Neural network layer' (9 min) + 'More complex neural networks' (8 min). You're now seeing how layers stack — this is the architecture behind every model in your reading group.",r:""},
+        {t:"safe",time:"40 min",h:"Week 2 — Specification Gaming + Apollo Deception",b:"Read GDM 'Specification gaming' blog post (~15 min). Then read Apollo Research deception paper abstract + intro. Core concept: reward hacking means achieving the reward without doing what you wanted.",r:"→ search: 'specification gaming deepmind blog 2020'"}
       ],
-      tip:"Quantum concepts today are purely vocabulary-building. Don't stress about the math — that comes Week 2."
+      tip:"The NN Model section of Ng directly connects to what 3B1B Chapter 1 showed you yesterday. Layers → forward propagation → how predictions are made."
     },
-    {date:"4/29",short:"Wed",title:"CS50P + Ep 3",tags:["rb","py","biz"],
-      morning:{type:'rb',time:"25 min",h:"Robotics — What is ROS?",b:"Watch 'ROS for Beginners' intro video on YouTube (15 min). Understand: what ROS does, the node/topic/publisher/subscriber model, and why it exists. Then read the first page of 'A Gentle Introduction to ROS' (free PDF online). Just the overview.",r:"→ youtube: 'ROS for beginners explained'\n→ search: 'a gentle introduction to ROS PDF'"},
+    {date:"4/29",short:"Wed",title:"Ng TensorFlow + CS50P",tags:["rb","ng","py","biz"],
+      morning:{type:'rb',time:"25 min",h:"Robotics — What is ROS?",b:"Watch 'ROS for Beginners' intro on YouTube (15 min). Understand: nodes, topics, publisher/subscriber model. Read the first page of 'A Gentle Introduction to ROS' (free PDF). Just the overview.",r:"→ youtube: 'ROS for beginners explained'"},
       blocks:[
-        {t:"py",time:"45 min",h:"CS50P — Lecture 0: Functions & Variables",b:"Start CS50P at cs50.harvard.edu/python. Watch at 1.5x. Each lecture is ~2 hrs so do the first half today.",r:"→ cs50.harvard.edu/python"},
-        {t:"biz",time:"30 min",h:"How to Start a Startup — Ep 3 (Paul Graham)",b:"PG on counterintuitive parts of startups. You've done Ep 1 and 2 — this is where it gets philosophically interesting.",r:"→ youtube: 'how to start a startup ep 3 paul graham'"}
+        {t:"ng",time:"35 min",h:"Ng — Forward Propagation + TensorFlow begins",b:"Watch 'Inference: making predictions (forward propagation)' (5 min) + complete the 'Neurons and Layers' lab (10 min). Then start TensorFlow section: watch 'Inference in Code' (6 min) + 'Data in TensorFlow' (11 min). This is your first real TensorFlow code — pay attention to how arrays are structured.",r:""},
+        {t:"py",time:"40 min",h:"CS50P — Lecture 0: Functions & Variables",b:"Start CS50P at cs50.harvard.edu/python. Watch at 1.5x. Each lecture is ~2 hrs — do the first half today. The Python fundamentals here directly support the Ng labs.",r:"→ cs50.harvard.edu/python"},
+        {t:"biz",time:"25 min",h:"How to Start a Startup — Ep 3 (PG)",b:"Paul Graham on counterintuitive parts of startups.",r:"→ youtube: 'how to start a startup ep 3 paul graham'"}
       ],
-      tip:""
+      tip:"The TensorFlow videos in Ng require Python comfort — your CS50P session today directly feeds into the Ng labs. They reinforce each other."
     },
-    {date:"4/30",short:"Thu",title:"3B1B + RLHF",tags:["sc","ai","safe"],
-      morning:{type:'sc',time:"25 min",h:"Supercomputing — HPC Architecture",b:"Read the TOP500 list page (top500.org) — look at the #1 supercomputer. What makes it fast? Then watch the first 10 min of MIT 6.172 Lecture 1 on YouTube. Key terms to understand: FLOPS, memory bandwidth, interconnects (InfiniBand).",r:"→ top500.org\n→ youtube: 'MIT 6.172 lecture 1 performance engineering'"},
+    {date:"4/30",short:"Thu",title:"Ng + 3B1B Backprop",tags:["sc","ng","ai","safe"],
+      morning:{type:'sc',time:"25 min",h:"Supercomputing — HPC Architecture",b:"Read the TOP500 list (top500.org) — look at the #1 supercomputer. What makes it fast? Watch the first 10 min of MIT 6.172 Lecture 1. Key terms: FLOPS, memory bandwidth, interconnects.",r:"→ top500.org\n→ youtube: 'MIT 6.172 lecture 1'"},
       blocks:[
-        {t:"ai",time:"40 min",h:"Week 0 — 3B1B Ch 3 + Ch 4: Backpropagation",b:"Watch 'What is backpropagation really doing?' and 'Backpropagation calculus'. Ch 3 intuition, Ch 4 math — skim math if needed.",r:"→ youtube: '3blue1brown backpropagation'"},
-        {t:"safe",time:"30 min",h:"Week 2 — InstructGPT + Wen et al.",b:"Read OpenAI InstructGPT intro. Skim Wen et al. abstract and conclusion. Connect: RLHF tries to fix specification gaming but creates new deception problems.",r:"→ search: 'instructgpt openai 2022'"}
+        {t:"ng",time:"35 min",h:"Ng — Building a Neural Network + Coffee Roasting Lab",b:"Watch 'Building a neural network' (8 min). Complete the 'Coffee Roasting in TensorFlow' lab (10 min) — this is your first hands-on TF model. Take your time with it. Do the practice quiz after.",r:""},
+        {t:"ai",time:"30 min",h:"Week 0 — 3B1B Ch 2 + Ch 3",b:"Watch 'Gradient descent' (21 min) and start 'What is backpropagation?' (14 min). These directly support what Ng is teaching — you're seeing the same math from two angles.",r:"→ youtube: '3blue1brown gradient descent'"},
+        {t:"safe",time:"20 min",h:"Week 2 — InstructGPT intro",b:"Read OpenAI InstructGPT paper intro. Connect: RLHF tries to fix specification gaming but creates new deception problems.",r:"→ search: 'instructgpt openai 2022'"}
       ],
-      tip:""
+      tip:"The Coffee Roasting lab is short but important — it's your first real TensorFlow model. Don't rush past it."
     },
-    {date:"5/1",short:"Fri",title:"Python + Review",tags:["qc","py","rest"],
-      morning:{type:'qc',time:"25 min",h:"Quantum — Gates and Circuits",b:"Watch 'Quantum Gates explained' on YouTube (~15 min). Understand: quantum gates are like classical logic gates but operate on superpositions. Learn what a Hadamard gate and CNOT gate do. These are the building blocks of everything in Qiskit.",r:"→ youtube: 'quantum gates explained qubits'"},
+    {date:"5/1",short:"Fri",title:"Ng Python impl + Review",tags:["qc","ng","py","rest"],
+      morning:{type:'qc',time:"25 min",h:"Quantum — Gates and Circuits",b:"Watch 'Quantum Gates explained' on YouTube (~15 min). Understand Hadamard gate and CNOT gate. These are the building blocks of everything in Qiskit.",r:"→ youtube: 'quantum gates explained qubits'"},
       blocks:[
-        {t:"py",time:"30 min",h:"python-course.eu — Tutorial Ch 1–2",b:"Read first two chapters at python-course.eu/python-tutorial. Text complement to CS50P.",r:"→ python-course.eu/python-tutorial"},
-        {t:"rest",time:"25 min",h:"Weekly review — write from memory",b:"Without notes: (1) Outer alignment? (2) Reward hacking? (3) Gradient descent? (4) What is parallelism? (5) What is a qubit? (6) What does a ROS node do?",r:""}
+        {t:"ng",time:"35 min",h:"Ng — Python Implementation of Forward Prop",b:"Watch 'Forward prop in a single layer' (5 min) + 'General implementation of forward propagation' (7 min). Start the CoffeeRoastingNumPy lab (1 hr total — do 30 min today, finish Saturday). This lab is where the Python + NN math connection clicks.",r:""},
+        {t:"py",time:"25 min",h:"python-course.eu + CS50P continued",b:"Read python-course.eu tutorial Ch 1–2. Then continue CS50P Lecture 0 if not finished.",r:"→ python-course.eu/python-tutorial"},
+        {t:"rest",time:"20 min",h:"Weekly review",b:"From memory: (1) What is forward propagation? (2) What did the Coffee Roasting lab do? (3) What is outer alignment? (4) What is parallelism? (5) What is a qubit? (6) What does a ROS node do?",r:""}
       ],
-      tip:"Six recall questions now. The new three tracks get tested every Friday from here on."
+      tip:"The forward propagation Python videos today are the bridge between Ng's TensorFlow abstractions and raw NumPy — pay attention to the matrix shapes."
     },
-    {date:"5/2",short:"Sat",title:"Catch-up + Depth",tags:["rb","safe","ai","biz"],
-      morning:{type:'rb',time:"25 min",h:"Robotics — Sensors and Control Loops",b:"Watch 'How do robots sense the world?' on YouTube (~15 min). Cover: cameras, LiDAR, IMUs, encoders. Then read about PID control — search 'PID controller explained simply'. This is how robots stay stable and on target.",r:"→ youtube: 'robot sensors lidar camera IMU explained'"},
+    {date:"5/2",short:"Sat",title:"Ng Lab + 3B1B + Depth",tags:["rb","ng","safe","ai","biz"],
+      morning:{type:'rb',time:"25 min",h:"Robotics — Sensors and Control Loops",b:"Watch 'How do robots sense the world?' on YouTube (~15 min). Cameras, LiDAR, IMUs, encoders. Read about PID control — search 'PID controller explained simply'.",r:"→ youtube: 'robot sensors explained'"},
       blocks:[
-        {t:"safe",time:"40 min",h:"Finish Week 2 readings",b:"Read Wen et al. more carefully. Re-read Apollo Research abstract. Write one question for the reading group.",r:""},
-        {t:"ai",time:"35 min",h:"Week 0 — 3B1B Ch 5 + Ch 6: Transformers & Attention",b:"Watch 'Attention in transformers, visually explained' and 'How might LLMs store facts'. Ch 5–6 are the bridge from NNs to modern LLMs. After today, Week 0 is complete.",r:"→ youtube: '3blue1brown transformers attention'"},
-        {t:"biz",time:"25 min",h:"Paul Graham + SaaS basics",b:"Read 'Default Alive or Default Dead' (paulgraham.com/aord.html). Then read ARR + LTV sections of David Skok's SaaS Metrics 2.0.",r:"→ paulgraham.com/aord.html"}
+        {t:"ng",time:"45 min",h:"Ng — Finish CoffeeRoastingNumPy lab + AGI video",b:"Finish the CoffeeRoastingNumPy lab (remaining ~30 min). Then watch 'Is there a path to AGI?' (10 min) — this video connects directly to your AI safety reading group. Ng's take on AGI from a technical perspective is worth comparing to the alignment researchers' view.",r:""},
+        {t:"ai",time:"35 min",h:"3B1B Ch 4 + Ch 5 — Backprop calculus + Transformers",b:"Watch these two. Ch 4 finishes backprop. Ch 5 covers transformers — the architecture behind every LLM in your reading group.",r:"→ youtube: '3blue1brown transformers attention'"},
+        {t:"safe",time:"20 min",h:"Finish Week 2 readings + write group question",b:"Finish Wen et al. skimming. Write one genuine question for the reading group.",r:""},
+        {t:"biz",time:"20 min",h:"Paul Graham + SaaS basics",b:"Read 'Default Alive or Default Dead' (paulgraham.com/aord.html). Skim ARR + LTV in David Skok's SaaS Metrics 2.0.",r:"→ paulgraham.com/aord.html"}
       ],
-      tip:"By end of today you've finished all 6 3B1B chapters — Week 0 is done. That's a real milestone."
+      tip:"The AGI video from Ng is a rare moment where your course material and your reading group directly overlap. Watch it thinking about what the alignment researchers would say in response."
     },
     {date:"5/3",short:"Sun",title:"Rest + Read",tags:["rest","biz"],
-      morning:{type:'rest',time:"20 min",h:"Morning Review — all three tracks",b:"Without looking at notes: write one sentence about what you learned in supercomputing this week, one about quantum, one about robotics. If you can't write them, those are your targets next week. Keep it to 20 min.",r:""},
+      morning:{type:'rest',time:"20 min",h:"Morning Review — all three tracks",b:"Write one sentence each: (1) What did you learn in supercomputing this week? (2) Quantum? (3) Robotics? 20 min max, no notes.",r:""},
       blocks:[
-        {t:"rest",time:"25 min",h:"Review + reading group question",b:"Reread your notes. Write one genuine question for the next session.",r:""},
+        {t:"rest",time:"25 min",h:"Review + reading group question",b:"Reread your notes. Write one genuine question for the Week 2 outer alignment session.",r:""},
         {t:"biz",time:"15 min",h:"Zero to One — continue",b:"Keep the nightly habit.",r:""}
       ],
       tip:"Sunday is rest. Don't add new material."
     }
   ]},
-
-  {label:"WEEK 2 — MAY 4 · Inner Alignment",days:[
-    {date:"5/4",short:"Mon",title:"Inner Alignment",tags:["sc","safe","ai"],
-      morning:{type:'sc',time:"25 min",h:"Supercomputing — CUDA Concepts",b:"Watch 'CUDA Programming Basics' intro on YouTube (15–20 min). Understand: a GPU kernel is a function that runs in parallel across thousands of threads. Thread blocks organize these threads. Memory hierarchy: registers → shared → global. You don't need to write CUDA today — own the mental model.",r:"→ youtube: 'CUDA programming basics intro nvidia'"},
+  {label:"WEEK 2 — MAY 4 · Inner Alignment + Ng Vectorization + Final Lab",days:[
+    {date:"5/4",short:"Mon",title:"Inner Alignment + Ng Vectorization",tags:["sc","ng","safe","ai"],
+      morning:{type:'sc',time:"25 min",h:"Supercomputing — CUDA Concepts",b:"Watch 'CUDA Programming Basics' intro on YouTube (15–20 min). Understand: GPU kernel = function running across thousands of threads in parallel. Thread blocks. Memory hierarchy: registers → shared → global. Own the mental model.",r:"→ youtube: 'CUDA programming basics intro'"},
       blocks:[
-        {t:"safe",time:"50 min",h:"Week 3 — Mesa-Optimizers + Alignment Faking",b:"Watch Robert Miles 'Mesa-Optimizers and Inner Alignment' (~20 min). Then read Anthropic 'Alignment Faking' abstract (2024). Key: even perfect training may produce models with internal goals that differ from what you intended.",r:"→ youtube: 'robert miles mesa optimizers'"},
-        {t:"ai",time:"30 min",h:"fast.ai — Practical Deep Learning Lesson 1",b:"Go to course.fast.ai. Train a real image classifier. Start before you feel ready.",r:"→ course.fast.ai"}
+        {t:"ng",time:"35 min",h:"Ng — Vectorization section",b:"Watch 'How neural networks are implemented efficiently' (4 min) + 'Matrix multiplication' (9 min) + 'Matrix multiplication rules' (9 min). This section explains WHY your SC morning session on CUDA matters — matrix multiplication on GPUs is literally how neural networks train fast. The two tracks just connected.",r:""},
+        {t:"safe",time:"40 min",h:"Week 3 — Mesa-Optimizers + Alignment Faking",b:"Watch Robert Miles 'Mesa-Optimizers and Inner Alignment' (~20 min). Then read Anthropic 'Alignment Faking' abstract. Key: even perfect training may produce models with internal goals that differ from what you intended.",r:"→ youtube: 'robert miles mesa optimizers'"}
       ],
-      tip:"CUDA mental model this morning directly supports understanding why AI training needs supercomputers — connects to your reading group's discussion of compute scaling."
+      tip:"Today is a huge connection day: Ng's vectorization section explains exactly why CUDA and GPUs matter. Matrix multiplication on GPUs IS neural network training. SC morning + Ng afternoon = one complete picture."
     },
-    {date:"5/5",short:"Tue",title:"Sleeper Agents + CS50P",tags:["qc","safe","py"],
-      morning:{type:'qc',time:"25 min",h:"Quantum — Install Qiskit + First Circuit",b:"Run: pip install qiskit. Then go to learning.quantum.ibm.com and complete the 'Hello Quantum' example. Build a Bell state — two qubits in entanglement. Run on the IBM simulator. This is your first quantum code.",r:"→ learning.quantum.ibm.com\n→ pip install qiskit qiskit-aer"},
+    {date:"5/5",short:"Tue",title:"Ng Matrix Code + Sleeper Agents",tags:["qc","ng","safe","py"],
+      morning:{type:'qc',time:"25 min",h:"Quantum — Install Qiskit + First Circuit",b:"pip install qiskit. Go to learning.quantum.ibm.com and complete 'Hello Quantum'. Build a Bell state. Run on IBM simulator. Your first quantum code.",r:"→ learning.quantum.ibm.com\n→ pip install qiskit qiskit-aer"},
       blocks:[
-        {t:"safe",time:"40 min",h:"Sleeper Agents + Shortcuts to Sabotage",b:"Read Anthropic 'Sleeper Agents' abstract, intro, conclusion. Deceptive behaviors persist through safety training. Then read 'Shortcuts to sabotage' abstract. Core empirical case for why inner alignment is hard.",r:"→ search: 'anthropic sleeper agents 2024'"},
-        {t:"py",time:"45 min",h:"CS50P — Lectures 0–1 continued",b:"Keep going. Try at least one problem set problem — that's where the actual learning happens.",r:"→ cs50.harvard.edu/python"}
+        {t:"ng",time:"30 min",h:"Ng — Matrix Multiplication Code + Quiz",b:"Watch 'Matrix multiplication code' (6 min). Complete the 'Practice quiz: Neural network implementation in Python' (10 min). You've now finished all the videos and quizzes in Module 1 — only the final lab remains.",r:""},
+        {t:"safe",time:"40 min",h:"Sleeper Agents + Shortcuts to Sabotage",b:"Read Anthropic 'Sleeper Agents' abstract, intro, conclusion. Deceptive behaviors persist through safety training. Then read 'Shortcuts to sabotage' abstract.",r:"→ search: 'anthropic sleeper agents 2024'"},
+        {t:"py",time:"25 min",h:"CS50P — Lecture 1: Conditionals",b:"Keep progressing. Try a problem set problem.",r:"→ cs50.harvard.edu/python"}
       ],
-      tip:"You wrote your first quantum circuit this morning. That's real."
+      tip:"After today you've watched every video in Module 1. The 3-hr final lab on Saturday is the only thing standing between you and Module 2 unlocking."
     },
-    {date:"5/6",short:"Wed",title:"CS50P + Ep 4",tags:["rb","py","biz"],
-      morning:{type:'rb',time:"25 min",h:"Robotics — Install ROS 2 + First Node",b:"Install ROS 2 Humble (docs.ros.org — use Docker if needed). Complete the very first CLI tutorial: creating a workspace and running 'ros2 run demo_nodes_cpp talker'. You should see messages being published. If install takes longer, watch along with the tutorial.",r:"→ docs.ros.org/en/humble/Installation.html\n→ docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools.html"},
+    {date:"5/6",short:"Wed",title:"CS50P + Ep 4",tags:["rb","py","biz","ng"],
+      morning:{type:'rb',time:"25 min",h:"Robotics — Install ROS 2 + First Node",b:"Install ROS 2 Humble via Docker (docs.ros.org). Complete the first CLI tutorial: run 'ros2 run demo_nodes_cpp talker'. You should see messages published. Start the install before class — let it run.",r:"→ docs.ros.org/en/humble/Installation.html"},
       blocks:[
-        {t:"py",time:"50 min",h:"CS50P Lecture 2: Loops + python-course.eu",b:"CS50P Lecture 2 on loops. Then read python-course.eu loops chapter to reinforce. Two formats locks in faster.",r:"→ python-course.eu/python-tutorial/loops"},
-        {t:"biz",time:"30 min",h:"How to Start a Startup — Ep 4 (Adora Cheung)",b:"Build what people want, talk to users constantly. Most practically useful episode.",r:"→ youtube: 'how to start a startup ep 4'"}
+        {t:"ng",time:"20 min",h:"Ng — Review Module 1 before the lab",b:"Skim back through your notes on TensorFlow implementation and Python forward propagation. The Saturday lab builds a neural network for binary classification — you'll use everything from Module 1. 20 min of review now saves an hour of confusion Saturday.",r:""},
+        {t:"py",time:"45 min",h:"CS50P — Lecture 2: Loops + python-course.eu",b:"CS50P Lecture 2. Then read python-course.eu loops chapter. Two formats of the same concept locks in faster.",r:"→ python-course.eu/python-tutorial/loops"},
+        {t:"biz",time:"30 min",h:"How to Start a Startup — Ep 4 (Adora Cheung)",b:"Build what people want, talk to users constantly.",r:"→ youtube: 'how to start a startup ep 4'"}
       ],
-      tip:"ROS 2 installation is the first real robotics setup. Be patient — it takes time. Start it before class and let it run."
+      tip:"Wednesday is your prep day for Saturday's Ng lab. The review block is short but important."
     },
-    {date:"5/7",short:"Thu",title:"Karpathy + Quantum HW",tags:["sc","ai","qc"],
-      morning:{type:'sc',time:"25 min",h:"Supercomputing — Parallel Python",b:"Open Python and try the multiprocessing module. Run this: from multiprocessing import Pool; pool = Pool(4); results = pool.map(lambda x: x**2, range(100)). Read the Python multiprocessing docs intro. This is how you use multiple CPU cores — the conceptual step before MPI.",r:"→ docs.python.org/3/library/multiprocessing.html"},
+    {date:"5/7",short:"Thu",title:"Karpathy + 3B1B Ch 6",tags:["sc","ai","qc"],
+      morning:{type:'sc',time:"25 min",h:"Supercomputing — Parallel Python",b:"Open Python and try the multiprocessing module: from multiprocessing import Pool; pool = Pool(4); results = pool.map(lambda x: x**2, range(100)). Read the docs intro. Conceptual step before MPI.",r:"→ docs.python.org/3/library/multiprocessing.html"},
       blocks:[
         {t:"ai",time:"40 min",h:"Karpathy — Let's Build GPT (first 30 min)",b:"Tokens, attention, context windows. Makes every LLM paper in your reading group concrete.",r:"→ youtube: 'karpathy lets build gpt'"},
-        {t:"ai",time:"15 min",h:"3B1B Ch 6 — completes Week 0",b:"Watch 'How might LLMs store facts'. Finishes the required Week 0 reading group material.",r:"→ youtube: '3blue1brown LLM facts'"},
-        {t:"qc",time:"15 min",h:"Submit circuit to real IBM quantum hardware",b:"At learning.quantum.ibm.com, submit your Bell state to real quantum hardware (free). Look at the results — you'll see noise. That's real quantum mechanics.",r:"→ learning.quantum.ibm.com"}
+        {t:"ai",time:"15 min",h:"3B1B Ch 6 — completes Week 0",b:"Watch 'How might LLMs store facts'. Finishes required Week 0 material.",r:"→ youtube: '3blue1brown LLM facts'"},
+        {t:"qc",time:"15 min",h:"Submit circuit to real IBM quantum hardware",b:"At learning.quantum.ibm.com, submit your Bell state to real quantum hardware. See quantum noise in real results.",r:"→ learning.quantum.ibm.com"}
       ],
-      tip:"Running a circuit on real quantum hardware is a genuinely memorable moment. Do it."
+      tip:"After today you've finished all 6 3B1B chapters (Week 0 complete) AND submitted a real quantum circuit. Two milestones in one day."
     },
     {date:"5/8",short:"Fri",title:"Python + Review",tags:["qc","py","rest"],
-      morning:{type:'qc',time:"25 min",h:"Quantum — Grover's Search Algorithm",b:"Watch 'Grover's Algorithm explained' on YouTube (~15 min). Conceptual goal: understand why Grover's search is O(√N) vs classical O(N). You don't need to implement it — just understand why quantum gives a speedup for search problems.",r:"→ youtube: 'grovers algorithm explained simply'"},
+      morning:{type:'qc',time:"25 min",h:"Quantum — Grover's Search Algorithm",b:"Watch 'Grover's Algorithm explained' on YouTube (~15 min). Conceptual goal: understand why Grover's is O(√N) vs classical O(N). Why quantum gives a speedup for search.",r:"→ youtube: 'grovers algorithm explained simply'"},
       blocks:[
-        {t:"py",time:"30 min",h:"python-course.eu — OOP Introduction",b:"Read python-course.eu/oop. OOP is used everywhere: PyTorch, sklearn, LangChain, and ROS Python client.",r:"→ python-course.eu/oop"},
-        {t:"rest",time:"30 min",h:"Weekly review",b:"From memory: (1) Mesa-optimizer? (2) Sleeper agents finding? (3) What is a CUDA kernel? (4) What did your Bell state circuit do? (5) What is a ROS node? (6) Adora Cheung on product?",r:""}
+        {t:"py",time:"35 min",h:"python-course.eu — OOP Introduction",b:"Read python-course.eu/oop. OOP is everywhere: TensorFlow, PyTorch, LangChain, ROS.",r:"→ python-course.eu/oop"},
+        {t:"rest",time:"30 min",h:"Weekly review — prep for Ng lab",b:"From memory: (1) What does forward propagation do? (2) Why does matrix multiplication matter for GPUs? (3) What is a CUDA kernel? (4) What is a Bell state? (5) What is a mesa-optimizer? (6) What is a ROS node? Also: write down anything about TF/NumPy you're unsure about before Saturday's lab.",r:""}
       ],
-      tip:""
+      tip:"The review question about TF/NumPy confusion is the most important one today. Write those down — they're your prep list for Saturday's 3-hr lab."
     },
-    {date:"5/9",short:"Sat",title:"First API Call + Deep Work",tags:["rb","ai","py","biz"],
-      morning:{type:'rb',time:"25 min",h:"Robotics — Kinematics basics",b:"Watch MIT 6.832 Underactuated Robotics Lecture 1 (first 20 min only). Prof. Russ Tedrake. What makes robots hard to control? What is forward vs inverse kinematics? This is the math behind robot movement.",r:"→ youtube: 'MIT 6.832 underactuated robotics lecture 1'"},
+    {date:"5/9",short:"Sat",title:"🏆 Ng Final Lab + API Call",tags:["rb","ng","ai","py"],
+      morning:{type:'rb',time:"25 min",h:"Robotics — Kinematics basics",b:"Watch MIT 6.832 Underactuated Robotics Lecture 1 (first 20 min). What makes robots hard to control? Forward vs inverse kinematics.",r:"→ youtube: 'MIT 6.832 underactuated robotics lecture 1'"},
       blocks:[
-        {t:"ai",time:"50 min",h:"First API call — make something real",b:"Sign up at console.anthropic.com (free tier). Write a Python script: send a prompt, print the response, then modify it to summarize a text file you provide. This is the moment AI stops being abstract.",r:"→ docs.anthropic.com/quickstart"},
-        {t:"biz",time:"35 min",h:"Venture capital — follow the money",b:"Go to crunchbase.com. Search Anthropic, Redwood Research, one AI for science company. Trace funding rounds. Understand: pre-money valuation, dilution, why VCs need 10x returns.",r:"→ crunchbase.com"},
-        {t:"py",time:"20 min",h:"CS50P problem set",b:"Work on any CS50P exercise. Don't skip — this is where real learning happens.",r:""}
+        {t:"ng",time:"180 min",h:"🏆 Ng — Practice Lab: Neural Networks for Binary Classification (3 hrs)",b:"This is the Module 1 capstone. You'll build a neural network from scratch to classify data using everything you've learned: forward propagation, TensorFlow, NumPy matrix operations. Take your time. Read the instructions carefully. When you finish this, Module 2 unlocks. Budget the full 3 hours and treat it like an exam.",r:"→ coursera.org → Advanced Learning Algorithms → Week 1 → Practice Lab"},
+        {t:"ai",time:"40 min",h:"First API call — make something real",b:"Sign up at console.anthropic.com (free tier). Write a Python script: send a prompt, print the response. This is the moment AI stops being abstract. If you finish the Ng lab early, do this. If the lab runs long, move the API call to Sunday.",r:"→ docs.anthropic.com/quickstart"}
       ],
-      tip:"API call is the most important milestone this week."
+      tip:"Saturday is Ng lab day. Give it the full 3 hours. Everything else is secondary today. When you submit it, Module 2 unlocks — that's the reward."
     },
-    {date:"5/10",short:"Sun",title:"Rest + Read",tags:["rest","biz"],
-      morning:{type:'rest',time:"20 min",h:"Morning Review — all three tracks",b:"Write from memory: (1) What is a CUDA thread block? (2) What is quantum entanglement in code (Bell state)? (3) What is forward kinematics? Three sentences, no notes. This is your weekly SC/QC/Robotics consolidation.",r:""},
+    {date:"5/10",short:"Sun",title:"Rest + Module 2 preview",tags:["rest","ng","biz"],
+      morning:{type:'rest',time:"20 min",h:"Morning Review — all three tracks",b:"Write from memory: (1) What is a CUDA thread block? (2) What did your Bell state circuit do? (3) What is forward kinematics? Three sentences, no notes.",r:""},
       blocks:[
-        {t:"rest",time:"25 min",h:"Prep Week 3 reading group question",b:"Review inner alignment notes. Write one question about alignment faking or sleeper agents.",r:""},
+        {t:"ng",time:"20 min",h:"Ng — Preview Module 2 (if unlocked)",b:"If the lab is done and Module 2 is unlocked, just look at what's coming — don't start it yet. Skim the module overview. We'll plan Module 2 integration into Week 3+ once you see what it covers.",r:""},
+        {t:"rest",time:"20 min",h:"Rest + reading group question",b:"Review inner alignment notes. Write one question about alignment faking or sleeper agents.",r:""},
         {t:"biz",time:"15 min",h:"Zero to One — continue",b:"",r:""}
       ],
-      tip:""
+      tip:"You finished Module 1 of Andrew Ng's course this week. That's real. Module 2 planning happens once you see what unlocked."
     }
   ]},
-
-  {label:"WEEK 3 — MAY 11 · Threat Models",days:[
-    {date:"5/11",short:"Mon",title:"Threat Models",tags:["sc","safe","ai"],
-      morning:{type:'sc',time:"25 min",h:"Supercomputing — MPI Concepts",b:"Read the Lawrence Livermore 'Introduction to Parallel Computing' tutorial intro (hpc.llnl.gov/documentation/tutorials). Section: what is MPI, why nodes need to communicate. Then read 'Hello World in MPI' — you don't need to compile it, just read the structure. Understand: each process has its own memory, they communicate by passing messages.",r:"→ hpc.llnl.gov/documentation/tutorials/introduction-parallel-computing-tutorial"},
+  {label:"WEEK 3 — MAY 11 · Threat Models + Module 2 TBD",days:[
+    {date:"5/11",short:"Mon",title:"Threat Models + Ng M2",tags:["sc","safe","ng","ai"],
+      morning:{type:'sc',time:"25 min",h:"Supercomputing — MPI Concepts",b:"Read LLNL 'Introduction to Parallel Computing' tutorial intro (hpc.llnl.gov). What is MPI, why nodes need to communicate. Read 'Hello World in MPI' structure. Each process has its own memory — they communicate by passing messages.",r:"→ hpc.llnl.gov/documentation/tutorials"},
       blocks:[
-        {t:"safe",time:"50 min",h:"Week 4 — Instrumental Convergence + CAIS",b:"Watch 'Why Would AI Want to do Bad Things? Instrumental Convergence' (15 min). Read CAIS Catastrophic Risks intro + conclusion. Key: instrumental convergence means almost any goal leads to resource acquisition and self-preservation as subgoals.",r:"→ youtube: 'instrumental convergence robert miles'"},
-        {t:"ai",time:"30 min",h:"Andrew Ng Deep Learning Specialization — start",b:"Begin Course 1 on Coursera (free audit). By now you have enough intuition for full value. Week 1 covers NNs from scratch.",r:"→ coursera.org/specializations/deep-learning"}
+        {t:"ng",time:"30 min",h:"Ng — Module 2 begins (TBD based on what unlocked)",b:"Start Module 2 with whatever the first section is. Come back here and we'll update the plan once you see the content. Spend 30 min on the first videos.",r:"→ coursera.org → Advanced Learning Algorithms → Module 2"},
+        {t:"safe",time:"45 min",h:"Week 4 — Instrumental Convergence + CAIS",b:"Watch 'Why Would AI Want to do Bad Things? Instrumental Convergence' (15 min). Read CAIS Catastrophic Risks intro + conclusion.",r:"→ youtube: 'instrumental convergence robert miles'"}
       ],
-      tip:"By Week 3 you're no longer a beginner. You've finished all 6 3B1B chapters, read alignment papers, made an API call, run a quantum circuit, and installed ROS."
+      tip:"Module 2 content is TBD — update your plan once you see what's in it. The 30-min daily Ng slot stays the same regardless."
     },
-    {date:"5/12",short:"Tue",title:"AI 2027 + CS50P",tags:["qc","safe","py"],
-      morning:{type:'qc',time:"25 min",h:"Quantum ML — PennyLane intro",b:"Go to pennylane.ai/qml and read 'What is Quantum Machine Learning?' (10 min). Then watch their intro demo video. PennyLane lets you build quantum circuits that are trained like neural networks using gradient descent — the QML intersection. Very relevant to your fellowship.",r:"→ pennylane.ai/qml"},
+    {date:"5/12",short:"Tue",title:"AI 2027 + Ng + CS50P",tags:["qc","safe","ng","py"],
+      morning:{type:'qc',time:"25 min",h:"Quantum ML — PennyLane intro",b:"Go to pennylane.ai/qml and read 'What is Quantum Machine Learning?' (10 min). Watch their intro demo. PennyLane lets you train quantum circuits like neural networks using gradient descent.",r:"→ pennylane.ai/qml"},
       blocks:[
-        {t:"safe",time:"40 min",h:"AI 2027 video",b:"Watch the 'AI 2027' video (35 min). After: two sentences — what feels plausible, what feels overstated.",r:"→ youtube: 'AI 2027'"},
-        {t:"py",time:"45 min",h:"CS50P — Lecture 3: Exceptions",b:"Exceptions and error handling. Directly useful for API calls.",r:"→ cs50.harvard.edu/python"}
+        {t:"ng",time:"30 min",h:"Ng — Module 2 continued",b:"Continue Module 2. ~30 min. Stay consistent.",r:""},
+        {t:"safe",time:"35 min",h:"AI 2027 video",b:"Watch the 'AI 2027' video (35 min). After: two sentences — what feels plausible, what feels overstated.",r:"→ youtube: 'AI 2027'"},
+        {t:"py",time:"25 min",h:"CS50P — Lecture 3: Exceptions",b:"Error handling — directly useful for API calls.",r:""}
       ],
       tip:""
     },
-    {date:"5/13",short:"Wed",title:"CS50P Libs + Ep 5",tags:["rb","py","biz","sc"],
-      morning:{type:'rb',time:"25 min",h:"Robotics — RL + OpenAI Gymnasium",b:"Install Gymnasium: pip install gymnasium. Run the CartPole environment — it's a robot arm balancing a pole. Watch it fail, then read how RL agents learn to keep it balanced. Search 'gymnasium cartpole tutorial python'. This is the simplest embodied AI problem.",r:"→ gymnasium.farama.org\n→ pip install gymnasium"},
+    {date:"5/13",short:"Wed",title:"CS50P Libs + Ep 5",tags:["rb","py","ng","biz"],
+      morning:{type:'rb',time:"25 min",h:"Robotics — RL + Gymnasium",b:"pip install gymnasium. Run CartPole environment. Watch it fail, read how RL agents learn to balance it. Search 'gymnasium cartpole tutorial python'.",r:"→ gymnasium.farama.org"},
       blocks:[
-        {t:"py",time:"45 min",h:"CS50P — Lecture 4: Libraries",b:"Most practically useful CS50P lecture. Libraries unlock everything: numpy, requests, anthropic SDK, Qiskit, ROS Python client.",r:""},
-        {t:"sc",time:"20 min",h:"Supercomputing — CuPy: GPU arrays in Python",b:"Read the CuPy quickstart (cupy.dev). CuPy is NumPy but runs on GPU. Try: import cupy as cp; a = cp.array([1,2,3]); print(a). This is GPU-accelerated Python. If you don't have a GPU, read through it — the concept is what matters.",r:"→ cupy.dev"},
+        {t:"ng",time:"30 min",h:"Ng — Module 2 continued",b:"Keep the daily Ng rhythm. 30 min.",r:""},
+        {t:"py",time:"40 min",h:"CS50P — Lecture 4: Libraries",b:"Most practically useful CS50P lecture. Unlocks numpy, requests, anthropic SDK, Qiskit, ROS Python.",r:""},
         {t:"biz",time:"25 min",h:"How to Start a Startup — Ep 5",b:"Continue the series.",r:""}
       ],
       tip:""
     },
-    {date:"5/14",short:"Thu",title:"Build RAG",tags:["sc","ai","rb"],
-      morning:{type:'sc',time:"25 min",h:"Supercomputing — How AI Training Uses HPC",b:"Read Anthropic's or OpenAI's scaling papers context: why did training GPT-3 require thousands of GPUs? Search 'how much compute does GPT-3 training use'. Then read 'AI and Compute' by OpenAI (2018, still relevant). Connect everything: FLOPS → CUDA → MPI → why supercomputers exist for AI.",r:"→ search: 'openai AI and compute 2018'"},
+    {date:"5/14",short:"Thu",title:"Build RAG + Ng",tags:["sc","ai","ng","rb"],
+      morning:{type:'sc',time:"25 min",h:"Supercomputing — How AI Training Uses HPC",b:"Search 'openai AI and compute 2018' and read it. Connect everything: FLOPS → CUDA → MPI → why supercomputers exist for AI. This is the capstone of your SC morning track.",r:"→ search: 'openai AI and compute 2018'"},
       blocks:[
-        {t:"ai",time:"60 min",h:"Mini RAG prototype",b:"LangChain beginner RAG tutorial. Load a text file, chunk it, embed it, query it. Even halfway done is valuable — you'll understand what your fellow works on at a code level.",r:"→ search: 'langchain RAG quickstart 2024'"},
-        {t:"rb",time:"20 min",h:"Embodied AI — LLMs + Robots",b:"Read about RT-2 (Robotics Transformer 2) by Google DeepMind. Search 'RT-2 robot paper'. This is where LLMs meet robotics — a robot that can reason in natural language and then act. Highly relevant to your fellowship.",r:"→ search: 'RT-2 robotics transformer google deepmind'"}
-      ],
-      tip:"The supercomputing morning session and the RAG build connect today: both are about how compute enables new AI capabilities."
-    },
-    {date:"5/15",short:"Fri",title:"3-Week Review",tags:["qc","py","rest"],
-      morning:{type:'qc',time:"25 min",h:"Quantum — Shor's Algorithm + quantum advantage",b:"Watch 'Shor's Algorithm explained' on YouTube (~15 min). Conceptual goal: understand why Shor's breaks RSA encryption and why that matters for cybersecurity. This is why governments are racing on quantum. You don't need to implement it.",r:"→ youtube: 'shors algorithm explained simply'"},
-      blocks:[
-        {t:"py",time:"30 min",h:"CS50P — problem set practice",b:"Do at least one CS50P problem set exercise.",r:""},
-        {t:"rest",time:"30 min",h:"Three-week review",b:"Write: (1) What you know now that you didn't on April 27. (2) Which morning track feels most interesting. (3) What's still fuzzy. This shapes your month 2 priorities.",r:""}
+        {t:"ng",time:"30 min",h:"Ng — Module 2 continued",b:"Daily Ng session.",r:""},
+        {t:"ai",time:"50 min",h:"Mini RAG prototype",b:"LangChain beginner RAG tutorial. Load a text file, chunk it, embed it, query it. This is your fellow's world — from the inside.",r:"→ search: 'langchain RAG quickstart 2024'"},
+        {t:"rb",time:"15 min",h:"Embodied AI — RT-2 paper",b:"Read about RT-2 (Google DeepMind). LLMs controlling robots. The AI+robotics frontier.",r:"→ search: 'RT-2 robotics transformer deepmind'"}
       ],
       tip:""
     },
-    {date:"5/16",short:"Sat",title:"Deep Work Day",tags:["rb","ai","biz"],
-      morning:{type:'rb',time:"25 min",h:"Robotics — ROS 2 Publisher + Subscriber",b:"Complete the ROS 2 tutorial: write a Python publisher node and subscriber node that communicate. This is the fundamental ROS pattern — everything in robotics is nodes sending messages to each other. docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html",r:"→ docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries"},
+    {date:"5/15",short:"Fri",title:"3-Week Review + Ng",tags:["qc","ng","py","rest"],
+      morning:{type:'qc',time:"25 min",h:"Quantum — Shor's Algorithm",b:"Watch 'Shor's Algorithm explained' on YouTube (~15 min). Why it breaks RSA. Why governments are racing on quantum.",r:"→ youtube: 'shors algorithm explained simply'"},
       blocks:[
-        {t:"ai",time:"60 min",h:"Andrew Ng — continue Course 1",b:"Another session. The math is clicking now with all your 3B1B intuition.",r:""},
-        {t:"biz",time:"30 min",h:"Zero to One — finish it",b:"Push to finish this weekend. Then go back and reread chapters that hit hardest.",r:""},
-        {t:"safe",time:"20 min",h:"Preview Week 5 — Control & Oversight",b:"Skim 'The case for ensuring powerful AIs are controlled'. Just the intro. What is the difference between control and alignment?",r:""}
+        {t:"ng",time:"30 min",h:"Ng — Module 2 continued",b:"Daily Ng session.",r:""},
+        {t:"py",time:"25 min",h:"CS50P — problem set practice",b:"Do at least one problem set exercise.",r:""},
+        {t:"rest",time:"25 min",h:"Three-week review",b:"Write: (1) What you know on May 15 that you didn't on April 27. (2) Which morning track is most interesting. (3) What's still fuzzy. (4) What Module 2 of Ng is covering.",r:""}
       ],
       tip:""
     },
-    {date:"5/17",short:"Sun",title:"Rest",tags:["rest"],
-      morning:{type:'rest',time:"20 min",h:"Morning Review — all three tracks",b:"Write from memory: (1) What is MPI and why does it matter? (2) What is quantum ML (PennyLane)? (3) What does RT-2 do? If you can answer all three clearly, you're tracking well across all morning sessions.",r:""},
+    {date:"5/16",short:"Sat",title:"Deep Work + Ng",tags:["rb","ng","ai","biz"],
+      morning:{type:'rb',time:"25 min",h:"Robotics — ROS 2 Publisher + Subscriber",b:"Write a Python publisher and subscriber node in ROS 2. The fundamental ROS pattern — everything in robotics is nodes sending messages to each other.",r:"→ docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html"},
       blocks:[
-        {t:"rest",time:"30 min",h:"Rest + Week 4 reading group question",b:"Write one question for Threat Models session. Rest intentionally.",r:""}
+        {t:"ng",time:"45 min",h:"Ng — Module 2 deep session",b:"Saturday Ng session is longer. Push through a full module section.",r:""},
+        {t:"ai",time:"40 min",h:"Andrew Ng Deep Learning Specialization — if Module 2 is ML-adjacent, supplement with Coursera DL Spec",b:"If Module 2 covers decision trees or other topics diverging from NNs, supplement with Coursera Deep Learning Specialization Course 1 for NN depth.",r:"→ coursera.org/specializations/deep-learning"},
+        {t:"biz",time:"25 min",h:"Zero to One — finish it",b:"Push to finish this weekend.",r:""}
       ],
-      tip:"Three weeks in. Every morning this week you learned something from SC, QC, or Robotics. That consistency compounds."
+      tip:""
+    },
+    {date:"5/17",short:"Sun",title:"Rest",tags:["rest","ng"],
+      morning:{type:'rest',time:"20 min",h:"Morning Review — all three tracks",b:"Write from memory: (1) What is MPI? (2) What is quantum ML (PennyLane)? (3) What does RT-2 do? Three sentences.",r:""},
+      blocks:[
+        {t:"ng",time:"15 min",h:"Ng — light review of Module 2 so far",b:"Reread your Module 2 notes. What's the core concept? What's still unclear?",r:""},
+        {t:"rest",time:"25 min",h:"Rest + Week 4 reading group question",b:"Write one question for Threat Models session. Rest intentionally.",r:""}
+      ],
+      tip:"Three weeks in. Every morning you learned SC, QC, or Robotics. Every day you did Ng. Every night you read Zero to One. That's a compound habit."
     }
   ]}
 ];
 
 const RESOURCES=[
-  {type:"safe",title:"3Blue1Brown — Neural Networks (6 chapters)",desc:"Required Week 0. Ch1–4 NN basics, Ch5 transformers, Ch6 attention.",link:"https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi",lt:"Watch playlist"},
-  {type:"safe",title:"Robert Miles — AI Safety YouTube",desc:"Clearest explainer. Watch 'Mesa-optimizers' for Week 3.",link:"https://www.youtube.com/@RobertMilesAI",lt:"YouTube channel"},
-  {type:"safe",title:"Specification Gaming — DeepMind Blog",desc:"Week 2 required. 15 min, very readable.",link:"https://deepmind.google/discover/blog/specification-gaming-the-flip-side-of-ai-ingenuity/",lt:"Read post"},
-  {type:"safe",title:"Anthropic — Alignment Faking Paper",desc:"Week 3 required. Models faking alignment during training.",link:"https://anthropic.com/research/alignment-faking",lt:"Read paper"},
-  {type:"safe",title:"Statement on AI Risk — CAIS",desc:"Week 4. 5 min. Signed by hundreds of researchers.",link:"https://www.safe.ai/statement-on-ai-risk",lt:"safe.ai"},
-  {type:"safe",title:"AGI Safety Fundamentals — BlueDot",desc:"Free curriculum mirroring your reading group syllabus.",link:"https://aisafetyfundamentals.com",lt:"aisafetyfundamentals.com"},
-  {type:"safe",title:"Alignment Forum",desc:"Where researchers post daily. Subscribe to the digest.",link:"https://alignmentforum.org",lt:"alignmentforum.org"},
-  {type:"py",title:"CS50P — Python (Harvard, free)",desc:"Primary video track. 9 lectures. Free on edX. Watch at 1.5x.",link:"https://cs50.harvard.edu/python",lt:"cs50.harvard.edu/python"},
-  {type:"py",title:"python-course.eu",desc:"Primary text track. Tutorial → OOP → Advanced → Numerical → ML.",link:"https://python-course.eu/python-tutorial/",lt:"python-course.eu"},
-  {type:"py",title:"Learn X in Y Minutes — Python",desc:"Read once on Day 1. Keep open as reference all week.",link:"https://learnxinyminutes.com/docs/python/",lt:"learnxinyminutes.com/python"},
-  {type:"py",title:"Anthropic Python SDK",desc:"For your first API call. Free tier available.",link:"https://docs.anthropic.com/en/api/getting-started",lt:"docs.anthropic.com"},
+  {type:"safe",title:"3Blue1Brown — Neural Networks (6 ch)",desc:"Required Week 0.",link:"https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi",lt:"Watch playlist"},
+  {type:"safe",title:"Robert Miles — AI Safety YouTube",desc:"Clearest explainer. 'Mesa-optimizers' for Week 3.",link:"https://www.youtube.com/@RobertMilesAI",lt:"YouTube channel"},
+  {type:"safe",title:"Specification Gaming — DeepMind",desc:"Week 2 required. 15 min.",link:"https://deepmind.google/discover/blog/specification-gaming-the-flip-side-of-ai-ingenuity/",lt:"Read post"},
+  {type:"safe",title:"Alignment Faking — Anthropic",desc:"Week 3 required.",link:"https://anthropic.com/research/alignment-faking",lt:"Read paper"},
+  {type:"safe",title:"Statement on AI Risk — CAIS",desc:"Week 4. 5 min.",link:"https://www.safe.ai/statement-on-ai-risk",lt:"safe.ai"},
+  {type:"safe",title:"AGI Safety Fundamentals — BlueDot",desc:"Free curriculum mirroring your reading group.",link:"https://aisafetyfundamentals.com",lt:"aisafetyfundamentals.com"},
+  {type:"ng",title:"Advanced Learning Algorithms — Coursera",desc:"Your active Ng course. Module 1 unlocked. ~30 min/day.",link:"https://www.coursera.org/learn/advanced-learning-algorithms",lt:"Open on Coursera"},
+  {type:"ng",title:"Deep Learning Specialization — Coursera",desc:"Supplement if needed. Free audit. NNs, optimization, CNNs.",link:"https://www.coursera.org/specializations/deep-learning",lt:"Audit on Coursera"},
+  {type:"py",title:"CS50P — Python (Harvard)",desc:"Primary video track. Free on edX.",link:"https://cs50.harvard.edu/python",lt:"cs50.harvard.edu/python"},
+  {type:"py",title:"python-course.eu",desc:"Primary text track. Tutorial → OOP → Numerical → ML.",link:"https://python-course.eu/python-tutorial/",lt:"python-course.eu"},
+  {type:"py",title:"Learn X in Y Minutes — Python",desc:"Read once Day 1. Keep open as reference.",link:"https://learnxinyminutes.com/docs/python/",lt:"learnxinyminutes.com/python"},
+  {type:"py",title:"Anthropic Python SDK",desc:"For your first API call. Free tier.",link:"https://docs.anthropic.com/en/api/getting-started",lt:"docs.anthropic.com"},
   {type:"ai",title:"Karpathy — Let's Build GPT",desc:"First 30 min: tokens, attention, context windows.",link:"https://youtu.be/kCc8FmEb1nY",lt:"Watch on YouTube"},
   {type:"ai",title:"fast.ai — Practical Deep Learning",desc:"Train a real model in Lesson 1. Free.",link:"https://course.fast.ai",lt:"course.fast.ai"},
-  {type:"ai",title:"Andrew Ng — Deep Learning Specialization",desc:"Start Week 4+. Free audit on Coursera.",link:"https://www.coursera.org/specializations/deep-learning",lt:"Audit on Coursera"},
   {type:"ai",title:"LangChain — RAG Quickstart",desc:"Build your first RAG system in Week 3.",link:"https://python.langchain.com/docs/tutorials/rag/",lt:"LangChain docs"},
-  {type:"sc",title:"Computerphile — How GPUs Work",desc:"Mon Wk1 morning. 9-min entry point. Why GPUs matter for AI.",link:"https://www.youtube.com/watch?v=C8YtdC8mxTU",lt:"Watch on YouTube"},
-  {type:"sc",title:"MIT 6.172 — Performance Engineering",desc:"Thu Wk1 morning. Lecture 1 covers HPC fundamentals.",link:"https://www.youtube.com/playlist?list=PLUl4u3cNGP63VIBQVWguXxZZi0566y7Wf",lt:"YouTube playlist"},
-  {type:"sc",title:"LLNL — Intro to Parallel Computing",desc:"Mon Wk3 morning. Free tutorial from a national lab. MPI, OpenMP, HPC structure.",link:"https://hpc.llnl.gov/documentation/tutorials/introduction-parallel-computing-tutorial",lt:"llnl.gov/hpc-tutorials"},
-  {type:"sc",title:"TOP500 — World's Fastest Supercomputers",desc:"Look at #1. What makes it fast? Great HPC context.",link:"https://www.top500.org",lt:"top500.org"},
-  {type:"sc",title:"CuPy — NumPy on GPU",desc:"Wed Wk3. GPU-accelerated Python arrays. Run your first GPU code.",link:"https://cupy.dev",lt:"cupy.dev"},
-  {type:"sc",title:"Python Multiprocessing Docs",desc:"Thu Wk2 morning. Parallel Python — the conceptual step before MPI.",link:"https://docs.python.org/3/library/multiprocessing.html",lt:"docs.python.org"},
-  {type:"qc",title:"IBM Quantum Learning",desc:"Tue Wk2 morning. Best hands-on QC curriculum. Real hardware access free.",link:"https://learning.quantum.ibm.com",lt:"learning.quantum.ibm.com"},
-  {type:"qc",title:"Qiskit — IBM Quantum SDK",desc:"pip install qiskit. Write your first Bell state circuit.",link:"https://qiskit.org",lt:"qiskit.org"},
-  {type:"qc",title:"PennyLane — Quantum ML",desc:"Tue Wk3 morning. Quantum + AI intersection. Train quantum circuits like NNs.",link:"https://pennylane.ai/qml",lt:"pennylane.ai/qml"},
-  {type:"qc",title:"Microsoft — Quantum Computing for CS",desc:"Tue Wk1 morning. First 15 min covers superposition and entanglement clearly.",link:"https://www.youtube.com/watch?v=F_Riqjdh2oM",lt:"Watch on YouTube"},
-  {type:"qc",title:"MIT OCW 8.370 — Quantum Computing",desc:"Full MIT course, free. Start after Qiskit basics.",link:"https://ocw.mit.edu/courses/8-370x-quantum-information-science-i-spring-2018/",lt:"MIT OCW"},
-  {type:"rb",title:"ROS 2 Documentation + Tutorials",desc:"Wed Wk1–2 morning. Official tutorials. Use Docker if install is complex.",link:"https://docs.ros.org/en/humble/Tutorials.html",lt:"docs.ros.org"},
-  {type:"rb",title:"MIT 6.832 — Underactuated Robotics",desc:"Sat Wk2 morning. Prof. Russ Tedrake. Kinematics, control, RL for robotics.",link:"https://www.youtube.com/playlist?list=PLkx8KyIQkMfX1WpDQ4XNnPMbxJsGGzDJb",lt:"YouTube playlist"},
-  {type:"rb",title:"A Gentle Introduction to ROS (free PDF)",desc:"Wed Wk1 morning. Best beginner robotics book. Free download.",link:"https://cse.sc.edu/~jokane/agitr/",lt:"Download PDF"},
+  {type:"sc",title:"Computerphile — How GPUs Work",desc:"Mon Wk1 morning. 9 min entry point.",link:"https://www.youtube.com/watch?v=C8YtdC8mxTU",lt:"Watch on YouTube"},
+  {type:"sc",title:"MIT 6.172 — Performance Engineering",desc:"Thu Wk1 morning. HPC fundamentals.",link:"https://www.youtube.com/playlist?list=PLUl4u3cNGP63VIBQVWguXxZZi0566y7Wf",lt:"YouTube playlist"},
+  {type:"sc",title:"LLNL — Intro to Parallel Computing",desc:"Mon Wk3 morning. Free national lab tutorial. MPI, OpenMP.",link:"https://hpc.llnl.gov/documentation/tutorials/introduction-parallel-computing-tutorial",lt:"llnl.gov"},
+  {type:"sc",title:"TOP500 — World's Fastest Supercomputers",desc:"Context for why HPC scale matters for AI.",link:"https://www.top500.org",lt:"top500.org"},
+  {type:"sc",title:"CuPy — NumPy on GPU",desc:"Wed Wk3 morning. GPU-accelerated Python.",link:"https://cupy.dev",lt:"cupy.dev"},
+  {type:"qc",title:"IBM Quantum Learning",desc:"Tue Wk2 morning. Best hands-on QC curriculum. Real hardware.",link:"https://learning.quantum.ibm.com",lt:"learning.quantum.ibm.com"},
+  {type:"qc",title:"Qiskit — IBM Quantum SDK",desc:"pip install qiskit. Write your first Bell state.",link:"https://qiskit.org",lt:"qiskit.org"},
+  {type:"qc",title:"PennyLane — Quantum ML",desc:"Tue Wk3 morning. Quantum + AI intersection.",link:"https://pennylane.ai/qml",lt:"pennylane.ai/qml"},
+  {type:"qc",title:"Microsoft — Quantum for CS",desc:"Tue Wk1 morning. First 15 min covers concepts clearly.",link:"https://www.youtube.com/watch?v=F_Riqjdh2oM",lt:"Watch on YouTube"},
+  {type:"rb",title:"ROS 2 Documentation",desc:"Wed Wk1–2 mornings. Official tutorials.",link:"https://docs.ros.org/en/humble/Tutorials.html",lt:"docs.ros.org"},
+  {type:"rb",title:"MIT 6.832 — Underactuated Robotics",desc:"Sat Wk2 morning. Kinematics, control, RL for robots.",link:"https://www.youtube.com/playlist?list=PLkx8KyIQkMfX1WpDQ4XNnPMbxJsGGzDJb",lt:"YouTube playlist"},
+  {type:"rb",title:"A Gentle Introduction to ROS (PDF)",desc:"Wed Wk1 morning. Best beginner robotics book. Free.",link:"https://cse.sc.edu/~jokane/agitr/",lt:"Download PDF"},
   {type:"rb",title:"OpenAI Gymnasium",desc:"Wed Wk3 morning. RL simulation. Start with CartPole.",link:"https://gymnasium.farama.org",lt:"gymnasium.farama.org"},
-  {type:"rb",title:"RT-2 — Robotics Transformer (Google)",desc:"Thu Wk3. LLMs controlling robots. The embodied AI frontier.",link:"https://deepmind.google/discover/blog/rt-2-new-model-translates-vision-and-language-into-robot-actions/",lt:"DeepMind blog"},
-  {type:"biz",title:"Zero to One — Peter Thiel",desc:"Read nightly (~15 min).",link:"https://www.amazon.com/Zero-One-Notes-Startups-Future/dp/0804139296",lt:"Get the book"},
-  {type:"biz",title:"How to Start a Startup — Sam Altman",desc:"Ep 1+2 done. Continue Ep 3+. One per week.",link:"https://www.youtube.com/playlist?list=PL5q_lef6zVkaTY_cT1k7qFNF2TidHCe-1",lt:"Full playlist"},
-  {type:"biz",title:"Paul Graham Essays",desc:"'Default Alive or Dead', 'How to Get Startup Ideas', 'Do Things That Don't Scale'.",link:"https://paulgraham.com/articles.html",lt:"paulgraham.com"},
-  {type:"biz",title:"SaaS Metrics 2.0 — David Skok",desc:"ARR, CAC, LTV, churn. The metrics every investor asks about.",link:"https://www.forentrepreneurs.com/saas-metrics-2/",lt:"Read free"},
+  {type:"rb",title:"RT-2 — Robotics Transformer (Google)",desc:"Thu Wk3. LLMs controlling robots.",link:"https://deepmind.google/discover/blog/rt-2-new-model-translates-vision-and-language-into-robot-actions/",lt:"DeepMind blog"},
+  {type:"biz",title:"Zero to One — Peter Thiel",desc:"Read nightly.",link:"https://www.amazon.com/Zero-One-Notes-Startups-Future/dp/0804139296",lt:"Get the book"},
+  {type:"biz",title:"How to Start a Startup — Sam Altman",desc:"Ep 1+2 done. Continue from Ep 3.",link:"https://www.youtube.com/playlist?list=PL5q_lef6zVkaTY_cT1k7qFNF2TidHCe-1",lt:"Full playlist"},
+  {type:"biz",title:"Paul Graham Essays",desc:"'Default Alive or Dead', 'Do Things That Don't Scale'.",link:"https://paulgraham.com/articles.html",lt:"paulgraham.com"},
+  {type:"biz",title:"SaaS Metrics 2.0 — David Skok",desc:"ARR, CAC, LTV, churn. Free online.",link:"https://www.forentrepreneurs.com/saas-metrics-2/",lt:"Read free"},
 ];
 
 function renderCal(){
   const cal=document.getElementById('cal');
-  const morningColors={sc:'var(--sc)',qc:'var(--qc)',rb:'var(--rb)',rest:'var(--rest)'};
-  const morningBgs={sc:'var(--sc-bg)',qc:'var(--qc-bg)',rb:'var(--rb-bg)',rest:'var(--rest-bg)'};
   WEEKS.forEach(w=>{
     const wl=document.createElement('div');wl.className='wh';wl.textContent=w.label;cal.appendChild(wl);
     const lr=document.createElement('div');lr.className='dlabels';
@@ -564,29 +679,26 @@ function renderCal(){
       const c=document.createElement('div');
       c.className='dc'+(d.today?' tday':'');
       c.innerHTML=`
-        <div class="dc-morning" style="background:${morningBgs[mt]}">
-          <div class="dc-morning-dot" style="background:${morningColors[mt]}"></div>
-          <span class="dc-morning-label" style="color:${morningColors[mt]}">${TM[mt].text.split(' ')[0]} ☀️</span>
+        <div class="dc-morning" style="background:${MB[mt]}">
+          <div class="dc-morning-dot" style="background:${MC[mt]}"></div>
+          <span class="dc-morning-label" style="color:${MC[mt]}">${mt==='rest'?'REVIEW ☀️':TM[mt].text.split(' ')[0]+' ☀️'}</span>
         </div>
         <div class="dc-main">
           <div class="dn${d.today?' t':''}">${d.date}${d.today?' ★':''}</div>
           <div class="dts">${d.title}</div>
-          <div class="dots">${d.tags.filter(t=>t!==mt).map(t=>`<div class="dot ${TM[t].dot}"></div>`).join('')}</div>
+          <div class="dots">${d.tags.filter(t=>t!==mt).map(t=>`<div class="dot ${TM[t].dot}" title="${TM[t].text}"></div>`).join('')}</div>
         </div>`;
       c.addEventListener('click',()=>{
         document.querySelectorAll('.dc').forEach(x=>x.classList.remove('active'));
         c.classList.add('active');
         document.getElementById('ptitle').textContent=`${d.short} ${d.date} — ${d.title}`;
-        document.getElementById('pmeta').textContent='~1.5–2 hrs total';
-        // Build panel content
+        document.getElementById('pmeta').textContent='☀️ morning + 📚 day sessions';
         const inner=document.getElementById('pinner');
         const m=d.morning;
-        const mcolor=morningColors[mt];
-        const mbg=morningBgs[mt];
         inner.innerHTML=`
-          <div class="morning-section" style="border-color:${mcolor}30">
-            <div class="ms-header"><div class="ms-dot" style="background:${mcolor}"></div>☀️ MORNING SESSION · ${m.time}</div>
-            <div class="ms-block ${TM[mt].block}">
+          <div class="morning-section" style="border-color:${MC[mt]}30">
+            <div class="ms-header"><div class="ms-dot" style="background:${MC[mt]}"></div>☀️ MORNING · ${m.time}</div>
+            <div class="block ${TM[mt].block}">
               <div class="bl ${TM[mt].label}">${TM[mt].text}</div>
               <div class="bh">${m.h}</div>
               <div class="bb">${m.b}</div>
@@ -595,8 +707,17 @@ function renderCal(){
           </div>
           <div class="day-divider">📚 Rest of Day</div>
           <div class="blocks">${d.blocks.map(b=>`<div class="block ${TM[b.t].block}"><div class="bl ${TM[b.t].label}">${TM[b.t].text} · ${b.time}</div><div class="bh">${b.h}</div>${b.b?`<div class="bb">${b.b}</div>`:''}${b.r?`<div class="bres">${b.r}</div>`:''}</div>`).join('')}</div>`;
+        // Always append Zero to One nightly block
+        const blocksEl=inner.querySelector('.blocks');
+        if(blocksEl){
+          const z=document.createElement('div');
+          z.className='block blbiz';
+          z.innerHTML=`<div class="bl lbiz">EVERY NIGHT · 15 min</div><div class="bh">📖 Zero to One — Peter Thiel</div><div class="bb">Read before bed every single night. ~15 pages. Doesn't matter which chapter — just keep going. This is your nightly entrepreneurship habit and it compounds across the whole fellowship.</div>`;
+          blocksEl.appendChild(z);
+        }
         const te=document.getElementById('ptip');
-        if(d.tip){te.style.display='block';te.innerHTML=`<strong>Note:</strong> ${d.tip}`;}else te.style.display='none';
+        if(d.tip){te.style.display='block';te.innerHTML=`<strong>Note:</strong> ${d.tip}`;}
+        else te.style.display='none';
         const p=document.getElementById('panel');p.classList.add('vis');p.scrollIntoView({behavior:'smooth',block:'nearest'});
       });
       gr.appendChild(c);
@@ -607,8 +728,8 @@ function renderCal(){
 
 function renderRes(){
   const g=document.getElementById('rg');
-  const tc={ai:'var(--ai)',safe:'var(--safe)',biz:'var(--biz)',py:'var(--py)',sc:'var(--sc)',qc:'var(--qc)',rb:'var(--rb)'};
-  const tl={ai:'AI / ML',safe:'AI SAFETY',biz:'ENTREPRENEURSHIP',py:'PYTHON',sc:'SUPERCOMPUTING ☀️',qc:'QUANTUM ☀️',rb:'ROBOTICS ☀️'};
+  const tc={ai:'var(--ai)',safe:'var(--safe)',biz:'var(--biz)',py:'var(--py)',sc:'var(--sc)',qc:'var(--qc)',rb:'var(--rb)',ng:'var(--ng)'};
+  const tl={ai:'AI / ML',safe:'AI SAFETY',biz:'ENTREPRENEURSHIP',py:'PYTHON',sc:'SUPERCOMPUTING ☀️',qc:'QUANTUM ☀️',rb:'ROBOTICS ☀️',ng:'ANDREW NG'};
   RESOURCES.forEach(r=>{
     const c=document.createElement('div');c.className='rc';c.dataset.type=r.type;
     c.innerHTML=`<div class="rtype" style="color:${tc[r.type]}">${tl[r.type]}</div><div class="rtitle">${r.title}</div><div class="rdesc">${r.desc}</div>${r.link?`<a class="rlink" href="${r.link}" target="_blank" rel="noopener">↗ ${r.lt}</a>`:''}`;
@@ -630,4 +751,3 @@ renderCal();renderRes();
 </script>
 </body>
 </html>
-
