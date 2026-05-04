@@ -195,7 +195,7 @@ h1 span{color:var(--accent);font-style:italic;}
       <h1>Poseidon <span>Fellows</span></h1>
       <p class="sub">
         ☀️ Morning (~30 min): Quantum → ROS+SLAM → repeat<br>
-        📚 Day (1–2 hrs): AI Safety · Python · ML Foundations · Andrew Ng · Entrepreneurship
+        📚 Day (2–3 hrs): CS50P daily · 3B1B daily · AI Policy/Frontier · Andrew Ng · Build
       </p>
     </div>
     <div class="today-badge" id="tday">—</div>
@@ -516,163 +516,219 @@ const TM={
 
 const WEEKS=[
   {label:"WEEK 1 — MAY 4 · Concept Foundation",days:[
-    {date:"5/4",short:"Mon",title:"Orientation + Setup",today:true,tags:["hw","ai","biz"],
-      morning:{type:'hw',time:"optional",h:"Hardware — skip today, use time for setup",b:"Hardware sessions are interest-driven and occasional. Use today's morning to get set up: install Python 3.12+, bookmark your three daily destinations (HuggingFace Papers, learnxinyminutes, CS50P), open a Learning Log file.",r:""},
+    {date:"5/4",short:"Mon",title:"Setup + Orientation",today:true,tags:["hw","py","ai","biz"],
+      morning:{type:'hw',time:"setup day",h:"Hardware — skip today, use time for setup",b:"Install Python 3.12+ (python.org). Bookmark: HuggingFace Papers, learnxinyminutes, CS50P, Ng Coursera. Open a Learning Log .txt file. Read the Learning Spine tab top to bottom.",r:""},
       blocks:[
-        {t:"ai",time:"30 min",h:"Read the Learning Spine — top to bottom",b:"Open the Learning Spine tab and read the full 5-step sequence. Understand the structure before you start any of it. The blur you've felt is a sequencing problem — this fixes the sequence.",r:""},
-        {t:"py",time:"30 min",h:"Install Python + first syntax pass",b:"Install Python 3.12+ from python.org. Then open learnxinyminutes.com/docs/python — full Python syntax on one page. You have Java, this is a 30-min read.",r:"→ learnxinyminutes.com/docs/python"},
-        {t:"biz",time:"15 min",h:"Zero to One — Preface + Ch 1 (tonight)",b:"Philosophy book, not a how-to. Thiel: the most valuable companies create something genuinely new (0→1) rather than copying (1→n). Read before bed.",r:""}
+        {t:"py",time:"30 min",h:"learnxinyminutes — Python syntax in one sitting",b:"Full Python syntax on one page written for people who already code. You have Java — this is a 30-min read. Keep it open as reference all week.",r:"→ learnxinyminutes.com/docs/python"},
+        {t:"py",time:"60 min",h:"CS50P Lecture 0 — Functions & Variables",b:"Start CS50P at cs50.harvard.edu/python. Watch at 1.5x. Focus on Python idioms different from Java: dynamic typing, f-strings, tuple unpacking, list comprehensions. CS50P Lec 0 = functions, variables, expressions.",r:"→ cs50.harvard.edu/python"},
+        {t:"ai",time:"20 min",h:"3B1B — What is a Neural Network? (Ch 1)",b:"'But what is a neural network?' (19 min). Don't just watch — pause after each concept and say it back in your own words. This is Layer 2 of your learning spine.",r:"→ youtube: '3blue1brown what is a neural network'"},
+        {t:"safe",time:"20 min",h:"Frontier read: AI 2027 — what's actually coming",b:"Read the AI 2027 scenario (ai-2027.com). A concrete attempt to forecast AI capability development. Not official prediction — a structured thought experiment that your reading group will reference.",r:"→ ai-2027.com"},
+        {t:"biz",time:"15 min",h:"Zero to One — Preface + Ch 1 (tonight)",b:"Read nightly before bed. ~15 min.",r:""}
       ],
-      tip:"Today is setup and orientation. Don't rush — getting the mental model right on Day 1 is more valuable than rushing into content."
+      tip:"Day 1. Every day from here has the same structure: morning session → CS50P lecture → 3B1B chapter → frontier item → Ng or other content. Today is lighter — tomorrow the full rhythm starts."
     },
-    {date:"5/5",short:"Tue",title:"Quantum + MIT 6.034",tags:["qc","ai"],
-      morning:{type:'qc',time:"25 min",h:"Quantum — Qubits and Superposition",b:"Watch IBM's 'What is Quantum Computing?' (5 min) then the first 15 min of Microsoft Research's 'Quantum Computing for Computer Scientists'. Today: pure concepts — qubits vs bits, superposition, entanglement. No math yet.",r:"→ youtube: 'quantum computing for computer scientists microsoft research'"},
+    {date:"5/5",short:"Tue",title:"MIT 6.034 + CS50P 1",tags:["qc","ai","py","safe"],
+      morning:{type:'qc',time:"25 min",h:"Quantum — Qubits and Superposition",b:"Watch IBM's 'What is Quantum Computing?' (5 min) then first 15 min of Microsoft Research 'Quantum Computing for Computer Scientists'. Pure concepts: qubits vs bits, superposition, entanglement. No math yet.",r:"→ youtube: 'quantum computing for computer scientists microsoft research'"},
       blocks:[
-        {t:"ai",time:"50 min",h:"MIT 6.034 Lec 1 — Intro & Scope",b:"Patrick Winston explains what AI is and WHY it exists. Watch before anything else. After watching, write in your own words: 'What is AI?' Don't look it up — force the synthesis.",r:"→ youtube.com/watch?v=TjZBTDzGeGg"}
+        {t:"py",time:"70 min",h:"CS50P Lecture 1 — Conditionals",b:"Lecture 1 covers conditionals — if/elif/else. Python conditionals are cleaner than Java. Focus on match statements (Python 3.10+) and truthiness. Do the problem set after.",r:"→ cs50.harvard.edu/python"},
+        {t:"ai",time:"20 min",h:"3B1B Ch 2 — Gradient Descent",b:"'Gradient descent, how neural networks learn' (21 min). After watching: what does 'training' actually mean? Write the answer.",r:"→ youtube: '3blue1brown gradient descent'"},
+        {t:"ai",time:"50 min",h:"MIT 6.034 Lec 1 — Intro & Scope",b:"Patrick Winston on what AI is and WHY it exists. Watch before anything else. After: write 'What is AI?' in your own words without looking it up.",r:"→ youtube.com/watch?v=TjZBTDzGeGg"},
+        {t:"safe",time:"20 min",h:"Frontier: The case for taking AI seriously — Yoshua Bengio",b:"Read Bengio's statement on AI risk (safe.ai/statement-on-ai-risk). Then watch his 10-min talk 'The case for AI safety' on YouTube. One of the most respected researchers on why the frontier community is worried.",r:"→ safe.ai/statement-on-ai-risk"}
       ],
-      tip:"Winston is Layer 1 — the WHY. Everything else you'll learn is Layer 3+. This 50-minute session is the most important of the week."
+      tip:"MIT 6.034 Lec 1 is the conceptual anchor for everything. CS50P Lec 1 is the daily Python habit starting now."
     },
-    {date:"5/6",short:"Wed",title:"ROS Install + CS50P",tags:["slam","py"],
-      morning:{type:'slam',time:"25 min",h:"ROS + SLAM — Install + Concepts",b:"Install ROS 2 Humble: docs.ros.org/en/humble/Installation.html (Ubuntu preferred, or WSL2 on Windows). Then read 'A Gentle Introduction to ROS' Ch 1–2 (free PDF). Core concepts: nodes, topics, publishers, subscribers — what they are and why ROS exists.",r:"→ cse.sc.edu/~jokane/agitr/ (free PDF)"},
+    {date:"5/6",short:"Wed",title:"ROS + CS50P 2",tags:["slam","py","ai","safe"],
+      morning:{type:'slam',time:"25 min",h:"ROS 2 — Install + Concepts",b:"Install ROS 2 Humble (docs.ros.org/en/humble/Installation.html). Read 'A Gentle Introduction to ROS' Ch 1–2. Core concepts: nodes, topics, publishers, subscribers. Run: ros2 run demo_nodes_py talker in one terminal, ros2 run demo_nodes_py listener in another.",r:"→ cse.sc.edu/~jokane/agitr/"},
       blocks:[
-        {t:"py",time:"60 min",h:"CS50P Lecture 1 — Functions & Variables",b:"Start CS50P at cs50.harvard.edu/python. Watch at 1.5x. Focus on Python idioms that differ from Java: list comprehensions, f-strings, tuple unpacking, dynamic typing.",r:"→ cs50.harvard.edu/python"}
+        {t:"py",time:"70 min",h:"CS50P Lecture 2 — Loops",b:"for loops, while loops, list comprehensions. Python loops are more expressive than Java — focus on the Pythonic patterns: enumerate(), zip(), range(). Do the problem set.",r:"→ cs50.harvard.edu/python"},
+        {t:"ai",time:"20 min",h:"3B1B Ch 3 — Backpropagation",b:"'What is backpropagation really doing?' (14 min). The mechanism by which NNs learn — error flows backward, weights update.",r:"→ youtube: '3blue1brown backpropagation'"},
+        {t:"ai",time:"40 min",h:"MIT 6.034 Lec 10 — Intro to Learning",b:"The most important session of the week. Winston: instead of writing rules, computer learns rules from examples. After: write 'What is ML?' Compare to what you wrote for AI on Tuesday.",r:"→ MIT 6.034 playlist — Lec 10"},
+        {t:"safe",time:"20 min",h:"Frontier: What is AI policy? — 80,000 Hours intro",b:"Read 80000hours.org/problem-profiles/ai-policy. Short intro to the AI governance landscape: compute governance, export controls, safety standards. Context for your reading group's Week 7 material.",r:"→ 80000hours.org/problem-profiles/ai-policy"}
       ],
       tip:""
     },
-    {date:"5/7",short:"Thu",title:"MIT 6.034 Lec 10",tags:["hw","ai"],
-      morning:{type:'hw',time:"optional",h:"Hardware — optional today",b:"If curious: watch 'GPU Architecture' on YouTube (15 min). How GPUs differ from CPUs — massively parallel, thousands of small cores. Otherwise, use time to go deeper on MIT 6.034.",r:"→ youtube: 'GPU architecture explained'"},
+    {date:"5/7",short:"Thu",title:"Ng Course 1 Begins + CS50P 3",tags:["hw","py","ai","biz"],
+      morning:{type:'hw',time:"optional",h:"Hardware — GPU Architecture",b:"Watch 'GPU Architecture' on YouTube (15 min). How GPUs differ from CPUs — massively parallel, thousands of small cores. Foundation for understanding why deep learning runs on GPUs.",r:"→ youtube: 'GPU architecture explained'"},
       blocks:[
-        {t:"ai",time:"50 min",h:"MIT 6.034 Lec 10 — Introduction to Learning",b:"The most important session of Week 1. Winston explains ML: instead of writing rules, computer learns rules from examples. After watching, write 'What is ML?' in your own words. Compare to what you wrote for AI on Tuesday.",r:"→ MIT 6.034 playlist — Lec 10"}
-      ],
-      tip:"After this session you have the core mental model. Everything else — 3B1B, Ng, fast.ai — is building on this foundation."
-    },
-    {date:"5/8",short:"Fri",title:"3B1B Ch 1–2 + Quantum Gates",tags:["qc","ai"],
-      morning:{type:'qc',time:"25 min",h:"Quantum Gates — Hadamard & CNOT",b:"Quantum gates are like classical logic gates but operate on superpositions. Learn what Hadamard (creates superposition) and CNOT (creates entanglement) do. Draw the gate diagrams on paper. Reinforce Tuesday's learning.",r:"→ youtube: 'quantum gates explained hadamard CNOT'"},
-      blocks:[
-        {t:"ai",time:"50 min",h:"3B1B Ch 1 + Ch 2 — Neural Networks & Gradient Descent",b:"Watch 'But what is a neural network?' (19 min) and 'Gradient descent, how neural networks learn' (21 min). After each: pause and write 1 sentence summary. Watch actively — don't just let it play.",r:"→ youtube: '3blue1brown neural network' and '3blue1brown gradient descent'"}
+        {t:"py",time:"70 min",h:"CS50P Lecture 3 — Exceptions",b:"try/except, raising exceptions, custom exceptions. Exception handling in Python is more expressive than Java's checked exceptions. Do the problem set.",r:"→ cs50.harvard.edu/python"},
+        {t:"ai",time:"20 min",h:"3B1B Ch 4 — Backprop Calculus",b:"'Backpropagation calculus' (10 min). The math behind backprop. Skim if the calculus is unfamiliar — track the intuition.",r:"→ youtube: '3blue1brown backprop calculus'"},
+        {t:"ai",time:"60 min",h:"Andrew Ng Course 1 Wk 1 — Supervised ML begins",b:"Start coursera.org/learn/machine-learning (free audit). Topics: supervised vs unsupervised learning, linear regression, cost function. This is Layer 3 — code — grounded now after Winston + 3B1B.",r:"→ coursera.org/learn/machine-learning"},
+        {t:"biz",time:"20 min",h:"Frontier: Sam Altman on AI and the economy",b:"Watch Sam Altman's 'Intelligence Age' essay video or read the essay (ia.samaltman.com). The economic argument for why AI matters for startups. Connects Zero to One to the current moment.",r:"→ ia.samaltman.com"}
       ],
       tip:""
     },
-    {date:"5/9",short:"Sat",title:"SLAM Handbook + NumPy",tags:["slam","py","ai"],
-      morning:{type:'slam',time:"25 min",h:"SLAM Handbook — Prelude + Part 1 Intro",b:"Read the Prelude (editors' intro) of the SLAM Handbook. Understand the book's structure: Part 1 = SLAM theory, Part 2 = applications, Part 3 = spatial AI + deep learning for SLAM. SLAM in one sentence: a robot estimates its own position and builds a map simultaneously, without knowing either to start. Write this in your log.",r:"→ github.com/SLAM-Handbook-contributors/slam-handbook-public-release"},
+    {date:"5/8",short:"Fri",title:"Quantum Gates + CS50P 4",tags:["qc","py","ai","safe"],
+      morning:{type:'qc',time:"25 min",h:"Quantum Gates — Hadamard & CNOT",b:"Quantum gates operate on superpositions. Learn what Hadamard (creates superposition) and CNOT (creates entanglement) do. Draw the gate diagrams on paper from memory after the video.",r:"→ youtube: 'quantum gates explained hadamard CNOT'"},
       blocks:[
-        {t:"py",time:"40 min",h:"CS50P Lec 2–3 + Start NumPy",b:"CS50P Lectures 2–3 — functions, conditionals, loops. Then start NumPy Absolute Beginners guide. NumPy is how ML code works — arrays, slicing, broadcasting. Critical, don't skip.",r:"→ numpy.org/doc/stable/user/absolute_beginners.html"},
-        {t:"ai",time:"20 min",h:"3B1B Ch 3 — Backpropagation",b:"'What is backpropagation really doing?' (14 min). This shows HOW training works mechanically.",r:"→ youtube: '3blue1brown backpropagation'"}
+        {t:"py",time:"70 min",h:"CS50P Lecture 4 — Libraries",b:"Importing libraries, pip, creating your own modules. This lecture unlocks everything: after this you can use NumPy, Pandas, Qiskit, and the Anthropic API. Critical milestone.",r:"→ cs50.harvard.edu/python"},
+        {t:"ai",time:"20 min",h:"3B1B Ch 5 — Transformers & GPT",b:"'Attention in transformers, visually explained' (26 min). How LLMs actually work. After this you can explain to your friend what a transformer is.",r:"→ youtube: '3blue1brown transformers GPT'"},
+        {t:"ai",time:"40 min",h:"Ng Course 1 Wk 1 — continue + gradient descent",b:"Gradient descent in code. Cost function minimization. Do the labs — coding exercises are where it clicks.",r:"→ coursera.org/learn/machine-learning"},
+        {t:"safe",time:"20 min",h:"Frontier: EU AI Act — what it actually says",b:"Read the EFF's plain-language summary of the EU AI Act (eff.org search 'EU AI Act explained'). First major AI regulation. Understand: risk tiers, prohibited uses, high-risk systems, foundation model rules.",r:"→ search: 'EU AI Act explained plain language'"}
       ],
       tip:""
     },
-    {date:"5/10",short:"Sun",title:"Review + AI Safety Wk 1",tags:["rest","safe"],
-      morning:{type:'rest',time:"25 min",h:"Review — write from memory",b:"From memory only: (1) What is AI? (2) What is ML? (3) What is a neural network? (4) What is gradient descent? (5) What is a qubit? (6) What does a ROS node do? Don't look at notes. This is the only test that matters.",r:""},
+    {date:"5/9",short:"Sat",title:"SLAM + CS50P 5 + Sycophancy Paper",tags:["slam","py","ai","safe"],
+      morning:{type:'slam',time:"25 min",h:"SLAM Handbook — Prelude + Structure",b:"Read the Prelude of the SLAM Handbook. Understand the book's 3-part structure. SLAM in one sentence: a robot estimates its own position and builds a map simultaneously, without knowing either to start. Write this definition in your log.",r:"→ github.com/SLAM-Handbook-contributors/slam-handbook-public-release"},
       blocks:[
-        {t:"safe",time:"45 min",h:"AI Safety Reading Group Wk 1 — Transformative AI & Trajectory",b:"METR Long-Horizon Tasks (2025) + Epoch AI Trends (2025). How long can AI agents work autonomously? What does the compute scaling curve look like?",r:"→ metr.org → epochai.org"},
-        {t:"rest",time:"30 min",h:"Catch-up day",b:"Anything from Mon–Sat that isn't done — finish it today. No new content on catch-up days.",r:""}
+        {t:"py",time:"70 min",h:"CS50P Lecture 5 — Unit Tests",b:"pytest, test-driven development, writing tests for your own code. Unit testing is critical for ML code — models that 'work' but give wrong outputs are a real problem. Do the problem set.",r:"→ cs50.harvard.edu/python"},
+        {t:"ai",time:"20 min",h:"3B1B Ch 6 — Attention Mechanism",b:"'Attention in transformers' (25 min). The core innovation that made transformers work. After this the concept cards make full sense.",r:"→ youtube: '3blue1brown attention'"},
+        {t:"ai",time:"40 min",h:"Ng Course 1 Wk 2 — Logistic Regression",b:"Classification (predicting categories, not numbers). Sigmoid function, decision boundary. Do all labs.",r:"→ coursera.org/learn/machine-learning"},
+        {t:"safe",time:"30 min",h:"Paper: Sycophancy to Subterfuge (Anthropic)",b:"Read abstract + intro. This is what your friend was discussing about LLM illusions. RLHF trained models to get better ratings; humans rate agreeable answers higher; models learned to confirm biases.",r:"→ anthropic.com/research/sycophancy-to-subterfuge"}
       ],
-      tip:"Six recall questions, no notes. The moment you can write those six answers from memory is the moment Week 1 is done."
+      tip:"After today you've done 5 CS50P lectures, all 6 core 3B1B chapters, and your first real paper. That's a full week."
+    },
+    {date:"5/10",short:"Sun",title:"Review + AI Safety Wk 1",tags:["rest","safe","py"],
+      morning:{type:'rest',time:"25 min",h:"Review — write from memory",b:"Write without notes: (1) What is AI? (2) What is ML? (3) What is a neural network? (4) What is gradient descent? (5) What is a qubit? (6) What does a ROS node do? (7) What is sycophancy in LLMs?",r:""},
+      blocks:[
+        {t:"py",time:"60 min",h:"CS50P Lecture 6 — File I/O",b:"Reading and writing files, CSV handling, binary files. This unlocks dataset loading — you'll use this in every ML project. Do the problem set.",r:"→ cs50.harvard.edu/python"},
+        {t:"ai",time:"20 min",h:"3B1B Ch 7 — LLM Facts",b:"Recent chapter on how LLMs work at scale (15 min). Covers temperature, context windows, emergent behavior.",r:"→ youtube: '3blue1brown LLM facts'"},
+        {t:"safe",time:"45 min",h:"AI Safety Reading Group Wk 1 — Transformative AI",b:"METR Long-Horizon Tasks + Epoch AI Trends. How long can AI agents work autonomously? What does the compute scaling curve look like?",r:"→ metr.org → epochai.org"},
+        {t:"safe",time:"20 min",h:"Frontier: METR's AI autonomy research — 5 min overview",b:"Browse metr.org and read their 'about' page and latest eval results. METR measures how long AI can work on real tasks autonomously. This is frontier safety research happening right now.",r:"→ metr.org"}
+      ],
+      tip:"Seven recall questions without notes. The moment you can answer all seven is the moment Week 1 is actually done."
     }
   ]},
-  {label:"WEEK 2 — MAY 11 · Andrew Ng Course 1 + 3B1B Finish",days:[
-    {date:"5/11",short:"Mon",title:"Ng Course 1 Begins",tags:["hw","ai"],
-      morning:{type:'hw',time:"optional",h:"Hardware — optional",b:"CUDA basics: GPU has thousands of cores running simultaneously. 'Kernel' = function running on GPU. 'Thread' = smallest unit of execution. Search YouTube for a 15-min CUDA intro. Or skip and use time on Ng.",r:""},
+  {label:"WEEK 2 — MAY 11 · Andrew Ng + 3B1B Finish + Build",days:[
+    {date:"5/11",short:"Mon",title:"Ng Wk 2 + CS50P 7",tags:["hw","py","ai","safe"],
+      morning:{type:'hw',time:"optional",h:"Hardware — CUDA basics",b:"CUDA: GPU has thousands of cores running simultaneously. 'Kernel' = function on GPU. 'Thread' = smallest execution unit. Watch a 15-min CUDA intro on YouTube. Or skip and use time on Ng.",r:"→ youtube: 'cuda programming intro'"},
       blocks:[
-        {t:"ai",time:"70 min",h:"Andrew Ng Course 1 — Week 1: Supervised ML",b:"Start at coursera.org/learn/machine-learning (free audit). Topics: linear regression, cost function, gradient descent. This is Layer 3 — code — and it should feel grounded now after Winston + 3B1B. Take notes in a .py file and run the code examples.",r:"→ coursera.org/learn/machine-learning"}
-      ],
-      tip:"You were on Course 2. This is Course 1. The conceptual anchoring from last week makes this click in a way it wouldn't have before."
-    },
-    {date:"5/12",short:"Tue",title:"Qiskit + 3B1B Ch 4–5",tags:["qc","ai"],
-      morning:{type:'qc',time:"25 min",h:"Qiskit — Bell State",b:"Install Qiskit (pip install qiskit). Build a Bell state: apply Hadamard to qubit 1, then CNOT using qubit 1 as control. Run on IBM simulator at learning.quantum.ibm.com. First quantum circuit you've coded.",r:"→ learning.quantum.ibm.com"},
-      blocks:[
-        {t:"ai",time:"60 min",h:"3B1B Ch 4 + Ch 5 — Backprop Calculus + Transformers",b:"Ch 4 (10 min) completes backprop with calculus. Ch 5 (26 min) covers GPT and transformers — how LLMs actually work. After Ch 5 you can explain to your friend what a transformer is.",r:"→ youtube: '3blue1brown backprop calculus' and '3blue1brown transformers'"}
+        {t:"py",time:"70 min",h:"CS50P Lecture 7 — Regular Expressions",b:"Regex: pattern matching on strings. Used constantly in data cleaning and text processing for ML. re module, match(), search(), groups. Do the problem set.",r:"→ cs50.harvard.edu/python"},
+        {t:"ai",time:"20 min",h:"3B1B — How LLMs work (extra: Visualizing Attention)",b:"Watch '3B1B Visualizing Attention' or 'But what is a GPT?' if not yet watched. Consolidate the transformer picture.",r:"→ youtube: '3blue1brown but what is a GPT'"},
+        {t:"ai",time:"60 min",h:"Ng Course 1 Wk 2 — Logistic Regression + Labs",b:"Decision boundary, cost function for classification, gradient descent for logistic regression. Do all coding labs — the labs are where it clicks.",r:"→ coursera.org/learn/machine-learning"},
+        {t:"safe",time:"20 min",h:"Frontier: Compute governance — why chips matter for AI policy",b:"Read 'Compute and the Future of AI' overview or the CAIS compute governance piece. Export controls on Nvidia chips = AI policy in practice. This connects hardware track to policy.",r:"→ search: 'compute governance AI policy CAIS'"}
       ],
       tip:""
     },
-    {date:"5/13",short:"Wed",title:"ROS 2 First Nodes + Pandas",tags:["slam","py"],
-      morning:{type:'slam',time:"25 min",h:"ROS 2 — Publisher/Subscriber",b:"Write your first Python publisher node: a node that publishes a string message to a topic every second. Then write a subscriber that listens and prints it. docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html",r:"→ docs.ros.org/en/humble/Tutorials"},
+    {date:"5/12",short:"Tue",title:"Qiskit + CS50P 8",tags:["qc","py","ai","safe"],
+      morning:{type:'qc',time:"25 min",h:"Qiskit — Bell State",b:"Install Qiskit (pip install qiskit). Build a Bell state: Hadamard on qubit 1, CNOT using qubit 1 as control. Run on IBM simulator. First quantum circuit you've coded.",r:"→ learning.quantum.ibm.com"},
       blocks:[
-        {t:"py",time:"50 min",h:"CS50P Lec 4–5 + Pandas 10 min",b:"CS50P Lec 4 (libraries) unlocks NumPy, Pandas, Qiskit, ROS Python. After Lec 4, read the Pandas 10 Minutes guide — Pandas = tables in Python. Read a CSV, filter rows, compute means.",r:"→ pandas.pydata.org/docs/user_guide/10min.html"}
+        {t:"py",time:"70 min",h:"CS50P Lecture 8 — Object-Oriented Programming",b:"Classes, objects, __init__, __str__, inheritance. OOP is used everywhere in ML: PyTorch models are classes, sklearn estimators are objects. This lecture directly unlocks the ML code you'll write.",r:"→ cs50.harvard.edu/python"},
+        {t:"ai",time:"20 min",h:"3B1B — Softmax explained",b:"Watch 'Softmax and cross-entropy loss explained visually' (any good YouTube explainer, ~15 min). The output layer of classification networks. You'll see this in every Ng lab.",r:"→ youtube: 'softmax cross entropy explained visually'"},
+        {t:"ai",time:"50 min",h:"Ng Course 1 Wk 3 — Regularization",b:"Overfitting vs underfitting, bias-variance tradeoff, L1/L2 regularization. One of the most important practical concepts in ML.",r:"→ coursera.org/learn/machine-learning"},
+        {t:"safe",time:"20 min",h:"Frontier: AI safety careers — 80,000 Hours guide",b:"Read 80000hours.org/career-reviews/ai-safety-researcher. What does a career in AI safety actually look like? Relevant for Poseidon Fellows conversations about what your fellow is working toward.",r:"→ 80000hours.org/career-reviews/ai-safety-researcher"}
       ],
       tip:""
     },
-    {date:"5/14",short:"Thu",title:"Ng Wk 2 + Attention",tags:["hw","ai"],
-      morning:{type:'hw',time:"optional",h:"Hardware — optional",b:"Python multiprocessing: run a simple example — split a list, process chunks in parallel using Pool. docs.python.org/3/library/multiprocessing.html. Foundation for understanding distributed computing. Or skip.",r:""},
+    {date:"5/13",short:"Wed",title:"ROS Publisher/Subscriber + CS50P 9",tags:["slam","py","ai","safe"],
+      morning:{type:'slam',time:"25 min",h:"ROS 2 — Publisher/Subscriber nodes",b:"Write your first Python publisher node: publishes a string message to a topic every second. Then a subscriber that listens and prints it. This is the fundamental ROS communication pattern.",r:"→ docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html"},
       blocks:[
-        {t:"ai",time:"70 min",h:"Ng Course 1 Wk 2 + 3B1B Ch 6 Attention",b:"Ng Wk 2: logistic regression, classification, decision boundary. Then 3B1B Ch 6 (25 min) — Attention mechanism. After this you have the full picture: NNs + training + transformers + attention.",r:"→ coursera.org/learn/machine-learning"}
+        {t:"py",time:"70 min",h:"CS50P Lecture 9 — Et Cetera (final lecture)",b:"Type hints, docstrings, argparse, map/filter/list comprehensions advanced, global vs local scope. Python style and production-quality code habits.",r:"→ cs50.harvard.edu/python"},
+        {t:"ai",time:"20 min",h:"3B1B — Convolutional Neural Networks",b:"Watch 'But what is a convolution?' (23 min) or the 3B1B CNN explainer. CNNs are the architecture behind image recognition. You'll see them in fast.ai.",r:"→ youtube: '3blue1brown convolution'"},
+        {t:"ai",time:"50 min",h:"Ng Course 1 — Finish + Review",b:"Complete all of Course 1. If done, start Course 2 Wk 1 — Neural Networks introduction.",r:"→ coursera.org/learn/machine-learning"},
+        {t:"safe",time:"20 min",h:"Frontier: Anthropic's responsible scaling policy — what it commits to",b:"Read Anthropic's Responsible Scaling Policy (anthropic.com/responsible-scaling-policy). What safety commitments did Anthropic actually make? What are ASL levels? This is frontier safety policy from an AI lab.",r:"→ anthropic.com/responsible-scaling-policy"}
+      ],
+      tip:"CS50P done — 10 lectures complete. Python is now a real tool in your hands."
+    },
+    {date:"5/14",short:"Thu",title:"Ng Course 2 Begins + NumPy",tags:["hw","py","ai","biz"],
+      morning:{type:'hw',time:"optional",h:"Hardware — Python multiprocessing",b:"Run a simple multiprocessing example: split a list, process chunks in parallel using Pool. docs.python.org/3/library/multiprocessing.html. Foundation for HPC intuition.",r:"→ docs.python.org/3/library/multiprocessing.html"},
+      blocks:[
+        {t:"py",time:"40 min",h:"NumPy deep dive — arrays, broadcasting, slicing",b:"NumPy Absolute Beginners guide (numpy.org/doc/stable/user/absolute_beginners.html). Every ML operation is NumPy under the hood. Understand: ndarray, shape, dtype, broadcasting rules, axis operations.",r:"→ numpy.org/doc/stable/user/absolute_beginners.html"},
+        {t:"ai",time:"20 min",h:"3B1B — Reinforcement Learning intro",b:"Watch a solid RL explainer: 'Reinforcement Learning: an Easy Introduction' (~15 min) or the 3B1B-style explainer. RL is Course 3 of Ng — get the mental model now.",r:"→ youtube: 'reinforcement learning easy introduction'"},
+        {t:"ai",time:"60 min",h:"Ng Course 2 Wk 1 — Neural Networks in TensorFlow",b:"NN intuition, NN model, TensorFlow implementation, Python implementation. This is where Ng's code matches what 3B1B showed visually. Do all labs.",r:"→ coursera.org/learn/advanced-learning-algorithms"},
+        {t:"biz",time:"20 min",h:"Frontier: YC's requests for startups in AI — what gaps exist",b:"Read YC's latest RFS (ycombinator.com/rfs). What problems is YC willing to fund in AI right now? Directly relevant to Poseidon Fellows ideation.",r:"→ ycombinator.com/rfs"}
       ],
       tip:""
     },
-    {date:"5/15",short:"Fri",title:"Grover's + 3B1B Ch 7",tags:["qc","ai"],
-      morning:{type:'qc',time:"25 min",h:"Grover's Algorithm",b:"Quantum search algorithm: finds an item in unsorted list of N items in √N steps vs classical O(N). The quantum speedup is real but specific — not a general 'make everything faster.' Watch a 10-min explainer.",r:"→ youtube: 'grover algorithm explained'"},
+    {date:"5/15",short:"Fri",title:"Grover's + Alignment Faking Paper",tags:["qc","py","ai","safe"],
+      morning:{type:'qc',time:"25 min",h:"Grover's Algorithm",b:"Quantum search: finds an item in N unsorted items in √N steps vs classical O(N). The speedup is real but specific. Watch a 10-min explainer.",r:"→ youtube: 'grover algorithm explained simply'"},
       blocks:[
-        {t:"ai",time:"40 min",h:"3B1B Ch 7 — LLM Facts + Read Sycophancy Paper",b:"3B1B Ch 7 (recent, covers LLM facts at scale). Then start the Anthropic Sycophancy paper — this is what your friend was discussing about LLM illusions. Read abstract + intro.",r:"→ anthropic.com/research/sycophancy-to-subterfuge"}
-      ],
-      tip:"After this session you can have the 'LLM illusions' conversation with your friend from a position of knowledge."
-    },
-    {date:"5/16",short:"Sat",title:"SLAM Ch 1 + Ng Wk 3",tags:["slam","ai"],
-      morning:{type:'slam',time:"25 min",h:"SLAM Handbook — Ch 1: Foundations",b:"Ch 1: the core probabilistic formulation. Robot has state x (pose), makes observations z, takes actions u. SLAM = estimate x given z and u over time. Key concepts: state estimation, Bayes filter, role of uncertainty. Track the intuition, not every equation.",r:"→ SLAM Handbook Ch 1"},
-      blocks:[
-        {t:"ai",time:"60 min",h:"Ng Course 1 Wk 3 — Regularization",b:"Regularization: prevents overfitting (model memorizes training data but fails on new data). L1 and L2 regularization. The bias-variance tradeoff — one of the most important concepts in ML. Ng explains this very well.",r:"→ coursera.org/learn/machine-learning"}
+        {t:"py",time:"40 min",h:"Pandas — 10 Minutes to Pandas",b:"Read pandas.pydata.org/docs/user_guide/10min.html. Tables in Python. Read a CSV, filter rows, compute means, groupby. You'll use this for every ML dataset.",r:"→ pandas.pydata.org/docs/user_guide/10min.html"},
+        {t:"ai",time:"20 min",h:"3B1B — Diffusion models explained",b:"Watch a visual explainer of diffusion models (Stable Diffusion, DALL-E). Understanding the generative AI space beyond LLMs.",r:"→ youtube: 'diffusion models explained visually'"},
+        {t:"ai",time:"50 min",h:"Ng Course 2 Wk 2 — NNs in more depth",b:"Neural network model deeper, training intuition, vectorized implementation.",r:"→ coursera.org/learn/advanced-learning-algorithms"},
+        {t:"safe",time:"30 min",h:"Paper: Alignment Faking in Large Language Models",b:"Read abstract + intro + conclusion. LLMs can learn to behave differently during training vs deployment. Directly relevant to reading group Wk 3 (Inner Alignment).",r:"→ anthropic.com/research/alignment-faking"}
       ],
       tip:""
     },
-    {date:"5/17",short:"Sun",title:"Review + AI Safety Wk 2",tags:["rest","safe"],
-      morning:{type:'rest',time:"25 min",h:"Review — write from memory",b:"From memory: (1) What is logistic regression? (2) What is overfitting? (3) What does attention do in a transformer? (4) What is Grover's algorithm good for? (5) What is SLAM? (6) What is sycophancy in LLMs?",r:""},
+    {date:"5/16",short:"Sat",title:"SLAM Ch 1 + First API Call",tags:["slam","py","ai","biz"],
+      morning:{type:'slam',time:"25 min",h:"SLAM Handbook — Ch 1: Foundations",b:"Ch 1: probabilistic formulation. Robot has state x, makes observations z, takes actions u. SLAM = estimate x given z and u over time. Key: state estimation, Bayes filter, role of uncertainty. Track intuition not every equation.",r:"→ SLAM Handbook Ch 1"},
       blocks:[
-        {t:"safe",time:"50 min",h:"AI Safety Wk 2 — Outer Alignment",b:"Specification gaming (GDM blog) · InstructGPT · LLMs mislead via RLHF · Apollo deception paper. Core concept: reward hacking = achieving the reward without doing what you actually wanted.",r:"→ search: 'specification gaming deepmind' and 'instructgpt openai 2022'"}
+        {t:"py",time:"40 min",h:"Build your first API call",b:"pip install anthropic. Write 10 lines of Python sending a message to Claude and printing the response. First AI-powered program. Understand request/response, message objects, model parameters.",r:"→ docs.anthropic.com/en/api/getting-started"},
+        {t:"ai",time:"20 min",h:"3B1B — Embeddings and word vectors",b:"Watch '3B1B Word2Vec' or 'Embeddings explained' (~15 min). Embeddings are how LLMs represent meaning — vectors in high-dimensional space.",r:"→ youtube: 'word embeddings explained 3blue1brown style'"},
+        {t:"ai",time:"50 min",h:"Ng Course 2 Wk 3 — Decision Trees + Ensemble Methods",b:"Decision trees, random forests, XGBoost. These are the most practical ML models for tabular data — used constantly in industry.",r:"→ coursera.org/learn/advanced-learning-algorithms"},
+        {t:"biz",time:"20 min",h:"Frontier: The state of AI regulation in the US",b:"Read the Executive Order on AI (whitehouse.gov) summary or a news analysis. How does US AI policy differ from the EU AI Act? What does NIST's AI Risk Management Framework do?",r:"→ search: 'US executive order AI 2023 summary'"}
+      ],
+      tip:""
+    },
+    {date:"5/17",short:"Sun",title:"Review + AI Safety Wk 2",tags:["rest","safe","ai"],
+      morning:{type:'rest',time:"25 min",h:"Review — write from memory",b:"Write without notes: (1) What is logistic regression? (2) What is overfitting? (3) What does attention do? (4) What is sycophancy? (5) What is alignment faking? (6) What is the EU AI Act? (7) What is SLAM?",r:""},
+      blocks:[
+        {t:"ai",time:"20 min",h:"3B1B — anything you missed or want to rewatch",b:"Pick one 3B1B chapter you want to see again. Or watch 'Neural Networks from Scratch' supplemental content.",r:"→ youtube: '3blue1brown neural networks playlist'"},
+        {t:"safe",time:"50 min",h:"AI Safety Reading Group Wk 2 — Outer Alignment",b:"Specification gaming (GDM blog post) + InstructGPT + Apollo deception paper. Core: reward hacking = achieving the reward without doing what you actually wanted.",r:"→ search: 'specification gaming deepmind blog 2020'\n→ search: 'instructgpt openai 2022'"},
+        {t:"safe",time:"25 min",h:"Frontier: Stuart Russell on AI and human values",b:"Watch Stuart Russell's TED talk 'The search for a smarter AI' (17 min) or read his essay on value alignment. Russell is the author of the standard AI textbook and one of the most credible voices on long-term safety.",r:"→ youtube: 'stuart russell TED AI talk'"}
       ],
       tip:""
     }
   ]},
-  {label:"WEEK 3 — MAY 18 · Build + Papers + Deepen",days:[
-    {date:"5/18",short:"Mon",title:"First API Call",tags:["hw","ai","py"],
-      morning:{type:'hw',time:"optional",h:"Hardware — optional",b:"OpenAI AI and Compute essay: compute used in AI training doubles every 3.4 months (faster than Moore's Law). This is the context for why hardware matters so much. openai.com/index/ai-and-compute/. Or skip.",r:""},
+  {label:"WEEK 3 — MAY 18 · Build + Papers + Depth",days:[
+    {date:"5/18",short:"Mon",title:"RAG Pipeline + Karpathy",tags:["hw","py","ai","safe"],
+      morning:{type:'hw',time:"optional",h:"Hardware — OpenAI AI and Compute",b:"Read openai.com/index/ai-and-compute/. Compute used in AI training doubled every 3.4 months. This single chart explains why hardware matters, why export controls matter, and why your FPGA track matters.",r:"→ openai.com/index/ai-and-compute/"},
       blocks:[
-        {t:"ai",time:"60 min",h:"Build Your First API Call",b:"Install the anthropic library: pip install anthropic. Write 10 lines of Python that sends a message to Claude and prints the response. This is your first AI-powered program. Understand the request/response pattern, what a 'message' object is, what model parameters do.",r:"→ docs.anthropic.com/en/api/getting-started"},
-        {t:"py",time:"30 min",h:"CS50P Lec 6–7",b:"File I/O and regular expressions. These unlock practical data handling.",r:""}
-      ],
-      tip:"The moment your API call works is the moment abstract ML becomes concrete. Don't skip building things."
-    },
-    {date:"5/19",short:"Tue",title:"Quantum ML + Ng",tags:["qc","ai"],
-      morning:{type:'qc',time:"25 min",h:"PennyLane — Quantum ML",b:"PennyLane bridges quantum computing and ML. A quantum circuit can act like a neural network layer. Visit pennylane.ai/qml for the QML intro. Speculative/early-stage but directly relevant to AI-for-science thread.",r:"→ pennylane.ai/qml"},
-      blocks:[
-        {t:"ai",time:"70 min",h:"Ng Course 1 — Finish + Start Course 2",b:"Complete any remaining Course 1 material. If done, start Course 2 (Advanced Learning Algorithms) — NNs in TensorFlow. This is where Ng's implementation matches what 3B1B showed you visually.",r:"→ coursera.org/learn/advanced-learning-algorithms"}
+        {t:"py",time:"40 min",h:"CS50P — Final Project planning",b:"CS50P has a final project. Spend today planning yours. Requirements: a Python program of your own design. Good options: a CLI tool that calls the Anthropic API, a data analysis script on a real dataset, a ROS node that does something interesting.",r:"→ cs50.harvard.edu/python/2022/project/"},
+        {t:"ai",time:"20 min",h:"3B1B — Probability and Bayes' theorem",b:"'Bayes theorem, the geometry of changing beliefs' (15 min). Bayes is the math behind SLAM, probabilistic ML, and AI safety reasoning.",r:"→ youtube: '3blue1brown bayes theorem'"},
+        {t:"ai",time:"60 min",h:"Build a RAG Pipeline",b:"RAG = load docs → split → embed → store in vector DB → retrieve on query → send to LLM with context. This is what your friend is working on. Building it makes every RAG conversation richer.",r:"→ python.langchain.com/docs/tutorials/rag/"},
+        {t:"safe",time:"25 min",h:"Frontier: AI and national security — CNAS report",b:"Read the CNAS 'AI and National Security' overview or the Georgetown CSET report intro. How are governments thinking about AI as a strategic technology? Connects policy to the technical work.",r:"→ search: 'CNAS AI national security report overview'"}
       ],
       tip:""
     },
-    {date:"5/20",short:"Wed",title:"TF2 + RAG Pipeline",tags:["slam","ai","py"],
-      morning:{type:'slam',time:"25 min",h:"ROS 2 — Launch Files + TF2 Transforms",b:"Launch files: start multiple nodes with one command. TF2: how ROS tracks coordinate frames (robot base → camera → world). Essential for SLAM. Run: ros2 run tf2_tools view_frames and look at the output.",r:"→ docs.ros.org/en/humble/Tutorials/Intermediate/Tf2"},
+    {date:"5/19",short:"Tue",title:"Quantum ML + Ng Course 3",tags:["qc","py","ai","biz"],
+      morning:{type:'qc',time:"25 min",h:"PennyLane — Quantum ML",b:"Visit pennylane.ai/qml. PennyLane bridges quantum computing and ML — a quantum circuit can act like a neural network layer. Read the intro. Speculative but directly relevant to AI-for-science.",r:"→ pennylane.ai/qml"},
       blocks:[
-        {t:"ai",time:"70 min",h:"Build a RAG Pipeline",b:"RAG = load documents → split → embed → store in vector DB → retrieve on query → send to LLM with context. This is what your friend is working on. Actually building it makes every RAG conversation richer.",r:"→ python.langchain.com/docs/tutorials/rag/"}
+        {t:"py",time:"30 min",h:"PyTorch quickstart",b:"Run the official PyTorch quickstart tutorial (pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html). Define a model as a Python class, train it, evaluate it. 20 min of code that shows you everything Ng covers but in the real framework.",r:"→ pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html"},
+        {t:"ai",time:"20 min",h:"3B1B — What makes a 'deep' network?",b:"Watch 'Why does deep learning work?' or a visual explainer on depth in NNs. Why more layers helps — hierarchical feature learning.",r:"→ youtube: 'why does deep learning work visually'"},
+        {t:"ai",time:"60 min",h:"Ng Course 3 Wk 1 — Unsupervised Learning",b:"K-means clustering, anomaly detection. Unsupervised = no labels. The model finds structure in data by itself.",r:"→ coursera.org/learn/unsupervised-learning-recommenders-reinforcement-learning"},
+        {t:"biz",time:"20 min",h:"Frontier: Foundation model governance — who should own the frontier?",b:"Read the AI Governance Institute overview or the 'Governing AI' piece from Council on Foreign Relations. Who makes decisions about frontier AI? What role do companies vs governments vs international bodies play?",r:"→ search: 'governing frontier AI models CFR overview'"}
       ],
       tip:""
     },
-    {date:"5/21",short:"Thu",title:"Ng NNs + FPGA Concepts",tags:["hw","ai","fpga"],
-      morning:{type:'hw',time:"optional",h:"Hardware — FPGA vs GPU",b:"FPGA vs GPU: YouTube search 'fpga vs gpu explained'. FPGAs are reconfigurable hardware — you define the circuit in Verilog and it becomes that circuit. Unlike GPUs which run fixed instructions. Key for inference acceleration.",r:"→ youtube: 'fpga vs gpu neural network inference'"},
+    {date:"5/20",short:"Wed",title:"TF2 Transforms + fast.ai",tags:["slam","py","ai","safe"],
+      morning:{type:'slam',time:"25 min",h:"ROS 2 — TF2 Coordinate Transforms",b:"TF2: how ROS tracks coordinate frames (robot base → camera → world). Essential for SLAM — the robot needs to know where its sensors are relative to itself. Run: ros2 run tf2_tools view_frames.",r:"→ docs.ros.org/en/humble/Tutorials/Intermediate/Tf2"},
       blocks:[
-        {t:"ai",time:"60 min",h:"Ng Course 2 — NNs in TensorFlow",b:"Neural network model, TensorFlow implementation, Python implementation, vectorization. This is where the code matches the 3B1B visual. Do all lab exercises.",r:"→ coursera.org/learn/advanced-learning-algorithms"},
-        {t:"fpga",time:"20 min",h:"FPGA Tab — Read Layer 1 (conceptual)",b:"Open the FPGA + Hardware tab. Read through Layer 1 (steps 1–3). Get the conceptual picture before any Verilog.",r:""}
+        {t:"py",time:"30 min",h:"CS50P Final Project — start coding",b:"Write the first version of your CS50P final project. Aim for a working prototype today, even if basic.",r:"→ cs50.harvard.edu/python/2022/project/"},
+        {t:"ai",time:"20 min",h:"3B1B — How does ChatGPT actually work? (supplemental)",b:"Watch 'How ChatGPT works, technically' (any solid 15-min explainer). Synthesize everything: pretraining, RLHF, instruction following.",r:"→ youtube: 'how chatgpt works technically explained'"},
+        {t:"ai",time:"60 min",h:"fast.ai Lesson 1 — Practical Deep Learning",b:"Top-down: run a state-of-the-art model FIRST, then understand why it works. Perfectly complements Ng's bottom-up approach. Lesson 1 is a shift in how you think about practical ML.",r:"→ course.fast.ai"},
+        {t:"safe",time:"20 min",h:"Frontier: DeepMind's approach to safety — spec and evals",b:"Read DeepMind's Gemini safety report intro or their frontier safety research overview. How does a different lab think about safety compared to Anthropic?",r:"→ search: 'deepmind frontier safety research overview 2024'"}
       ],
       tip:""
     },
-    {date:"5/22",short:"Fri",title:"Shor's + Alignment Faking",tags:["qc","safe","ai"],
-      morning:{type:'qc',time:"25 min",h:"Shor's Algorithm",b:"Shor's factorizes large numbers exponentially faster than classical computers — breaks RSA encryption. The algorithm exists; the hardware to run it at scale doesn't yet. Why quantum-resistant cryptography is a real concern.",r:"→ youtube: 'shor algorithm explained'"},
+    {date:"5/21",short:"Thu",title:"Karpathy GPT + FPGA Layer 1",tags:["hw","py","ai","fpga"],
+      morning:{type:'hw',time:"optional",h:"Hardware — FPGA vs GPU",b:"YouTube: 'FPGA vs GPU for neural network inference'. FPGAs are reconfigurable hardware — you define the circuit. Unlike GPUs which run fixed instructions. Key for the inference acceleration track.",r:"→ youtube: 'fpga vs gpu neural network inference'"},
       blocks:[
-        {t:"safe",time:"40 min",h:"Alignment Faking + Sycophancy Papers",b:"Alignment Faking (Anthropic): LLMs can learn to behave differently during training vs deployment. Sycophancy: RLHF trained models to get better ratings; humans rate agreeable answers higher; models learned to confirm biases. Read both abstracts + intros.",r:"→ anthropic.com/research/alignment-faking\n→ anthropic.com/research/sycophancy-to-subterfuge"},
-        {t:"ai",time:"30 min",h:"Karpathy — Build GPT (start)",b:"Watch the first 30 min of 'Let's build GPT from scratch' by Karpathy. After concept (Winston) + visual math (3B1B) + code (Ng), building the actual thing is the moment it all connects.",r:"→ youtube: 'andrej karpathy lets build GPT'"}
+        {t:"py",time:"30 min",h:"CS50P Final Project — refine and test",b:"Write unit tests for your final project (CS50P Lec 8 pattern). Test edge cases. A tested project is a finished project.",r:""},
+        {t:"ai",time:"20 min",h:"3B1B — Principal Component Analysis",b:"'PCA visually explained' — dimensionality reduction. Used in interpretability (sparse autoencoders), data analysis, and visualization. 15 min.",r:"→ youtube: '3blue1brown PCA visually explained'"},
+        {t:"ai",time:"60 min",h:"Karpathy — Build GPT from scratch (first 45 min)",b:"After concept (Winston) + visual math (3B1B) + code (Ng) — you're ready. Watch the first 45 min. This is the capstone moment where everything connects.",r:"→ youtube: 'andrej karpathy lets build GPT from scratch'"},
+        {t:"fpga",time:"30 min",h:"FPGA Tab — read Layer 1 (CPU/GPU/FPGA/ASIC concepts)",b:"Open the FPGA + Hardware tab. Read through steps 1–3 (conceptual). Get the landscape picture before any Verilog. Watch the 'CPU vs GPU vs TPU vs FPGA' video.",r:"→ FPGA tab → Layer 1"}
       ],
       tip:""
     },
-    {date:"5/23",short:"Sat",title:"SLAM Ch 2 + fast.ai",tags:["slam","ai"],
-      morning:{type:'slam',time:"25 min",h:"SLAM Handbook — Ch 2: State Variable Representations",b:"Rotation matrices, quaternions, Lie groups (SO(3), SE(3)). The math that describes a robot's pose in 3D space. Focus on intuition: a robot's position is (x,y,z) and orientation is a rotation — SLAM tracks and updates both under uncertainty. Note 2 things you understood and 1 to revisit.",r:"→ SLAM Handbook Ch 2"},
+    {date:"5/22",short:"Fri",title:"Shor's + Scaling Monosemanticity",tags:["qc","py","ai","safe"],
+      morning:{type:'qc',time:"25 min",h:"Shor's Algorithm",b:"Shor's factorizes large numbers exponentially faster than classical — breaks RSA encryption. The algorithm exists; the hardware doesn't yet. Why quantum-resistant cryptography matters.",r:"→ youtube: 'shor algorithm explained'"},
       blocks:[
-        {t:"ai",time:"60 min",h:"fast.ai Lesson 1 — Practical Deep Learning",b:"fast.ai is top-down: run a state-of-the-art model FIRST, then understand why it works. Complements Ng's bottom-up approach perfectly. Lesson 1 = eye-opening.",r:"→ course.fast.ai"}
+        {t:"py",time:"30 min",h:"CS50P Final Project — complete",b:"Finish and submit your CS50P final project. This is your first complete Python program. Screenshot it for your portfolio.",r:"→ cs50.harvard.edu/python/2022/project/"},
+        {t:"ai",time:"20 min",h:"3B1B — Support Vector Machines",b:"'SVM visually explained' — another key ML algorithm in Ng's curriculum. Understanding the decision boundary geometrically.",r:"→ youtube: 'support vector machines visually explained'"},
+        {t:"ai",time:"50 min",h:"Karpathy GPT — continue (next 45 min)",b:"Continue the GPT build. By the end you'll have written a transformer from scratch in ~200 lines of PyTorch.",r:"→ youtube: 'andrej karpathy lets build GPT from scratch'"},
+        {t:"safe",time:"30 min",h:"Paper: Scaling Monosemanticity (sparse autoencoders)",b:"Abstract + intro. Your friend works on sparse autoencoders and mechanistic interpretability. This is Anthropic's key paper using SAEs to find interpretable features inside LLMs.",r:"→ anthropic.com/research/scaling-monosemanticity"}
       ],
       tip:""
     },
-    {date:"5/24",short:"Sun",title:"Review + AI Safety Wk 3",days:["rest","safe"],
-      morning:{type:'rest',time:"25 min",h:"Review — write from memory",b:"From memory: (1) What is a transformer? (2) What is RAG? (3) What is alignment faking? (4) What is sycophancy in LLMs? (5) What does SLAM Ch 1 say about state estimation? (6) What makes FPGAs different from GPUs?",r:""},
+    {date:"5/23",short:"Sat",title:"SLAM Ch 2 + Ng RL",tags:["slam","py","ai","biz"],
+      morning:{type:'slam',time:"25 min",h:"SLAM Handbook — Ch 2: State Variable Representations",b:"Rotation matrices, quaternions, Lie groups (SO(3), SE(3)). The math that describes a robot's pose in 3D space. Focus on intuition: a robot's position is (x,y,z) and its orientation is a rotation. SLAM tracks and updates both under uncertainty.",r:"→ SLAM Handbook Ch 2"},
       blocks:[
-        {t:"safe",time:"50 min",h:"AI Safety Wk 3 — Inner Alignment",b:"Mesa-optimizers (Robert Miles video, 20 min) + Alignment Faking + Sleeper Agents. Inner alignment = even if outer alignment is perfect, a model might develop an internal goal that only approximates the training objective.",r:"→ youtube: 'robert miles mesa optimizers'\n→ anthropic.com/research/alignment-faking"}
+        {t:"py",time:"30 min",h:"Matplotlib + basic plotting for ML",b:"pip install matplotlib. Plot a training loss curve, a decision boundary, a confusion matrix. Visualization is how you debug ML models.",r:"→ matplotlib.org/stable/tutorials/index.html"},
+        {t:"ai",time:"20 min",h:"3B1B — Linear algebra refresher",b:"'Essence of Linear Algebra' playlist — watch Ch 1 (Vectors, 3 min) and Ch 3 (Linear transformations, 10 min). Neural networks ARE linear transformations + nonlinearities.",r:"→ youtube: '3blue1brown essence of linear algebra'"},
+        {t:"ai",time:"50 min",h:"Ng Course 3 Wk 3 — Reinforcement Learning",b:"RL intro: Markov decision process, state/action/reward, Q-learning, policy gradient. The conceptual framework for all game-playing and robotics AI.",r:"→ coursera.org/learn/unsupervised-learning-recommenders-reinforcement-learning"},
+        {t:"biz",time:"20 min",h:"Frontier: How do AI startups actually get funded?",b:"Read a16z's 'AI Canon' overview (a16z.com/ai-canon) or their AI startup landscape piece. How does VC think about AI companies? What makes an AI startup fundable vs a feature?",r:"→ a16z.com/ai-canon"}
       ],
-      tip:"End of 3 weeks. Take 10 minutes to write what has genuinely shifted in how you think about AI. That reflection is as valuable as any session."
+      tip:""
+    },
+    {date:"5/24",short:"Sun",title:"Review + AI Safety Wk 3",tags:["rest","safe","ai"],
+      morning:{type:'rest',time:"25 min",h:"Review — write from memory",b:"Without notes: (1) What is a transformer? (2) What is RAG? (3) What is alignment faking? (4) What is a sparse autoencoder? (5) What does SLAM Ch 2 say about robot pose? (6) What is the difference between outer and inner alignment?",r:""},
+      blocks:[
+        {t:"ai",time:"20 min",h:"3B1B — pick your favorite chapter and rewatch",b:"Rewatch the chapter that made the biggest click happen. Active repetition is how things stick.",r:""},
+        {t:"safe",time:"50 min",h:"AI Safety Reading Group Wk 3 — Inner Alignment",b:"Mesa-optimizers (Robert Miles 20-min video) + Alignment Faking + Sleeper Agents. Inner alignment: even if outer alignment is perfect, a model might develop an internal goal that only approximates the training objective.",r:"→ youtube: 'robert miles mesa optimizers'\n→ anthropic.com/research/alignment-faking"},
+        {t:"safe",time:"25 min",h:"Frontier: UN AI governance — what is the global picture?",b:"Read the UN AI Advisory Body overview or the ITU AI for Good initiative. How are international institutions trying to govern AI? What role does the UN play vs national governments?",r:"→ search: 'UN AI advisory body 2024 recommendations'"},
+        {t:"biz",time:"15 min",h:"Reflect: what shifted in 3 weeks?",b:"Write 3 paragraphs: (1) what you know now that you didn't May 4, (2) what you want to go deeper on, (3) one idea for a project or company at the intersection of what you've learned.",r:""}
+      ],
+      tip:"End of 3 weeks. 10 CS50P lectures done. 21+ 3B1B chapters watched. 3 papers read. Ng Course 1 + 2 + 3 started. First API call made. First RAG pipeline built. That's a real foundation."
     }
   ]}
 ];
