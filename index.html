@@ -3,751 +3,1463 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Poseidon Fellows — Learning Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="Poseidon Fellows learning dashboard: 3-week schedule, spine, ML concepts, papers, and resources. Starts May 4, 2026.">
+<meta name="theme-color" content="#0a0a0f">
+<title>Poseidon Fellows — Learning Dashboard · Started May 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0a0e1a;--bg2:#0f1525;--bg3:#161d30;--bg4:#1c2540;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
-  --text:#e8eaf0;--text2:#8b92a8;--text3:#555d75;
-  --accent:#4f8ef7;--accent2:#7c6af7;
-  --safe:#f77c6a;--safe-bg:rgba(247,124,106,0.1);
-  --py:#4fcf8e;--py-bg:rgba(79,207,142,0.1);
-  --ai:#a78bfa;--ai-bg:rgba(167,139,250,0.1);
-  --ng:#34d399;--ng-bg:rgba(52,211,153,0.1);
-  --biz:#f7c84f;--biz-bg:rgba(247,200,79,0.1);
-  --sc:#38bdf8;--sc-bg:rgba(56,189,248,0.1);
-  --qc:#f472b6;--qc-bg:rgba(244,114,182,0.1);
-  --rb:#fb923c;--rb-bg:rgba(251,146,60,0.1);
-  --rest:#6b7280;--rest-bg:rgba(107,114,128,0.1);
-  --r:10px;--rl:16px;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(79,142,247,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,0.02) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
-.wrap{max-width:1150px;margin:0 auto;padding:0 1.5rem 4rem;position:relative;z-index:1;}
-header{padding:2.5rem 0 2rem;border-bottom:1px solid var(--border);margin-bottom:2rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-h1{font-family:'DM Serif Display',serif;font-size:2.1rem;color:var(--text);line-height:1.1;letter-spacing:-0.02em;}
-h1 span{color:var(--accent);font-style:italic;}
-.sub{font-size:12px;color:var(--text2);margin-top:6px;font-weight:300;line-height:1.7;}
-.today-badge{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.2);padding:4px 12px;border-radius:20px;white-space:nowrap;}
-.nav{display:flex;gap:6px;margin-bottom:2rem;flex-wrap:wrap;}
-.nb{font-size:12px;font-weight:500;padding:6px 14px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;transition:all .15s;letter-spacing:.02em;font-family:'DM Sans',sans-serif;}
-.nb:hover{border-color:var(--accent);color:var(--text);}
-.nb.active{background:var(--accent);border-color:var(--accent);color:#fff;}
-.view{display:none;}.view.active{display:block;}
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #16161f;
+    --border: #1e1e2e;
+    --accent: #5b8aff;
+    --accent2: #a78bfa;
+    --accent3: #34d399;
+    --accent4: #fb923c;
+    --accent5: #f472b6;
+    --text: #e8e8f0;
+    --text2: #9898b0;
+    --text3: #5a5a72;
+    --sc: #5b8aff;
+    --qc: #a78bfa;
+    --rob: #34d399;
+    --warning: #fbbf24;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; font-size: 14px; line-height: 1.6; }
+  header { padding: 28px 32px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; background: rgba(10,10,15,0.95); backdrop-filter: blur(12px); z-index: 100; }
+  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
+  .logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(91,138,255,0.4)} 50%{opacity:0.7;box-shadow:0 0 0 6px rgba(91,138,255,0)} }
+  @media (prefers-reduced-motion: reduce) {
+    .logo-dot { animation: none; }
+    .day-card { transition: none; }
+  }
+  .date-badge { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text3); letter-spacing: 0.05em; }
+  .tabs { display: flex; gap: 2px; padding: 0 32px; border-bottom: 1px solid var(--border); background: var(--surface); overflow-x: auto; }
+  .tab { padding: 14px 20px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; color: var(--text3); border: none; background: none; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+  .tab:hover { color: var(--text2); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  main { padding: 32px; max-width: 1400px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .section-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 22px; margin-bottom: 6px; letter-spacing: -0.02em; }
+  .section-sub { color: var(--text3); font-size: 13px; margin-bottom: 28px; font-family: 'DM Mono', monospace; letter-spacing: 0.02em; }
 
-/* MORNING BANNER */
-.morning-banner{background:linear-gradient(135deg,rgba(56,189,248,0.07),rgba(244,114,182,0.07),rgba(251,146,60,0.07));border:1px solid rgba(255,255,255,0.09);border-radius:var(--rl);padding:1.1rem 1.4rem;margin-bottom:1.5rem;}
-.mb-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;margin-bottom:.6rem;}
-.mb-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
-.mb-item{display:flex;align-items:center;gap:7px;background:var(--bg3);border-radius:8px;padding:6px 12px;border:1px solid var(--border);}
-.mb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.mb-label{font-size:12px;font-weight:500;color:var(--text);}
-.mb-desc{font-size:11px;}
-.mb-arrow{font-size:13px;color:var(--text3);}
+  /* SPINE */
+  .spine { display: flex; flex-direction: column; gap: 0; margin-bottom: 40px; }
+  .spine-step { display: flex; gap: 0; align-items: stretch; }
+  .spine-left { width: 56px; display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .spine-num { width: 36px; height: 36px; border-radius: 50%; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 13px; flex-shrink: 0; }
+  .spine-line { width: 1px; flex: 1; background: var(--border); margin: 4px 0; }
+  .spine-step:last-child .spine-line { display: none; }
+  .spine-content { flex: 1; padding: 0 0 32px 16px; }
+  .spine-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+  .spine-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; }
+  .spine-timing { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent); background: rgba(91,138,255,0.1); border: 1px solid rgba(91,138,255,0.2); padding: 2px 8px; border-radius: 3px; letter-spacing: 0.05em; }
+  .spine-desc { color: var(--text2); font-size: 13px; margin-bottom: 12px; }
+  .spine-resources { display: flex; flex-wrap: wrap; gap: 8px; }
+  .res-chip { font-family: 'DM Mono', monospace; font-size: 11px; padding: 5px 12px; border-radius: 4px; border: 1px solid var(--border); color: var(--text2); text-decoration: none; transition: all 0.15s; display: inline-block; }
+  .res-chip:hover { border-color: var(--accent); color: var(--accent); background: rgba(91,138,255,0.05); }
+  .res-chip.primary { background: rgba(91,138,255,0.08); border-color: rgba(91,138,255,0.3); color: var(--accent); }
+  .spine-step.active-step .spine-num { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(91,138,255,0.4); }
+  .spine-step.done-step .spine-num { background: var(--accent3); border-color: var(--accent3); color: #fff; }
 
-/* NG BANNER */
-.ng-banner{background:var(--ng-bg);border:1px solid rgba(52,211,153,0.2);border-radius:var(--r);padding:.9rem 1.2rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:10px;}
-.ng-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px;}
-.ng-title{font-size:13px;font-weight:600;color:var(--ng);margin-bottom:3px;}
-.ng-desc{font-size:12px;color:var(--text2);line-height:1.55;}
+  /* CONCEPTS */
+  .concepts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 40px; }
+  .concept-card { background: var(--surface); padding: 20px; transition: background 0.15s; }
+  .concept-card:hover { background: var(--surface2); }
+  .concept-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+  .concept-term { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .concept-def { color: var(--text2); font-size: 13px; line-height: 1.6; margin-bottom: 10px; }
+  .concept-analogy { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text3); border-left: 2px solid var(--border); padding-left: 10px; line-height: 1.5; }
 
-/* LEGEND */
-.legend{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem;}
-.badge{font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;letter-spacing:.02em;font-family:'DM Mono',monospace;}
-.bsafe{background:var(--safe-bg);color:var(--safe);border:1px solid rgba(247,124,106,.2);}
-.bpy{background:var(--py-bg);color:var(--py);border:1px solid rgba(79,207,142,.2);}
-.bai{background:var(--ai-bg);color:var(--ai);border:1px solid rgba(167,139,250,.2);}
-.bng{background:var(--ng-bg);color:var(--ng);border:1px solid rgba(52,211,153,.2);}
-.bbiz{background:var(--biz-bg);color:var(--biz);border:1px solid rgba(247,200,79,.2);}
-.bsc{background:var(--sc-bg);color:var(--sc);border:1px solid rgba(56,189,248,.2);}
-.bqc{background:var(--qc-bg);color:var(--qc);border:1px solid rgba(244,114,182,.2);}
-.brb{background:var(--rb-bg);color:var(--rb);border:1px solid rgba(251,146,60,.2);}
-.brest{background:var(--rest-bg);color:var(--rest);border:1px solid rgba(107,114,128,.2);}
+  /* SCHEDULE */
+  .week-header { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; margin: 32px 0 16px; display: flex; align-items: center; gap: 12px; }
+  .week-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .day-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 12px; }
+  .day-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; min-height: 180px; }
+  .day-name { padding: 8px 10px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border); }
+  .morning-block { padding: 8px 10px; border-bottom: 1px solid var(--border); font-size: 11px; }
+  .morning-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px; opacity: 0.7; }
+  .morning-sc { color: var(--sc); border-left: 2px solid var(--sc); padding-left: 6px; }
+  .morning-qc { color: var(--qc); border-left: 2px solid var(--qc); padding-left: 6px; }
+  .morning-rob { color: var(--rob); border-left: 2px solid var(--rob); padding-left: 6px; }
+  .morning-review { color: var(--warning); border-left: 2px solid var(--warning); padding-left: 6px; }
+  .day-content { padding: 10px; font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .day-content a { color: var(--accent); text-decoration: none; font-family: 'DM Mono', monospace; font-size: 10px; }
+  .day-content a:hover { text-decoration: underline; }
+  .tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px; padding: 1px 6px; border-radius: 3px; margin-bottom: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .tag-py { background: rgba(251,146,60,0.15); color: var(--accent4); }
+  .tag-ml { background: rgba(91,138,255,0.12); color: var(--accent); }
+  .tag-ai { background: rgba(167,139,250,0.12); color: var(--accent2); }
+  .tag-read { background: rgba(52,211,153,0.12); color: var(--accent3); }
+  .tag-build { background: rgba(244,114,182,0.12); color: var(--accent5); }
+  .nightly { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); font-family: 'DM Mono', monospace; font-size: 10px; color: var(--warning); }
+  .nightly::before { content: '📖 '; }
 
-/* CALENDAR */
-.wh{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;padding-left:2px;margin-top:2rem;}
-.wh:first-child{margin-top:0;}
-.dlabels{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-bottom:3px;}
-.dcl{font-size:10px;color:var(--text3);text-align:center;font-family:'DM Mono',monospace;letter-spacing:.04em;}
-.dgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-bottom:2rem;}
-.dc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);cursor:pointer;transition:all .15s;position:relative;overflow:hidden;display:flex;flex-direction:column;}
-.dc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .15s;background:linear-gradient(90deg,var(--accent),var(--accent2));}
-.dc:hover{border-color:var(--border2);background:var(--bg3);}
-.dc:hover::after,.dc.active::after{opacity:1;}
-.dc.active{border-color:var(--accent);background:var(--bg3);}
-.dc.tday{border-color:rgba(79,142,247,.4);}
-.dc.tday::after{opacity:1;background:var(--accent);}
-.dc-morning{padding:5px 8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:4px;}
-.dc-morning-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
-.dc-morning-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.04em;opacity:.85;}
-.dc-main{padding:7px 8px 9px;flex:1;}
-.dn{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);margin-bottom:4px;}
-.dn.t{color:var(--accent);}
-.dts{font-size:11px;font-weight:500;color:var(--text2);margin-bottom:5px;line-height:1.3;}
-.dots{display:flex;flex-wrap:wrap;gap:3px;}
-.dot{width:6px;height:6px;border-radius:50%;}
-.dsafe{background:var(--safe);}.dpy{background:var(--py);}.dai{background:var(--ai);}
-.dng{background:var(--ng);}.dbiz{background:var(--biz);}.dsc{background:var(--sc);}
-.dqc{background:var(--qc);}.drb{background:var(--rb);}.drest{background:var(--rest);}
+  /* PAPERS */
+  .papers-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .paper-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 18px 20px; display: flex; align-items: flex-start; gap: 16px; }
+  .paper-week { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text3); min-width: 50px; padding-top: 2px; flex-shrink: 0; }
+  .paper-info { flex: 1; }
+  .paper-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+  .paper-why { color: var(--text2); font-size: 12px; margin-bottom: 8px; line-height: 1.6; }
+  .paper-link { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); text-decoration: none; margin-right: 16px; }
+  .paper-link:hover { text-decoration: underline; }
+  .paper-scope { font-family: 'DM Mono', monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px; background: rgba(52,211,153,0.1); color: var(--accent3); border: 1px solid rgba(52,211,153,0.2); white-space: nowrap; flex-shrink: 0; }
 
-/* PANEL */
-.panel{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rl);padding:1.5rem;margin-top:1rem;display:none;animation:fi .2s ease;}
-.panel.vis{display:block;}
-@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-.ph{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--border);}
-.pt{font-family:'DM Serif Display',serif;font-size:1.35rem;color:var(--text);}
-.pm{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);background:var(--bg3);padding:3px 10px;border-radius:20px;}
-.morning-section{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:1rem;}
-.ms-header{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:6px;}
-.ms-dot{width:7px;height:7px;border-radius:50%;}
-.blocks{display:flex;flex-direction:column;gap:7px;}
-.block{border-radius:var(--r);padding:11px 13px;border-left:3px solid transparent;}
-.blsafe{background:var(--safe-bg);border-left-color:var(--safe);}
-.blpy{background:var(--py-bg);border-left-color:var(--py);}
-.blai{background:var(--ai-bg);border-left-color:var(--ai);}
-.blng{background:var(--ng-bg);border-left-color:var(--ng);}
-.blbiz{background:var(--biz-bg);border-left-color:var(--biz);}
-.blsc{background:var(--sc-bg);border-left-color:var(--sc);}
-.blqc{background:var(--qc-bg);border-left-color:var(--qc);}
-.blrb{background:var(--rb-bg);border-left-color:var(--rb);}
-.blrest{background:var(--rest-bg);border-left-color:var(--rest);}
-.bl{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.06em;margin-bottom:3px;}
-.lsafe{color:var(--safe);}.lpy{color:var(--py);}.lai{color:var(--ai);}.lng{color:var(--ng);}
-.lbiz{color:var(--biz);}.lsc{color:var(--sc);}.lqc{color:var(--qc);}.lrb{color:var(--rb);}.lrest{color:var(--rest);}
-.bh{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;}
-.bb{font-size:13px;color:var(--text2);line-height:1.65;}
-.bres{font-size:11px;color:var(--text3);margin-top:4px;font-family:'DM Mono',monospace;}
-.tip{margin-top:1rem;background:rgba(79,142,247,.06);border:1px solid rgba(79,142,247,.15);border-radius:var(--r);padding:10px 14px;font-size:13px;color:var(--text2);line-height:1.6;}
-.tip strong{color:var(--accent);}
-.day-divider{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin:1rem 0 .75rem;padding-top:.75rem;border-top:1px solid var(--border);}
+  /* FRONTIER */
+  .frontier-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .frontier-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+  .frontier-card-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; margin-bottom: 12px; }
+  .frontier-item { display: flex; gap: 10px; margin-bottom: 10px; font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .frontier-item::before { content: '→'; color: var(--text3); flex-shrink: 0; font-family: 'DM Mono', monospace; }
+  .frontier-item a { color: var(--accent); text-decoration: none; }
+  .frontier-item a:hover { text-decoration: underline; }
 
-/* NG PROGRESS TRACKER */
-.ng-tracker{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1.25rem;margin-bottom:1.5rem;}
-.ng-tracker-title{font-family:'DM Mono',monospace;font-size:11px;color:var(--ng);letter-spacing:.06em;margin-bottom:1rem;}
-.ng-modules{display:flex;flex-direction:column;gap:6px;}
-.ng-module{background:var(--bg3);border-radius:var(--r);padding:10px 14px;border-left:3px solid var(--border2);}
-.ng-module.current{border-left-color:var(--ng);}
-.ng-module.locked{opacity:.4;}
-.ng-mod-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.ng-mod-name{font-size:13px;font-weight:500;color:var(--text);}
-.ng-mod-status{font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:10px;}
-.status-current{background:var(--ng-bg);color:var(--ng);}
-.status-locked{background:var(--rest-bg);color:var(--rest);}
-.ng-lessons{display:flex;flex-direction:column;gap:3px;}
-.ng-lesson{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text2);}
-.ng-lesson-dot{width:5px;height:5px;border-radius:50%;background:var(--text3);flex-shrink:0;}
-.ng-lesson.done .ng-lesson-dot{background:var(--ng);}
-.ng-lesson.done{color:var(--text);}
+  /* LEGEND */
+  .legend { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; align-items: center; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text2); letter-spacing: 0.05em; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
 
-/* CURRICULUM */
-.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:1rem;}
-.cc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1.25rem;}
-.ct{font-size:11px;font-weight:600;margin-bottom:1rem;padding-bottom:8px;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;letter-spacing:.05em;}
-.cr{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);}
-.cr:last-child{border-bottom:none;}
-.cw{color:var(--text3);font-family:'DM Mono',monospace;min-width:44px;font-size:10px;padding-top:1px;flex-shrink:0;}
-.ctop{font-weight:500;color:var(--text);margin-bottom:2px;font-size:12px;}
-.cd{color:var(--text2);font-size:11px;line-height:1.5;}
-.chi{display:inline-block;margin-top:3px;font-size:10px;font-family:'DM Mono',monospace;padding:1px 7px;border-radius:10px;}
+  /* CALLOUT */
+  .callout { padding: 14px 18px; border-radius: 6px; margin-bottom: 24px; font-size: 13px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.7; }
+  .callout-blue { background: rgba(91,138,255,0.08); border: 1px solid rgba(91,138,255,0.2); }
+  .callout-green { background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.2); }
+  .callout-orange { background: rgba(251,146,60,0.08); border: 1px solid rgba(251,146,60,0.2); }
+  .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+  .callout a { color: var(--accent); }
 
-/* RESOURCES */
-.rf{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem;}
-.rfb{font-size:11px;font-weight:500;padding:4px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;transition:all .15s;font-family:'DM Mono',monospace;letter-spacing:.03em;}
-.rfb:hover{color:var(--text);}
-.rfb.active{background:var(--bg3);color:var(--text);border-color:var(--border2);}
-.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:9px;}
-.rc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:13px;transition:border-color .15s;}
-.rc:hover{border-color:var(--border2);}
-.rc.hidden{display:none;}
-.rtype{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.06em;margin-bottom:5px;}
-.rtitle{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;line-height:1.35;}
-.rdesc{font-size:12px;color:var(--text2);line-height:1.5;}
-.rlink{display:inline-block;margin-top:7px;font-size:11px;color:var(--accent);font-family:'DM Mono',monospace;text-decoration:none;}
-.rlink:hover{text-decoration:underline;}
+  /* RESOURCES */
+  .resource-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 32px; }
+  .resource-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; }
+  .resource-cat { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; }
+  .resource-link { display: block; font-size: 12px; color: var(--text2); text-decoration: none; padding: 5px 0; border-bottom: 1px solid var(--border); transition: color 0.15s; }
+  .resource-link:last-child { border-bottom: none; }
+  .resource-link:hover { color: var(--accent); }
+  .resource-link span { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text3); display: block; }
 
-@media(max-width:640px){
-  .dgrid,.dlabels{grid-template-columns:repeat(4,minmax(0,1fr));}
-  header{flex-direction:column;align-items:flex-start;}
-  .mb-row{flex-direction:column;align-items:flex-start;}
-}
+  /* TODAY highlight */
+  .day-card.today {
+    border-color: var(--accent3);
+    box-shadow: 0 0 0 1px var(--accent3), 0 0 20px rgba(52,211,153,0.1);
+  }
+  .day-card.today .day-name {
+    background: rgba(52,211,153,0.12);
+    color: var(--accent3);
+  }
+  .today-pill {
+    display: inline-block;
+    background: var(--accent3);
+    color: #0a0a0f;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .restart-banner {
+    background: rgba(52,211,153,0.07);
+    border: 1px solid rgba(52,211,153,0.25);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 13px;
+  }
+  .restart-banner-icon { font-size: 22px; flex-shrink: 0; }
+  .restart-banner strong { color: var(--accent3); }
+  .pacing-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 900px) { .day-grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 600px) { .day-grid { grid-template-columns: repeat(2, 1fr); } main { padding: 16px; } }
+
+  /* DAY CARD CLICKABLE */
+  .day-card {
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+  }
+  .day-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(91,138,255,0.12);
+  }
+  .day-card.expanded {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .day-expand-hint {
+    padding: 4px 10px 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text3);
+    letter-spacing: 0.06em;
+    text-align: right;
+  }
+
+  /* EXPANDED DAY PANEL — slides in below the grid row */
+  .day-expand-panel {
+    display: none;
+    grid-column: 1 / -1;
+    background: var(--surface2);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    margin: 4px 0 8px;
+    overflow: hidden;
+    animation: expandIn 0.2s ease;
+  }
+  .day-expand-panel.open { display: block; }
+  @keyframes expandIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .expand-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .expand-col {
+    padding: 22px 24px;
+    border-right: 1px solid var(--border);
+  }
+  .expand-col:last-child { border-right: none; }
+
+  .expand-col-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .expand-day-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .expand-week-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    margin-bottom: 20px;
+  }
+
+  .expand-section { margin-bottom: 18px; }
+
+  .expand-section-head {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .expand-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+  .expand-item::before {
+    content: '·';
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .expand-item a {
+    color: var(--accent);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+  }
+  .expand-item a:hover { text-decoration: underline; }
+
+  .expand-nightly {
+    background: rgba(251,191,36,0.07);
+    border: 1px solid rgba(251,191,36,0.2);
+    border-radius: 5px;
+    padding: 10px 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--warning);
+    margin-top: 16px;
+  }
+  .expand-nightly::before { content: '📖  '; }
+
+  .expand-close {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: all 0.15s;
+  }
+  .expand-close:hover { border-color: var(--accent); color: var(--accent); }
+
+  @media (max-width: 700px) { .expand-inner { grid-template-columns: 1fr; } .expand-col { border-right: none; border-bottom: 1px solid var(--border); } }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
+
+<header>
+  <div class="logo"><span class="logo-dot"></span>POSEIDON FELLOWS — LEARNING OS</div>
+  <div class="date-badge" id="datebadge">UCSD · INAUGURAL COHORT · 2026</div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('spine',this)">LEARNING SPINE</button>
+  <button class="tab" onclick="switchTab('schedule',this)">SCHEDULE</button>
+  <button class="tab" onclick="switchTab('concepts',this)">ML CONCEPTS</button>
+  <button class="tab" onclick="switchTab('papers',this)">PAPERS</button>
+  <button class="tab" onclick="switchTab('frontier',this)">FRONTIER</button>
+  <button class="tab" onclick="switchTab('resources',this)">RESOURCES</button>
+</div>
+
+<main>
+
+<!-- ═══ SPINE ═══ -->
+<div id="spine" class="panel active">
+  <div class="section-title">The Optimized Learning Spine</div>
+  <div class="section-sub">// Started May 4, 2026 · Do these in order. Don't skip layers. Each one enables the next.</div>
+
+  <div class="restart-banner">
+    <div class="restart-banner-icon">🟢</div>
     <div>
-      <h1>Poseidon <span>Fellows</span></h1>
-      <p class="sub">
-        ☀️ Morning (~30 min): Supercomputing → Quantum → Robotics → repeat<br>
-        📚 Day (1–2 hrs): AI Safety · Python · ML Foundations · Andrew Ng · Entrepreneurship
-      </p>
-    </div>
-    <div class="today-badge" id="tday">—</div>
-  </header>
-
-  <div class="nav">
-    <button class="nb active" onclick="tab('schedule',this)">Schedule</button>
-    <button class="nb" onclick="tab('ng',this)">Ng Course Tracker</button>
-    <button class="nb" onclick="tab('curriculum',this)">Curriculum</button>
-    <button class="nb" onclick="tab('resources',this)">Resources</button>
-  </div>
-
-  <!-- SCHEDULE -->
-  <div class="view active" id="view-schedule">
-    <div class="morning-banner">
-      <div class="mb-title">☀️ Daily Morning Rotation — 25–30 min before everything else</div>
-      <div class="mb-row">
-        <div class="mb-item"><div class="mb-dot" style="background:var(--sc)"></div><div><div class="mb-label">Mon + Thu</div><div class="mb-desc" style="color:var(--sc)">Supercomputing</div></div></div>
-        <div class="mb-arrow">→</div>
-        <div class="mb-item"><div class="mb-dot" style="background:var(--qc)"></div><div><div class="mb-label">Tue + Fri</div><div class="mb-desc" style="color:var(--qc)">Quantum Computing</div></div></div>
-        <div class="mb-arrow">→</div>
-        <div class="mb-item"><div class="mb-dot" style="background:var(--rb)"></div><div><div class="mb-label">Wed + Sat</div><div class="mb-desc" style="color:var(--rb)">Robotics</div></div></div>
-        <div class="mb-arrow">→</div>
-        <div class="mb-item"><div class="mb-dot" style="background:var(--rest)"></div><div><div class="mb-label">Sun</div><div class="mb-desc" style="color:var(--rest)">Review all three</div></div></div>
-      </div>
-    </div>
-
-    <div class="ng-banner">
-      <div class="ng-icon">🎓</div>
-      <div>
-        <div class="ng-title">Andrew Ng — Advanced Learning Algorithms (Module 1 unlocked)</div>
-        <div class="ng-desc">Module 1 runs across Weeks 1–2, ~30 min/day on weekdays. Topics: NN intuition → NN model → TensorFlow → Python implementation → Vectorization. The 3-hr final lab lands on Saturday of Week 2. Modules 2+ unlock after completion — we'll plan those then.</div>
-      </div>
-    </div>
-
-    <div class="legend">
-      <span class="badge bsafe">AI Safety</span>
-      <span class="badge bpy">Python</span>
-      <span class="badge bai">AI/ML</span>
-      <span class="badge bng">Andrew Ng</span>
-      <span class="badge bbiz">Entrepreneurship</span>
-      <span class="badge bsc">Supercomputing ☀️</span>
-      <span class="badge bqc">Quantum ☀️</span>
-      <span class="badge brb">Robotics ☀️</span>
-      <span class="badge brest">Review</span>
-    </div>
-
-    <div id="cal"></div>
-    <div style="background:var(--biz-bg);border:1px solid rgba(247,200,79,0.2);border-radius:var(--r);padding:10px 16px;margin-bottom:1rem;display:flex;align-items:center;gap:10px;">
-      <span style="font-size:1.1rem;">📖</span>
-      <div>
-        <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--biz);font-weight:600;letter-spacing:.06em;">EVERY NIGHT WITHOUT EXCEPTION</span>
-        <span style="font-size:13px;color:var(--text2);margin-left:8px;">Zero to One — Peter Thiel · ~15 min before bed</span>
-      </div>
-    </div>
-    <div class="panel" id="panel">
-      <div class="ph"><span class="pt" id="ptitle"></span><span class="pm" id="pmeta"></span></div>
-      <div id="pinner"></div>
-      <div class="tip" id="ptip" style="display:none"></div>
+      <strong>Fresh start — May 4, 2026.</strong> Zero — haven't done anything yet. That's the perfect place to begin because you'll do it in the right order from day one.<br>
+      <div class="pacing-note">1–2 hrs/day · Week 1: May 4–10 · Week 2: May 11–17 · Week 3: May 18–24</div>
     </div>
   </div>
 
-  <!-- NG TRACKER -->
-  <div class="view" id="view-ng">
-    <div class="ng-tracker">
-      <div class="ng-tracker-title">MODULE 1 — NEURAL NETWORKS (Unlocked)</div>
-      <div class="ng-modules">
-        <div class="ng-module current">
-          <div class="ng-mod-header">
-            <span class="ng-mod-name">Neural Networks Intuition</span>
-            <span class="ng-mod-status status-current">In Progress</span>
-          </div>
-          <div class="ng-lessons">
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Welcome! (2 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Neurons and the brain (10 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Demand Prediction (16 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Example: Recognizing Images (6 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Practice quiz: Neural networks intuition (10 min)</div>
-          </div>
+  <div class="callout callout-blue">
+    <span class="callout-icon">⚡</span>
+    <div><strong>The problem you identified correctly:</strong> You were learning layer 3 (code) before layer 1 (concept). The blur you feel is a sequencing problem, not a knowledge problem. This spine fixes the sequence.</div>
+  </div>
+
+  <div class="spine">
+    <div class="spine-step done-step">
+      <div class="spine-left"><div class="spine-num">✓</div><div class="spine-line"></div></div>
+      <div class="spine-content">
+        <div class="spine-head"><span class="spine-label">Python Syntax Transfer</span><span class="spine-timing">NOW · 2 DAYS</span></div>
+        <div class="spine-desc">You have Java. You do NOT need a "Python for AI" or "Python for OOP" course. You need a syntax transfer, then two data science libraries. That's the entire Python requirement for ML.</div>
+        <div class="spine-resources">
+          <a href="https://learnxinyminutes.com/docs/python" target="_blank" class="res-chip primary">learnxinyminutes.com/docs/python — Day 1, 30 min</a>
+          <a href="https://cs50.harvard.edu/python" target="_blank" class="res-chip">CS50P Harvard Python (watch at 1.5x)</a>
+          <a href="https://numpy.org/doc/stable/user/absolute_beginners.html" target="_blank" class="res-chip">NumPy Beginners (after CS50P Lec 4)</a>
+          <a href="https://pandas.pydata.org/docs/user_guide/10min.html" target="_blank" class="res-chip">Pandas 10 min (after NumPy)</a>
         </div>
-        <div class="ng-module current">
-          <div class="ng-mod-header">
-            <span class="ng-mod-name">Neural Network Model</span>
-            <span class="ng-mod-status status-current">Up Next</span>
-          </div>
-          <div class="ng-lessons">
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Neural network layer (9 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>More complex neural networks (8 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Inference: making predictions / forward propagation (5 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Lab: Neurons and Layers (10 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Practice quiz: Neural network model (10 min)</div>
-          </div>
+        <div class="callout callout-orange" style="margin-top:12px;margin-bottom:0;font-size:12px;">
+          <span class="callout-icon">⚠️</span>
+          <div>Do NOT take a "Python for AI" or "Python for OOP" course. Your Java background covers OOP. CS50P + NumPy + Pandas = everything you need for ML/data science.</div>
         </div>
-        <div class="ng-module current">
-          <div class="ng-mod-header">
-            <span class="ng-mod-name">TensorFlow Implementation</span>
-            <span class="ng-mod-status status-current">Up Next</span>
-          </div>
-          <div class="ng-lessons">
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Inference in Code (6 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Data in TensorFlow (11 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Building a neural network (8 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Lab: Coffee Roasting in TensorFlow (10 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Practice quiz: TensorFlow implementation (10 min)</div>
-          </div>
+      </div>
+    </div>
+
+    <div class="spine-step active-step">
+      <div class="spine-left"><div class="spine-num">1</div><div class="spine-line"></div></div>
+      <div class="spine-content">
+        <div class="spine-head"><span class="spine-label">Build the Conceptual Anchor — MIT 6.034</span><span class="spine-timing">WEEK 1 · 2 HOURS TOTAL</span></div>
+        <div class="spine-desc">Watch MIT 6.034 Lectures 1 and 10 by Patrick Winston. These answer WHY AI and ML exist before you see HOW any of it works. After each, write in your own words what AI/ML is. This is your foundation session.</div>
+        <div class="spine-resources">
+          <a href="https://www.youtube.com/watch?v=TjZBTDzGeGg" target="_blank" class="res-chip primary">MIT 6.034 Lec 1 — Introduction & Scope</a>
+          <a href="https://www.youtube.com/playlist?list=PLUl4u3cNGP63gFHB6xb-kVBiQHYe_4hSi" target="_blank" class="res-chip primary">MIT 6.034 Lec 10 — Intro to Learning (same playlist)</a>
+          <a href="https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/" target="_blank" class="res-chip">OCW page — notes, slides</a>
         </div>
-        <div class="ng-module current">
-          <div class="ng-mod-header">
-            <span class="ng-mod-name">Neural Network Implementation in Python</span>
-            <span class="ng-mod-status status-current">Up Next</span>
-          </div>
-          <div class="ng-lessons">
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Forward prop in a single layer (5 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>General implementation of forward propagation (7 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Lab: CoffeeRoastingNumPy (1 hr)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Practice quiz: NN implementation in Python (10 min)</div>
-          </div>
+      </div>
+    </div>
+
+    <div class="spine-step">
+      <div class="spine-left"><div class="spine-num">2</div><div class="spine-line"></div></div>
+      <div class="spine-content">
+        <div class="spine-head"><span class="spine-label">3Blue1Brown — Math Made Visual</span><span class="spine-timing">WEEK 1–2 · ALL 7 CHAPTERS</span></div>
+        <div class="spine-desc">Once Winston gives you the WHY, 3B1B makes the math intuitive before you have to write code. Neural networks, gradient descent, backprop, transformers, attention — all visual first. This is layer 2.</div>
+        <div class="spine-resources">
+          <a href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank" class="res-chip primary">Ch1 — What is a Neural Network?</a>
+          <a href="https://www.youtube.com/watch?v=IHZwWFHWa-w" target="_blank" class="res-chip">Ch2 — Gradient Descent</a>
+          <a href="https://www.youtube.com/watch?v=Ilg3gGewQ5U" target="_blank" class="res-chip">Ch3 — Backpropagation</a>
+          <a href="https://www.youtube.com/watch?v=tIeHLnjs5U8" target="_blank" class="res-chip">Ch4 — Backprop Calculus</a>
+          <a href="https://www.youtube.com/watch?v=wjZofJX0v4M" target="_blank" class="res-chip">Ch5 — Transformers / GPT</a>
+          <a href="https://www.youtube.com/watch?v=eMlx5fFNoYc" target="_blank" class="res-chip">Ch6 — Attention</a>
+          <a href="https://www.youtube.com/watch?v=9-Jl0dxWQs8" target="_blank" class="res-chip">Ch7 — LLM Facts</a>
         </div>
-        <div class="ng-module current">
-          <div class="ng-mod-header">
-            <span class="ng-mod-name">Speculations on AGI</span>
-            <span class="ng-mod-status status-current">Up Next</span>
-          </div>
-          <div class="ng-lessons">
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Is there a path to AGI? (10 min) — connects directly to your AI safety reading group</div>
-          </div>
+      </div>
+    </div>
+
+    <div class="spine-step">
+      <div class="spine-left"><div class="spine-num">3</div><div class="spine-line"></div></div>
+      <div class="spine-content">
+        <div class="spine-head"><span class="spine-label">Andrew Ng — ML Specialization</span><span class="spine-timing">WEEK 2–6 · COURSE 1 FIRST</span></div>
+        <div class="spine-desc">This is the hands-on code layer. After concept (Winston) and math-visual (3B1B), implementation makes sense.</div>
+        <div class="callout callout-orange" style="margin-top:8px;margin-bottom:12px;font-size:12px;">
+          <span class="callout-icon">🔄</span>
+          <div><strong>You were on Course 2. Go back to Course 1.</strong> Course 1 = what ML is + linear/logistic regression. Course 2 = NNs in code. You can't learn 2 before 1 — it's like learning to drive in 5th gear.</div>
         </div>
-        <div class="ng-module current">
-          <div class="ng-mod-header">
-            <span class="ng-mod-name">Vectorization (Optional but recommended)</span>
-            <span class="ng-mod-status status-current">Optional</span>
-          </div>
-          <div class="ng-lessons">
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>How neural networks are implemented efficiently (4 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Matrix multiplication (9 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Matrix multiplication rules (9 min)</div>
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Matrix multiplication code (6 min)</div>
-          </div>
+        <div class="spine-resources">
+          <a href="https://www.coursera.org/learn/machine-learning" target="_blank" class="res-chip primary">Course 1 — Supervised ML: Regression & Classification (FREE AUDIT)</a>
+          <a href="https://www.coursera.org/learn/advanced-learning-algorithms" target="_blank" class="res-chip">Course 2 — Advanced Learning Algorithms (NNs)</a>
+          <a href="https://www.coursera.org/learn/unsupervised-learning-recommenders-reinforcement-learning" target="_blank" class="res-chip">Course 3 — Unsupervised Learning + RL</a>
+          <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU" target="_blank" class="res-chip">Stanford CS229 (YouTube) — more math, supplement</a>
         </div>
-        <div class="ng-module current">
-          <div class="ng-mod-header">
-            <span class="ng-mod-name">🏆 Practice Lab: Neural Networks for Binary Classification</span>
-            <span class="ng-mod-status status-current">Final Lab — 3 hrs</span>
-          </div>
-          <div class="ng-lessons">
-            <div class="ng-lesson"><div class="ng-lesson-dot"></div>Programming Assignment — build a neural network to classify data. Scheduled for Saturday of Week 2.</div>
-          </div>
+      </div>
+    </div>
+
+    <div class="spine-step">
+      <div class="spine-left"><div class="spine-num">4</div><div class="spine-line"></div></div>
+      <div class="spine-content">
+        <div class="spine-head"><span class="spine-label">Build Real Things</span><span class="spine-timing">WEEK 3+ · PARALLEL WITH NG</span></div>
+        <div class="spine-desc">Call an API. Build a RAG prototype. Run fast.ai Lesson 1. Don't wait until you "know enough." The moment something works is when everything crystallizes. Start building now.</div>
+        <div class="spine-resources">
+          <a href="https://docs.anthropic.com/en/api/getting-started" target="_blank" class="res-chip primary">Anthropic API — first Claude API call</a>
+          <a href="https://python.langchain.com/docs/tutorials/rag/" target="_blank" class="res-chip">LangChain RAG Tutorial</a>
+          <a href="https://course.fast.ai" target="_blank" class="res-chip">fast.ai — Practical Deep Learning (Lesson 1)</a>
+          <a href="https://www.youtube.com/watch?v=kCc8FmEb1nY" target="_blank" class="res-chip">Karpathy — Build GPT from scratch (capstone)</a>
         </div>
-        <div class="ng-module locked">
-          <div class="ng-mod-header">
-            <span class="ng-mod-name">Module 2 — TBD</span>
-            <span class="ng-mod-status status-locked">Locked — unlocks after Module 1</span>
-          </div>
-        </div>
-        <div class="ng-module locked">
-          <div class="ng-mod-header">
-            <span class="ng-mod-name">Module 3+ — TBD</span>
-            <span class="ng-mod-status status-locked">Locked</span>
-          </div>
+      </div>
+    </div>
+
+    <div class="spine-step">
+      <div class="spine-left"><div class="spine-num">5</div><div class="spine-line"></div></div>
+      <div class="spine-content">
+        <div class="spine-head"><span class="spine-label">Read Papers + Stay at the Frontier</span><span class="spine-timing">WEEK 4+ · 1 PAPER/WEEK</span></div>
+        <div class="spine-desc">Daily habit: 5 min on HuggingFace Papers, read one abstract. 1 full paper per week using Ng's 3-pass method. This is how you develop frontier intuition.</div>
+        <div class="spine-resources">
+          <a href="https://www.youtube.com/watch?v=733m6qBH-jI" target="_blank" class="res-chip primary">Ng — How to Read a Paper (8 min)</a>
+          <a href="https://huggingface.co/papers" target="_blank" class="res-chip">HuggingFace Papers — daily</a>
+          <a href="https://www.anthropic.com/research" target="_blank" class="res-chip">Anthropic Research</a>
+          <a href="https://paperswithcode.com" target="_blank" class="res-chip">Papers With Code</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- CURRICULUM -->
-  <div class="view" id="view-curriculum">
-    <div class="cg">
-      <div class="cc">
-        <div class="ct" style="color:var(--safe)">AI Safety Reading Group</div>
-        <div class="cr"><div class="cw">Wk 0</div><div><div class="ctop">3Blue1Brown Neural Networks — 6 chapters</div><div class="cd">Required before Week 1 session.</div><div class="chi" style="background:var(--ai-bg);color:var(--ai)">Required Wk 0</div></div></div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">Transformative AI & Trajectory</div><div class="cd">METR long tasks + Epoch AI Trends</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">Apr 20 — catch up</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Outer Alignment</div><div class="cd">Specification gaming · InstructGPT · LLMs mislead via RLHF · Apollo deception</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">Apr 27</div></div></div>
-        <div class="cr"><div class="cw">Wk 3</div><div><div class="ctop">Inner Alignment</div><div class="cd">Mesa-optimizers · Alignment faking · Sleeper Agents · Shortcuts to sabotage</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">May 4</div></div></div>
-        <div class="cr"><div class="cw">Wk 4</div><div><div class="ctop">Threat Models</div><div class="cd">Statement on AI Risk · Instrumental Convergence · CAIS · AI 2027</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">May 11</div></div></div>
-        <div class="cr"><div class="cw">Wk 5</div><div><div class="ctop">Control & Scalable Oversight</div><div class="cd">Case for AI control · Ctrl-Z · Weak-to-strong</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">May 18</div></div></div>
-        <div class="cr"><div class="cw">Wk 6</div><div><div class="ctop">Mechanistic Interpretability</div><div class="cd">Interpretability Dreams · Biology of a Large LLM · Gemma Scope</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">May 25</div></div></div>
-        <div class="cr"><div class="cw">Wk 7</div><div><div class="ctop">Policy, Governance & Careers</div><div class="cd">Export controls · Compute governance · Careers in alignment</div><div class="chi" style="background:var(--safe-bg);color:var(--safe)">Jun 1</div></div></div>
-      </div>
-      <div class="cc">
-        <div class="ct" style="color:var(--ng)">Andrew Ng — Advanced Learning Algorithms</div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">NN Intuition + NN Model</div><div class="cd">Neurons, demand prediction, image recognition, forward propagation. ~30 min/day Mon–Wed.</div><div class="chi" style="background:var(--ng-bg);color:var(--ng)">Module 1 unlocked ✓</div></div></div>
-        <div class="cr"><div class="cw">Wk 1–2</div><div><div class="ctop">TensorFlow Implementation</div><div class="cd">Inference in code, data in TF, building NNs, Coffee Roasting lab. Your first real TF code.</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Python Implementation + Vectorization</div><div class="cd">Forward prop in NumPy. Matrix multiplication — connects directly to your SC morning sessions on GPU/CUDA.</div></div></div>
-        <div class="cr"><div class="cw">Wk 2 Sat</div><div><div class="ctop">🏆 Final Lab — Neural Networks Binary Classification (3 hrs)</div><div class="cd">Full programming assignment. The capstone of Module 1. Saturday deep-work slot.</div><div class="chi" style="background:var(--ng-bg);color:var(--ng)">3-hr lab</div></div></div>
-        <div class="cr"><div class="cw">Wk 3+</div><div><div class="ctop">Module 2+ (TBD after completion)</div><div class="cd">Modules unlock sequentially. We'll plan once Module 1 is done.</div><div class="chi" style="background:var(--rest-bg);color:var(--rest)">locked</div></div></div>
-      </div>
-      <div class="cc">
-        <div class="ct" style="color:var(--py)">Python Track</div>
-        <div class="cr"><div class="cw">Day 1</div><div><div class="ctop">Learn X in Y Minutes</div><div class="cd">Read once, keep open as reference.</div><div class="chi" style="background:var(--py-bg);color:var(--py)">learnxinyminutes.com/docs/python</div></div></div>
-        <div class="cr"><div class="cw">Daily</div><div><div class="ctop">python-course.eu</div><div class="cd">Tutorial → OOP → Advanced → Numerical → ML.</div></div></div>
-        <div class="cr"><div class="cw">Wk 1–2</div><div><div class="ctop">CS50P Lectures 0–3</div><div class="cd">Functions, conditionals, loops, exceptions.</div><div class="chi" style="background:var(--py-bg);color:var(--py)">cs50.harvard.edu/python</div></div></div>
-        <div class="cr"><div class="cw">Wk 2–3</div><div><div class="ctop">CS50P Lectures 4–6</div><div class="cd">Libraries, file I/O. Libraries unlock AI APIs, Qiskit, ROS.</div></div></div>
-        <div class="cr"><div class="cw">Wk 3–4</div><div><div class="ctop">CS50P Lectures 7–8 + OOP</div><div class="cd">OOP used in TensorFlow, PyTorch, LangChain, ROS.</div></div></div>
-      </div>
-      <div class="cc">
-        <div class="ct" style="color:var(--sc)">☀️ Supercomputing (Mon + Thu)</div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">CPUs vs GPUs + HPC architecture</div><div class="cd">Computerphile GPU video. TOP500 list. FLOPS, memory bandwidth, interconnects.</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">CUDA concepts + Parallel Python</div><div class="cd">CUDA kernel mental model. Python multiprocessing module.</div></div></div>
-        <div class="cr"><div class="cw">Wk 3</div><div><div class="ctop">MPI + CuPy GPU arrays</div><div class="cd">LLNL tutorials. CuPy: NumPy on GPU. Write first GPU Python code.</div></div></div>
-      </div>
-      <div class="cc">
-        <div class="ct" style="color:var(--qc)">☀️ Quantum Computing (Tue + Fri)</div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">Qubits, superposition, gates</div><div class="cd">IBM intro video. Microsoft Research lecture (first 15 min). Hadamard + CNOT gates.</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Qiskit — first circuit + real hardware</div><div class="cd">Build Bell state. Run on IBM simulator then real quantum hardware.</div><div class="chi" style="background:var(--qc-bg);color:var(--qc)">learning.quantum.ibm.com</div></div></div>
-        <div class="cr"><div class="cw">Wk 3</div><div><div class="ctop">Grover's, Shor's + Quantum ML</div><div class="cd">Why quantum beats classical for specific problems. PennyLane intro.</div></div></div>
-      </div>
-      <div class="cc">
-        <div class="ct" style="color:var(--rb)">☀️ Robotics (Wed + Sat)</div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">ROS intro + sensors/control loops</div><div class="cd">ROS for Beginners video. Node/topic model. PID control concept.</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">ROS 2 install + kinematics</div><div class="cd">First publisher/subscriber node. Forward vs inverse kinematics.</div><div class="chi" style="background:var(--rb-bg);color:var(--rb)">docs.ros.org</div></div></div>
-        <div class="cr"><div class="cw">Wk 3</div><div><div class="ctop">RL + Gymnasium + Embodied AI</div><div class="cd">CartPole environment. RT-2 paper. LLMs controlling robots.</div></div></div>
-      </div>
-      <div class="cc">
-        <div class="ct" style="color:var(--biz)">Entrepreneurship</div>
-        <div class="cr"><div class="cw">Nightly</div><div><div class="ctop">Zero to One — Peter Thiel</div><div class="cd">~15 min before bed.</div></div></div>
-        <div class="cr"><div class="cw">✓ Done</div><div><div class="ctop">How to Start a Startup Ep 1 & 2</div><div class="cd">Complete.</div><div class="chi" style="background:var(--py-bg);color:var(--py)">done ✓</div></div></div>
-        <div class="cr"><div class="cw">Wk 1</div><div><div class="ctop">Ep 3 — Paul Graham</div><div class="cd">Counterintuitive parts of startups.</div></div></div>
-        <div class="cr"><div class="cw">Wk 2</div><div><div class="ctop">Ep 4 — Adora Cheung + SaaS Metrics</div><div class="cd">Building product + ARR, CAC, LTV.</div></div></div>
-        <div class="cr"><div class="cw">Wk 3+</div><div><div class="ctop">Ep 5+ — one per week</div><div class="cd">Continue weekly.</div></div></div>
-      </div>
-    </div>
+  <div class="section-title" style="margin-top:8px;">Entrepreneurship Track</div>
+  <div class="section-sub">// Philosophy + tactics. Running parallel.</div>
+  <div class="callout callout-green">
+    <span class="callout-icon">📚</span>
+    <div><strong>Zero to One clarification:</strong> This is a philosophy book — Thiel's argument that the most valuable companies create something genuinely new (0→1) rather than copying (1→n). Worth finishing as a mindset book, but NOT a how-to guide. Read nightly as reflection, not curriculum. For actual tactics: YC Startup School.</div>
   </div>
 
-  <!-- RESOURCES -->
-  <div class="view" id="view-resources">
-    <div class="rf">
-      <button class="rfb active" onclick="filt('all',this)">All</button>
-      <button class="rfb" onclick="filt('safe',this)">AI Safety</button>
-      <button class="rfb" onclick="filt('py',this)">Python</button>
-      <button class="rfb" onclick="filt('ng',this)">Andrew Ng</button>
-      <button class="rfb" onclick="filt('ai',this)">AI/ML</button>
-      <button class="rfb" onclick="filt('biz',this)">Entrepreneurship</button>
-      <button class="rfb" onclick="filt('sc',this)">Supercomputing ☀️</button>
-      <button class="rfb" onclick="filt('qc',this)">Quantum ☀️</button>
-      <button class="rfb" onclick="filt('rb',this)">Robotics ☀️</button>
+  <div class="spine">
+    <div class="spine-step">
+      <div class="spine-left"><div class="spine-num">A</div><div class="spine-line"></div></div>
+      <div class="spine-content">
+        <div class="spine-head"><span class="spine-label">YC Startup School</span><span class="spine-timing">MOST TACTICAL RESOURCE</span></div>
+        <div class="spine-desc">Free. More current and practical than anything else. Designed exactly for your stage. This is where you learn how startups and VC actually work.</div>
+        <div class="spine-resources"><a href="https://www.startupschool.org" target="_blank" class="res-chip primary">startupschool.org — start here</a></div>
+      </div>
     </div>
-    <div class="rg" id="rg"></div>
+    <div class="spine-step">
+      <div class="spine-left"><div class="spine-num">B</div><div class="spine-line"></div></div>
+      <div class="spine-content">
+        <div class="spine-head"><span class="spine-label">How to Start a Startup + PG Essays</span><span class="spine-timing">ONGOING</span></div>
+        <div class="spine-desc">You've done Ep 1+2 of Sam Altman's series. Continue. PG essays are the most useful-per-minute entrepreneurship content available.</div>
+        <div class="spine-resources">
+          <a href="https://www.youtube.com/watch?v=f4_14pZlJBs" target="_blank" class="res-chip">Ep 3 — Paul Graham</a>
+          <a href="https://www.youtube.com/watch?v=3Fx5Q8xGU8k" target="_blank" class="res-chip">Ep 5 — Thiel</a>
+          <a href="http://paulgraham.com/ds.html" target="_blank" class="res-chip primary">Do Things That Don't Scale</a>
+          <a href="http://paulgraham.com/aord.html" target="_blank" class="res-chip primary">Default Alive or Default Dead</a>
+          <a href="http://paulgraham.com/startupideas.html" target="_blank" class="res-chip">How to Get Startup Ideas</a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<script>
-const TM={
-  safe:{dot:'dsafe',block:'blsafe',label:'lsafe',text:'AI SAFETY'},
-  py:  {dot:'dpy',  block:'blpy',  label:'lpy',  text:'PYTHON'},
-  ai:  {dot:'dai',  block:'blai',  label:'lai',  text:'AI / ML'},
-  ng:  {dot:'dng',  block:'blng',  label:'lng',  text:'ANDREW NG'},
-  biz: {dot:'dbiz', block:'blbiz', label:'lbiz', text:'ENTREPRENEURSHIP'},
-  sc:  {dot:'dsc',  block:'blsc',  label:'lsc',  text:'SUPERCOMPUTING'},
-  qc:  {dot:'dqc',  block:'blqc',  label:'lqc',  text:'QUANTUM COMPUTING'},
-  rb:  {dot:'drb',  block:'blrb',  label:'lrb',  text:'ROBOTICS'},
-  rest:{dot:'drest',block:'blrest',label:'lrest',text:'REVIEW'}
-};
+<!-- ═══ SCHEDULE ═══ -->
+<div id="schedule" class="panel">
+  <div class="section-title">3-Week Schedule</div>
+  <div class="section-sub">// Started May 4, 2026 · 1–2 hours/day · Morning rotation (25-30 min) before everything else</div>
 
-const MC={sc:'var(--sc)',qc:'var(--qc)',rb:'var(--rb)',rest:'var(--rest)'};
-const MB={sc:'var(--sc-bg)',qc:'var(--qc-bg)',rb:'var(--rb-bg)',rest:'var(--rest-bg)'};
+  <div class="restart-banner">
+    <div class="restart-banner-icon">🟢</div>
+    <div>
+      <strong>Day 1 — May 4, 2026. Clean slate.</strong> Zero pressure about what came before. The only thing that matters is what you do starting today.<br>
+      <div class="pacing-note">PACING: 1–2 hrs/day · Week 1: May 4–10 · Week 2: May 11–17 · Week 3: May 18–24 · Today = Monday (Review + orientation day)</div>
+    </div>
+  </div>
 
-const WEEKS=[
-  {label:"WEEK 0+1 — APR 27 · Outer Alignment + Ng Module 1 begins",days:[
-    {date:"4/27",short:"Mon",title:"Restart + Ng begins",today:true,tags:["sc","ng","safe","py","biz"],
-      morning:{type:'sc',time:"25 min",h:"Supercomputing — CPUs vs GPUs",b:"Watch Computerphile 'How Do Graphics Cards Work?' (9 min). Then watch 'Why GPUs are faster for AI' (5 min). Write 2 sentences: what is parallelism and why does it matter for AI training?",r:"→ youtube: 'computerphile how graphics cards work'"},
-      blocks:[
-        {t:"ng",time:"30 min",h:"Ng — Welcome + Neurons and the Brain",b:"Start the Coursera course. Watch 'Welcome!' (2 min) + 'Neurons and the Brain' (10 min) + 'Demand Prediction' (16 min). These three videos are the intuition layer — why neural networks are structured the way they are. Don't skip the demand prediction example, it's the clearest NN motivation you'll see.",r:"→ coursera.org → Advanced Learning Algorithms"},
-        {t:"safe",time:"30 min",h:"Week 0 — 3B1B Neural Networks Ch 1",b:"Watch 'But what is a neural network?' (19 min). Required Week 0 reading. Notice how it connects to what Ng just showed you — same concept, different angle.",r:"→ youtube: '3blue1brown what is a neural network'"},
-        {t:"py",time:"20 min",h:"Learn X in Y Minutes — Python",b:"Read the full page at learnxinyminutes.com/docs/python. Full orientation in one sitting. Keep it open all week.",r:"→ learnxinyminutes.com/docs/python"}
-      ],
-      tip:"Ng and 3B1B are covering the same thing from different angles today — that's intentional. Two perspectives on neural networks in one day locks it in fast."
-    },
-    {date:"4/28",short:"Tue",title:"Ng + Outer Alignment",tags:["qc","ng","safe","ai"],
-      morning:{type:'qc',time:"25 min",h:"Quantum — Qubits and Superposition",b:"Watch IBM's 'What is Quantum Computing?' (5 min) + first 15 min of Microsoft Research 'Quantum Computing for Computer Scientists'. Today: pure concepts — qubits vs bits, superposition, entanglement. No math.",r:"→ youtube: 'quantum computing for computer scientists microsoft'"},
-      blocks:[
-        {t:"ng",time:"30 min",h:"Ng — Recognizing Images + NN Model section begins",b:"Watch 'Example: Recognizing Images' (6 min). Then start NN Model: watch 'Neural network layer' (9 min) + 'More complex neural networks' (8 min). You're now seeing how layers stack — this is the architecture behind every model in your reading group.",r:""},
-        {t:"safe",time:"40 min",h:"Week 2 — Specification Gaming + Apollo Deception",b:"Read GDM 'Specification gaming' blog post (~15 min). Then read Apollo Research deception paper abstract + intro. Core concept: reward hacking means achieving the reward without doing what you wanted.",r:"→ search: 'specification gaming deepmind blog 2020'"}
-      ],
-      tip:"The NN Model section of Ng directly connects to what 3B1B Chapter 1 showed you yesterday. Layers → forward propagation → how predictions are made."
-    },
-    {date:"4/29",short:"Wed",title:"Ng TensorFlow + CS50P",tags:["rb","ng","py","biz"],
-      morning:{type:'rb',time:"25 min",h:"Robotics — What is ROS?",b:"Watch 'ROS for Beginners' intro on YouTube (15 min). Understand: nodes, topics, publisher/subscriber model. Read the first page of 'A Gentle Introduction to ROS' (free PDF). Just the overview.",r:"→ youtube: 'ROS for beginners explained'"},
-      blocks:[
-        {t:"ng",time:"35 min",h:"Ng — Forward Propagation + TensorFlow begins",b:"Watch 'Inference: making predictions (forward propagation)' (5 min) + complete the 'Neurons and Layers' lab (10 min). Then start TensorFlow section: watch 'Inference in Code' (6 min) + 'Data in TensorFlow' (11 min). This is your first real TensorFlow code — pay attention to how arrays are structured.",r:""},
-        {t:"py",time:"40 min",h:"CS50P — Lecture 0: Functions & Variables",b:"Start CS50P at cs50.harvard.edu/python. Watch at 1.5x. Each lecture is ~2 hrs — do the first half today. The Python fundamentals here directly support the Ng labs.",r:"→ cs50.harvard.edu/python"},
-        {t:"biz",time:"25 min",h:"How to Start a Startup — Ep 3 (PG)",b:"Paul Graham on counterintuitive parts of startups.",r:"→ youtube: 'how to start a startup ep 3 paul graham'"}
-      ],
-      tip:"The TensorFlow videos in Ng require Python comfort — your CS50P session today directly feeds into the Ng labs. They reinforce each other."
-    },
-    {date:"4/30",short:"Thu",title:"Ng + 3B1B Backprop",tags:["sc","ng","ai","safe"],
-      morning:{type:'sc',time:"25 min",h:"Supercomputing — HPC Architecture",b:"Read the TOP500 list (top500.org) — look at the #1 supercomputer. What makes it fast? Watch the first 10 min of MIT 6.172 Lecture 1. Key terms: FLOPS, memory bandwidth, interconnects.",r:"→ top500.org\n→ youtube: 'MIT 6.172 lecture 1'"},
-      blocks:[
-        {t:"ng",time:"35 min",h:"Ng — Building a Neural Network + Coffee Roasting Lab",b:"Watch 'Building a neural network' (8 min). Complete the 'Coffee Roasting in TensorFlow' lab (10 min) — this is your first hands-on TF model. Take your time with it. Do the practice quiz after.",r:""},
-        {t:"ai",time:"30 min",h:"Week 0 — 3B1B Ch 2 + Ch 3",b:"Watch 'Gradient descent' (21 min) and start 'What is backpropagation?' (14 min). These directly support what Ng is teaching — you're seeing the same math from two angles.",r:"→ youtube: '3blue1brown gradient descent'"},
-        {t:"safe",time:"20 min",h:"Week 2 — InstructGPT intro",b:"Read OpenAI InstructGPT paper intro. Connect: RLHF tries to fix specification gaming but creates new deception problems.",r:"→ search: 'instructgpt openai 2022'"}
-      ],
-      tip:"The Coffee Roasting lab is short but important — it's your first real TensorFlow model. Don't rush past it."
-    },
-    {date:"5/1",short:"Fri",title:"Ng Python impl + Review",tags:["qc","ng","py","rest"],
-      morning:{type:'qc',time:"25 min",h:"Quantum — Gates and Circuits",b:"Watch 'Quantum Gates explained' on YouTube (~15 min). Understand Hadamard gate and CNOT gate. These are the building blocks of everything in Qiskit.",r:"→ youtube: 'quantum gates explained qubits'"},
-      blocks:[
-        {t:"ng",time:"35 min",h:"Ng — Python Implementation of Forward Prop",b:"Watch 'Forward prop in a single layer' (5 min) + 'General implementation of forward propagation' (7 min). Start the CoffeeRoastingNumPy lab (1 hr total — do 30 min today, finish Saturday). This lab is where the Python + NN math connection clicks.",r:""},
-        {t:"py",time:"25 min",h:"python-course.eu + CS50P continued",b:"Read python-course.eu tutorial Ch 1–2. Then continue CS50P Lecture 0 if not finished.",r:"→ python-course.eu/python-tutorial"},
-        {t:"rest",time:"20 min",h:"Weekly review",b:"From memory: (1) What is forward propagation? (2) What did the Coffee Roasting lab do? (3) What is outer alignment? (4) What is parallelism? (5) What is a qubit? (6) What does a ROS node do?",r:""}
-      ],
-      tip:"The forward propagation Python videos today are the bridge between Ng's TensorFlow abstractions and raw NumPy — pay attention to the matrix shapes."
-    },
-    {date:"5/2",short:"Sat",title:"Ng Lab + 3B1B + Depth",tags:["rb","ng","safe","ai","biz"],
-      morning:{type:'rb',time:"25 min",h:"Robotics — Sensors and Control Loops",b:"Watch 'How do robots sense the world?' on YouTube (~15 min). Cameras, LiDAR, IMUs, encoders. Read about PID control — search 'PID controller explained simply'.",r:"→ youtube: 'robot sensors explained'"},
-      blocks:[
-        {t:"ng",time:"45 min",h:"Ng — Finish CoffeeRoastingNumPy lab + AGI video",b:"Finish the CoffeeRoastingNumPy lab (remaining ~30 min). Then watch 'Is there a path to AGI?' (10 min) — this video connects directly to your AI safety reading group. Ng's take on AGI from a technical perspective is worth comparing to the alignment researchers' view.",r:""},
-        {t:"ai",time:"35 min",h:"3B1B Ch 4 + Ch 5 — Backprop calculus + Transformers",b:"Watch these two. Ch 4 finishes backprop. Ch 5 covers transformers — the architecture behind every LLM in your reading group.",r:"→ youtube: '3blue1brown transformers attention'"},
-        {t:"safe",time:"20 min",h:"Finish Week 2 readings + write group question",b:"Finish Wen et al. skimming. Write one genuine question for the reading group.",r:""},
-        {t:"biz",time:"20 min",h:"Paul Graham + SaaS basics",b:"Read 'Default Alive or Default Dead' (paulgraham.com/aord.html). Skim ARR + LTV in David Skok's SaaS Metrics 2.0.",r:"→ paulgraham.com/aord.html"}
-      ],
-      tip:"The AGI video from Ng is a rare moment where your course material and your reading group directly overlap. Watch it thinking about what the alignment researchers would say in response."
-    },
-    {date:"5/3",short:"Sun",title:"Rest + Read",tags:["rest","biz"],
-      morning:{type:'rest',time:"20 min",h:"Morning Review — all three tracks",b:"Write one sentence each: (1) What did you learn in supercomputing this week? (2) Quantum? (3) Robotics? 20 min max, no notes.",r:""},
-      blocks:[
-        {t:"rest",time:"25 min",h:"Review + reading group question",b:"Reread your notes. Write one genuine question for the Week 2 outer alignment session.",r:""},
-        {t:"biz",time:"15 min",h:"Zero to One — continue",b:"Keep the nightly habit.",r:""}
-      ],
-      tip:"Sunday is rest. Don't add new material."
-    }
-  ]},
-  {label:"WEEK 2 — MAY 4 · Inner Alignment + Ng Vectorization + Final Lab",days:[
-    {date:"5/4",short:"Mon",title:"Inner Alignment + Ng Vectorization",tags:["sc","ng","safe","ai"],
-      morning:{type:'sc',time:"25 min",h:"Supercomputing — CUDA Concepts",b:"Watch 'CUDA Programming Basics' intro on YouTube (15–20 min). Understand: GPU kernel = function running across thousands of threads in parallel. Thread blocks. Memory hierarchy: registers → shared → global. Own the mental model.",r:"→ youtube: 'CUDA programming basics intro'"},
-      blocks:[
-        {t:"ng",time:"35 min",h:"Ng — Vectorization section",b:"Watch 'How neural networks are implemented efficiently' (4 min) + 'Matrix multiplication' (9 min) + 'Matrix multiplication rules' (9 min). This section explains WHY your SC morning session on CUDA matters — matrix multiplication on GPUs is literally how neural networks train fast. The two tracks just connected.",r:""},
-        {t:"safe",time:"40 min",h:"Week 3 — Mesa-Optimizers + Alignment Faking",b:"Watch Robert Miles 'Mesa-Optimizers and Inner Alignment' (~20 min). Then read Anthropic 'Alignment Faking' abstract. Key: even perfect training may produce models with internal goals that differ from what you intended.",r:"→ youtube: 'robert miles mesa optimizers'"}
-      ],
-      tip:"Today is a huge connection day: Ng's vectorization section explains exactly why CUDA and GPUs matter. Matrix multiplication on GPUs IS neural network training. SC morning + Ng afternoon = one complete picture."
-    },
-    {date:"5/5",short:"Tue",title:"Ng Matrix Code + Sleeper Agents",tags:["qc","ng","safe","py"],
-      morning:{type:'qc',time:"25 min",h:"Quantum — Install Qiskit + First Circuit",b:"pip install qiskit. Go to learning.quantum.ibm.com and complete 'Hello Quantum'. Build a Bell state. Run on IBM simulator. Your first quantum code.",r:"→ learning.quantum.ibm.com\n→ pip install qiskit qiskit-aer"},
-      blocks:[
-        {t:"ng",time:"30 min",h:"Ng — Matrix Multiplication Code + Quiz",b:"Watch 'Matrix multiplication code' (6 min). Complete the 'Practice quiz: Neural network implementation in Python' (10 min). You've now finished all the videos and quizzes in Module 1 — only the final lab remains.",r:""},
-        {t:"safe",time:"40 min",h:"Sleeper Agents + Shortcuts to Sabotage",b:"Read Anthropic 'Sleeper Agents' abstract, intro, conclusion. Deceptive behaviors persist through safety training. Then read 'Shortcuts to sabotage' abstract.",r:"→ search: 'anthropic sleeper agents 2024'"},
-        {t:"py",time:"25 min",h:"CS50P — Lecture 1: Conditionals",b:"Keep progressing. Try a problem set problem.",r:"→ cs50.harvard.edu/python"}
-      ],
-      tip:"After today you've watched every video in Module 1. The 3-hr final lab on Saturday is the only thing standing between you and Module 2 unlocking."
-    },
-    {date:"5/6",short:"Wed",title:"CS50P + Ep 4",tags:["rb","py","biz","ng"],
-      morning:{type:'rb',time:"25 min",h:"Robotics — Install ROS 2 + First Node",b:"Install ROS 2 Humble via Docker (docs.ros.org). Complete the first CLI tutorial: run 'ros2 run demo_nodes_cpp talker'. You should see messages published. Start the install before class — let it run.",r:"→ docs.ros.org/en/humble/Installation.html"},
-      blocks:[
-        {t:"ng",time:"20 min",h:"Ng — Review Module 1 before the lab",b:"Skim back through your notes on TensorFlow implementation and Python forward propagation. The Saturday lab builds a neural network for binary classification — you'll use everything from Module 1. 20 min of review now saves an hour of confusion Saturday.",r:""},
-        {t:"py",time:"45 min",h:"CS50P — Lecture 2: Loops + python-course.eu",b:"CS50P Lecture 2. Then read python-course.eu loops chapter. Two formats of the same concept locks in faster.",r:"→ python-course.eu/python-tutorial/loops"},
-        {t:"biz",time:"30 min",h:"How to Start a Startup — Ep 4 (Adora Cheung)",b:"Build what people want, talk to users constantly.",r:"→ youtube: 'how to start a startup ep 4'"}
-      ],
-      tip:"Wednesday is your prep day for Saturday's Ng lab. The review block is short but important."
-    },
-    {date:"5/7",short:"Thu",title:"Karpathy + 3B1B Ch 6",tags:["sc","ai","qc"],
-      morning:{type:'sc',time:"25 min",h:"Supercomputing — Parallel Python",b:"Open Python and try the multiprocessing module: from multiprocessing import Pool; pool = Pool(4); results = pool.map(lambda x: x**2, range(100)). Read the docs intro. Conceptual step before MPI.",r:"→ docs.python.org/3/library/multiprocessing.html"},
-      blocks:[
-        {t:"ai",time:"40 min",h:"Karpathy — Let's Build GPT (first 30 min)",b:"Tokens, attention, context windows. Makes every LLM paper in your reading group concrete.",r:"→ youtube: 'karpathy lets build gpt'"},
-        {t:"ai",time:"15 min",h:"3B1B Ch 6 — completes Week 0",b:"Watch 'How might LLMs store facts'. Finishes required Week 0 material.",r:"→ youtube: '3blue1brown LLM facts'"},
-        {t:"qc",time:"15 min",h:"Submit circuit to real IBM quantum hardware",b:"At learning.quantum.ibm.com, submit your Bell state to real quantum hardware. See quantum noise in real results.",r:"→ learning.quantum.ibm.com"}
-      ],
-      tip:"After today you've finished all 6 3B1B chapters (Week 0 complete) AND submitted a real quantum circuit. Two milestones in one day."
-    },
-    {date:"5/8",short:"Fri",title:"Python + Review",tags:["qc","py","rest"],
-      morning:{type:'qc',time:"25 min",h:"Quantum — Grover's Search Algorithm",b:"Watch 'Grover's Algorithm explained' on YouTube (~15 min). Conceptual goal: understand why Grover's is O(√N) vs classical O(N). Why quantum gives a speedup for search.",r:"→ youtube: 'grovers algorithm explained simply'"},
-      blocks:[
-        {t:"py",time:"35 min",h:"python-course.eu — OOP Introduction",b:"Read python-course.eu/oop. OOP is everywhere: TensorFlow, PyTorch, LangChain, ROS.",r:"→ python-course.eu/oop"},
-        {t:"rest",time:"30 min",h:"Weekly review — prep for Ng lab",b:"From memory: (1) What does forward propagation do? (2) Why does matrix multiplication matter for GPUs? (3) What is a CUDA kernel? (4) What is a Bell state? (5) What is a mesa-optimizer? (6) What is a ROS node? Also: write down anything about TF/NumPy you're unsure about before Saturday's lab.",r:""}
-      ],
-      tip:"The review question about TF/NumPy confusion is the most important one today. Write those down — they're your prep list for Saturday's 3-hr lab."
-    },
-    {date:"5/9",short:"Sat",title:"🏆 Ng Final Lab + API Call",tags:["rb","ng","ai","py"],
-      morning:{type:'rb',time:"25 min",h:"Robotics — Kinematics basics",b:"Watch MIT 6.832 Underactuated Robotics Lecture 1 (first 20 min). What makes robots hard to control? Forward vs inverse kinematics.",r:"→ youtube: 'MIT 6.832 underactuated robotics lecture 1'"},
-      blocks:[
-        {t:"ng",time:"180 min",h:"🏆 Ng — Practice Lab: Neural Networks for Binary Classification (3 hrs)",b:"This is the Module 1 capstone. You'll build a neural network from scratch to classify data using everything you've learned: forward propagation, TensorFlow, NumPy matrix operations. Take your time. Read the instructions carefully. When you finish this, Module 2 unlocks. Budget the full 3 hours and treat it like an exam.",r:"→ coursera.org → Advanced Learning Algorithms → Week 1 → Practice Lab"},
-        {t:"ai",time:"40 min",h:"First API call — make something real",b:"Sign up at console.anthropic.com (free tier). Write a Python script: send a prompt, print the response. This is the moment AI stops being abstract. If you finish the Ng lab early, do this. If the lab runs long, move the API call to Sunday.",r:"→ docs.anthropic.com/quickstart"}
-      ],
-      tip:"Saturday is Ng lab day. Give it the full 3 hours. Everything else is secondary today. When you submit it, Module 2 unlocks — that's the reward."
-    },
-    {date:"5/10",short:"Sun",title:"Rest + Module 2 preview",tags:["rest","ng","biz"],
-      morning:{type:'rest',time:"20 min",h:"Morning Review — all three tracks",b:"Write from memory: (1) What is a CUDA thread block? (2) What did your Bell state circuit do? (3) What is forward kinematics? Three sentences, no notes.",r:""},
-      blocks:[
-        {t:"ng",time:"20 min",h:"Ng — Preview Module 2 (if unlocked)",b:"If the lab is done and Module 2 is unlocked, just look at what's coming — don't start it yet. Skim the module overview. We'll plan Module 2 integration into Week 3+ once you see what it covers.",r:""},
-        {t:"rest",time:"20 min",h:"Rest + reading group question",b:"Review inner alignment notes. Write one question about alignment faking or sleeper agents.",r:""},
-        {t:"biz",time:"15 min",h:"Zero to One — continue",b:"",r:""}
-      ],
-      tip:"You finished Module 1 of Andrew Ng's course this week. That's real. Module 2 planning happens once you see what unlocked."
-    }
-  ]},
-  {label:"WEEK 3 — MAY 11 · Threat Models + Module 2 TBD",days:[
-    {date:"5/11",short:"Mon",title:"Threat Models + Ng M2",tags:["sc","safe","ng","ai"],
-      morning:{type:'sc',time:"25 min",h:"Supercomputing — MPI Concepts",b:"Read LLNL 'Introduction to Parallel Computing' tutorial intro (hpc.llnl.gov). What is MPI, why nodes need to communicate. Read 'Hello World in MPI' structure. Each process has its own memory — they communicate by passing messages.",r:"→ hpc.llnl.gov/documentation/tutorials"},
-      blocks:[
-        {t:"ng",time:"30 min",h:"Ng — Module 2 begins (TBD based on what unlocked)",b:"Start Module 2 with whatever the first section is. Come back here and we'll update the plan once you see the content. Spend 30 min on the first videos.",r:"→ coursera.org → Advanced Learning Algorithms → Module 2"},
-        {t:"safe",time:"45 min",h:"Week 4 — Instrumental Convergence + CAIS",b:"Watch 'Why Would AI Want to do Bad Things? Instrumental Convergence' (15 min). Read CAIS Catastrophic Risks intro + conclusion.",r:"→ youtube: 'instrumental convergence robert miles'"}
-      ],
-      tip:"Module 2 content is TBD — update your plan once you see what's in it. The 30-min daily Ng slot stays the same regardless."
-    },
-    {date:"5/12",short:"Tue",title:"AI 2027 + Ng + CS50P",tags:["qc","safe","ng","py"],
-      morning:{type:'qc',time:"25 min",h:"Quantum ML — PennyLane intro",b:"Go to pennylane.ai/qml and read 'What is Quantum Machine Learning?' (10 min). Watch their intro demo. PennyLane lets you train quantum circuits like neural networks using gradient descent.",r:"→ pennylane.ai/qml"},
-      blocks:[
-        {t:"ng",time:"30 min",h:"Ng — Module 2 continued",b:"Continue Module 2. ~30 min. Stay consistent.",r:""},
-        {t:"safe",time:"35 min",h:"AI 2027 video",b:"Watch the 'AI 2027' video (35 min). After: two sentences — what feels plausible, what feels overstated.",r:"→ youtube: 'AI 2027'"},
-        {t:"py",time:"25 min",h:"CS50P — Lecture 3: Exceptions",b:"Error handling — directly useful for API calls.",r:""}
-      ],
-      tip:""
-    },
-    {date:"5/13",short:"Wed",title:"CS50P Libs + Ep 5",tags:["rb","py","ng","biz"],
-      morning:{type:'rb',time:"25 min",h:"Robotics — RL + Gymnasium",b:"pip install gymnasium. Run CartPole environment. Watch it fail, read how RL agents learn to balance it. Search 'gymnasium cartpole tutorial python'.",r:"→ gymnasium.farama.org"},
-      blocks:[
-        {t:"ng",time:"30 min",h:"Ng — Module 2 continued",b:"Keep the daily Ng rhythm. 30 min.",r:""},
-        {t:"py",time:"40 min",h:"CS50P — Lecture 4: Libraries",b:"Most practically useful CS50P lecture. Unlocks numpy, requests, anthropic SDK, Qiskit, ROS Python.",r:""},
-        {t:"biz",time:"25 min",h:"How to Start a Startup — Ep 5",b:"Continue the series.",r:""}
-      ],
-      tip:""
-    },
-    {date:"5/14",short:"Thu",title:"Build RAG + Ng",tags:["sc","ai","ng","rb"],
-      morning:{type:'sc',time:"25 min",h:"Supercomputing — How AI Training Uses HPC",b:"Search 'openai AI and compute 2018' and read it. Connect everything: FLOPS → CUDA → MPI → why supercomputers exist for AI. This is the capstone of your SC morning track.",r:"→ search: 'openai AI and compute 2018'"},
-      blocks:[
-        {t:"ng",time:"30 min",h:"Ng — Module 2 continued",b:"Daily Ng session.",r:""},
-        {t:"ai",time:"50 min",h:"Mini RAG prototype",b:"LangChain beginner RAG tutorial. Load a text file, chunk it, embed it, query it. This is your fellow's world — from the inside.",r:"→ search: 'langchain RAG quickstart 2024'"},
-        {t:"rb",time:"15 min",h:"Embodied AI — RT-2 paper",b:"Read about RT-2 (Google DeepMind). LLMs controlling robots. The AI+robotics frontier.",r:"→ search: 'RT-2 robotics transformer deepmind'"}
-      ],
-      tip:""
-    },
-    {date:"5/15",short:"Fri",title:"3-Week Review + Ng",tags:["qc","ng","py","rest"],
-      morning:{type:'qc',time:"25 min",h:"Quantum — Shor's Algorithm",b:"Watch 'Shor's Algorithm explained' on YouTube (~15 min). Why it breaks RSA. Why governments are racing on quantum.",r:"→ youtube: 'shors algorithm explained simply'"},
-      blocks:[
-        {t:"ng",time:"30 min",h:"Ng — Module 2 continued",b:"Daily Ng session.",r:""},
-        {t:"py",time:"25 min",h:"CS50P — problem set practice",b:"Do at least one problem set exercise.",r:""},
-        {t:"rest",time:"25 min",h:"Three-week review",b:"Write: (1) What you know on May 15 that you didn't on April 27. (2) Which morning track is most interesting. (3) What's still fuzzy. (4) What Module 2 of Ng is covering.",r:""}
-      ],
-      tip:""
-    },
-    {date:"5/16",short:"Sat",title:"Deep Work + Ng",tags:["rb","ng","ai","biz"],
-      morning:{type:'rb',time:"25 min",h:"Robotics — ROS 2 Publisher + Subscriber",b:"Write a Python publisher and subscriber node in ROS 2. The fundamental ROS pattern — everything in robotics is nodes sending messages to each other.",r:"→ docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html"},
-      blocks:[
-        {t:"ng",time:"45 min",h:"Ng — Module 2 deep session",b:"Saturday Ng session is longer. Push through a full module section.",r:""},
-        {t:"ai",time:"40 min",h:"Andrew Ng Deep Learning Specialization — if Module 2 is ML-adjacent, supplement with Coursera DL Spec",b:"If Module 2 covers decision trees or other topics diverging from NNs, supplement with Coursera Deep Learning Specialization Course 1 for NN depth.",r:"→ coursera.org/specializations/deep-learning"},
-        {t:"biz",time:"25 min",h:"Zero to One — finish it",b:"Push to finish this weekend.",r:""}
-      ],
-      tip:""
-    },
-    {date:"5/17",short:"Sun",title:"Rest",tags:["rest","ng"],
-      morning:{type:'rest',time:"20 min",h:"Morning Review — all three tracks",b:"Write from memory: (1) What is MPI? (2) What is quantum ML (PennyLane)? (3) What does RT-2 do? Three sentences.",r:""},
-      blocks:[
-        {t:"ng",time:"15 min",h:"Ng — light review of Module 2 so far",b:"Reread your Module 2 notes. What's the core concept? What's still unclear?",r:""},
-        {t:"rest",time:"25 min",h:"Rest + Week 4 reading group question",b:"Write one question for Threat Models session. Rest intentionally.",r:""}
-      ],
-      tip:"Three weeks in. Every morning you learned SC, QC, or Robotics. Every day you did Ng. Every night you read Zero to One. That's a compound habit."
-    }
-  ]}
-];
+  <div class="legend">
+    <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);">MORNING:</span>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--sc)"></span>SUPERCOMPUTING (Mon+Thu; Wk1 Tue after May 4 orientation)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--qc)"></span>QUANTUM (Tue+Fri)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--rob)"></span>ROBOTICS (Wed+Sat)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--warning)"></span>REVIEW ALL 3 (Sun)</div>
+  </div>
 
-const RESOURCES=[
-  {type:"safe",title:"3Blue1Brown — Neural Networks (6 ch)",desc:"Required Week 0.",link:"https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi",lt:"Watch playlist"},
-  {type:"safe",title:"Robert Miles — AI Safety YouTube",desc:"Clearest explainer. 'Mesa-optimizers' for Week 3.",link:"https://www.youtube.com/@RobertMilesAI",lt:"YouTube channel"},
-  {type:"safe",title:"Specification Gaming — DeepMind",desc:"Week 2 required. 15 min.",link:"https://deepmind.google/discover/blog/specification-gaming-the-flip-side-of-ai-ingenuity/",lt:"Read post"},
-  {type:"safe",title:"Alignment Faking — Anthropic",desc:"Week 3 required.",link:"https://anthropic.com/research/alignment-faking",lt:"Read paper"},
-  {type:"safe",title:"Statement on AI Risk — CAIS",desc:"Week 4. 5 min.",link:"https://www.safe.ai/statement-on-ai-risk",lt:"safe.ai"},
-  {type:"safe",title:"AGI Safety Fundamentals — BlueDot",desc:"Free curriculum mirroring your reading group.",link:"https://aisafetyfundamentals.com",lt:"aisafetyfundamentals.com"},
-  {type:"ng",title:"Advanced Learning Algorithms — Coursera",desc:"Your active Ng course. Module 1 unlocked. ~30 min/day.",link:"https://www.coursera.org/learn/advanced-learning-algorithms",lt:"Open on Coursera"},
-  {type:"ng",title:"Deep Learning Specialization — Coursera",desc:"Supplement if needed. Free audit. NNs, optimization, CNNs.",link:"https://www.coursera.org/specializations/deep-learning",lt:"Audit on Coursera"},
-  {type:"py",title:"CS50P — Python (Harvard)",desc:"Primary video track. Free on edX.",link:"https://cs50.harvard.edu/python",lt:"cs50.harvard.edu/python"},
-  {type:"py",title:"python-course.eu",desc:"Primary text track. Tutorial → OOP → Numerical → ML.",link:"https://python-course.eu/python-tutorial/",lt:"python-course.eu"},
-  {type:"py",title:"Learn X in Y Minutes — Python",desc:"Read once Day 1. Keep open as reference.",link:"https://learnxinyminutes.com/docs/python/",lt:"learnxinyminutes.com/python"},
-  {type:"py",title:"Anthropic Python SDK",desc:"For your first API call. Free tier.",link:"https://docs.anthropic.com/en/api/getting-started",lt:"docs.anthropic.com"},
-  {type:"ai",title:"Karpathy — Let's Build GPT",desc:"First 30 min: tokens, attention, context windows.",link:"https://youtu.be/kCc8FmEb1nY",lt:"Watch on YouTube"},
-  {type:"ai",title:"fast.ai — Practical Deep Learning",desc:"Train a real model in Lesson 1. Free.",link:"https://course.fast.ai",lt:"course.fast.ai"},
-  {type:"ai",title:"LangChain — RAG Quickstart",desc:"Build your first RAG system in Week 3.",link:"https://python.langchain.com/docs/tutorials/rag/",lt:"LangChain docs"},
-  {type:"sc",title:"Computerphile — How GPUs Work",desc:"Mon Wk1 morning. 9 min entry point.",link:"https://www.youtube.com/watch?v=C8YtdC8mxTU",lt:"Watch on YouTube"},
-  {type:"sc",title:"MIT 6.172 — Performance Engineering",desc:"Thu Wk1 morning. HPC fundamentals.",link:"https://www.youtube.com/playlist?list=PLUl4u3cNGP63VIBQVWguXxZZi0566y7Wf",lt:"YouTube playlist"},
-  {type:"sc",title:"LLNL — Intro to Parallel Computing",desc:"Mon Wk3 morning. Free national lab tutorial. MPI, OpenMP.",link:"https://hpc.llnl.gov/documentation/tutorials/introduction-parallel-computing-tutorial",lt:"llnl.gov"},
-  {type:"sc",title:"TOP500 — World's Fastest Supercomputers",desc:"Context for why HPC scale matters for AI.",link:"https://www.top500.org",lt:"top500.org"},
-  {type:"sc",title:"CuPy — NumPy on GPU",desc:"Wed Wk3 morning. GPU-accelerated Python.",link:"https://cupy.dev",lt:"cupy.dev"},
-  {type:"qc",title:"IBM Quantum Learning",desc:"Tue Wk2 morning. Best hands-on QC curriculum. Real hardware.",link:"https://learning.quantum.ibm.com",lt:"learning.quantum.ibm.com"},
-  {type:"qc",title:"Qiskit — IBM Quantum SDK",desc:"pip install qiskit. Write your first Bell state.",link:"https://qiskit.org",lt:"qiskit.org"},
-  {type:"qc",title:"PennyLane — Quantum ML",desc:"Tue Wk3 morning. Quantum + AI intersection.",link:"https://pennylane.ai/qml",lt:"pennylane.ai/qml"},
-  {type:"qc",title:"Microsoft — Quantum for CS",desc:"Tue Wk1 morning. First 15 min covers concepts clearly.",link:"https://www.youtube.com/watch?v=F_Riqjdh2oM",lt:"Watch on YouTube"},
-  {type:"rb",title:"ROS 2 Documentation",desc:"Wed Wk1–2 mornings. Official tutorials.",link:"https://docs.ros.org/en/humble/Tutorials.html",lt:"docs.ros.org"},
-  {type:"rb",title:"MIT 6.832 — Underactuated Robotics",desc:"Sat Wk2 morning. Kinematics, control, RL for robots.",link:"https://www.youtube.com/playlist?list=PLkx8KyIQkMfX1WpDQ4XNnPMbxJsGGzDJb",lt:"YouTube playlist"},
-  {type:"rb",title:"A Gentle Introduction to ROS (PDF)",desc:"Wed Wk1 morning. Best beginner robotics book. Free.",link:"https://cse.sc.edu/~jokane/agitr/",lt:"Download PDF"},
-  {type:"rb",title:"OpenAI Gymnasium",desc:"Wed Wk3 morning. RL simulation. Start with CartPole.",link:"https://gymnasium.farama.org",lt:"gymnasium.farama.org"},
-  {type:"rb",title:"RT-2 — Robotics Transformer (Google)",desc:"Thu Wk3. LLMs controlling robots.",link:"https://deepmind.google/discover/blog/rt-2-new-model-translates-vision-and-language-into-robot-actions/",lt:"DeepMind blog"},
-  {type:"biz",title:"Zero to One — Peter Thiel",desc:"Read nightly.",link:"https://www.amazon.com/Zero-One-Notes-Startups-Future/dp/0804139296",lt:"Get the book"},
-  {type:"biz",title:"How to Start a Startup — Sam Altman",desc:"Ep 1+2 done. Continue from Ep 3.",link:"https://www.youtube.com/playlist?list=PL5q_lef6zVkaTY_cT1k7qFNF2TidHCe-1",lt:"Full playlist"},
-  {type:"biz",title:"Paul Graham Essays",desc:"'Default Alive or Dead', 'Do Things That Don't Scale'.",link:"https://paulgraham.com/articles.html",lt:"paulgraham.com"},
-  {type:"biz",title:"SaaS Metrics 2.0 — David Skok",desc:"ARR, CAC, LTV, churn. Free online.",link:"https://www.forentrepreneurs.com/saas-metrics-2/",lt:"Read free"},
-];
+  <div class="week-header">Week 1 — May 4–10 · Concept Foundation · Mon→Sun</div>
+  <div class="day-grid" id="wk1-grid">
+    <div class="day-card today" onclick="toggleDay('wk1-day1',this,event)">
+      <div class="day-name">MON · MAY 4 <span class="today-pill">TODAY</span> <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-review"><div class="morning-label">Review / Orientation</div>Read the full spine. Set up your tools.</div>
+      <div class="day-content"><div class="tag tag-ai">ORIENTATION</div><br>Read the Learning Spine tab top to bottom. Install Python. Bookmark all resources.<div class="nightly">Zero to One — Ch 1–2</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk1-mon',this,event)">
+      <div class="day-name">TUE · MAY 5 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-sc"><div class="morning-label">Supercomputing</div>GPU Architecture</div>
+      <div class="day-content"><div class="tag tag-py">Python</div><br>learnxinyminutes.com + CS50P Lec 1<div class="nightly">Zero to One — Ch 3</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk1-tue',this,event)">
+      <div class="day-name">WED · MAY 6 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-qc"><div class="morning-label">Quantum</div>Microsoft QC for CS</div>
+      <div class="day-content"><div class="tag tag-ai">MIT 6.034</div><br>Lec 1 — Intro & Scope. Write: "What is AI?"<div class="nightly">Zero to One — Ch 4</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk1-wed',this,event)">
+      <div class="day-name">THU · MAY 7 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-rob"><div class="morning-label">Robotics</div>Gentle Intro to ROS</div>
+      <div class="day-content"><div class="tag tag-py">Python</div><br>CS50P Lec 2–3<div class="nightly">Zero to One — Ch 5</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk1-thu',this,event)">
+      <div class="day-name">FRI · MAY 8 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-sc"><div class="morning-label">Supercomputing</div>TOP500 + MIT 6.172</div>
+      <div class="day-content"><div class="tag tag-ai">MIT 6.034</div><br>Lec 10 — Intro to Learning. Write: "What is ML?"<div class="nightly">Zero to One — Ch 6</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk1-fri',this,event)">
+      <div class="day-name">SAT · MAY 9 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-qc"><div class="morning-label">Quantum</div>Gates: Hadamard, CNOT</div>
+      <div class="day-content"><div class="tag tag-ml">3B1B</div><br>Ch1 Neural Network + Ch2 Gradient Descent<div class="nightly">Zero to One — Ch 7</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk1-sat',this,event)">
+      <div class="day-name">SUN · MAY 10 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-rob"><div class="morning-label">Robotics</div>Sensors: LiDAR, IMUs, PID</div>
+      <div class="day-content"><div class="tag tag-py">Python</div><br>CS50P Lec 4–5 + Start NumPy<div class="nightly">Zero to One — Ch 8</div></div>
+    </div>
 
-function renderCal(){
-  const cal=document.getElementById('cal');
-  WEEKS.forEach(w=>{
-    const wl=document.createElement('div');wl.className='wh';wl.textContent=w.label;cal.appendChild(wl);
-    const lr=document.createElement('div');lr.className='dlabels';
-    w.days.forEach(d=>{const l=document.createElement('div');l.className='dcl';l.textContent=d.short;lr.appendChild(l);});
-    cal.appendChild(lr);
-    const gr=document.createElement('div');gr.className='dgrid';
-    w.days.forEach(d=>{
-      const mt=d.morning.type;
-      const c=document.createElement('div');
-      c.className='dc'+(d.today?' tday':'');
-      c.innerHTML=`
-        <div class="dc-morning" style="background:${MB[mt]}">
-          <div class="dc-morning-dot" style="background:${MC[mt]}"></div>
-          <span class="dc-morning-label" style="color:${MC[mt]}">${mt==='rest'?'REVIEW ☀️':TM[mt].text.split(' ')[0]+' ☀️'}</span>
-        </div>
-        <div class="dc-main">
-          <div class="dn${d.today?' t':''}">${d.date}${d.today?' ★':''}</div>
-          <div class="dts">${d.title}</div>
-          <div class="dots">${d.tags.filter(t=>t!==mt).map(t=>`<div class="dot ${TM[t].dot}" title="${TM[t].text}"></div>`).join('')}</div>
-        </div>`;
-      c.addEventListener('click',()=>{
-        document.querySelectorAll('.dc').forEach(x=>x.classList.remove('active'));
-        c.classList.add('active');
-        document.getElementById('ptitle').textContent=`${d.short} ${d.date} — ${d.title}`;
-        document.getElementById('pmeta').textContent='☀️ morning + 📚 day sessions';
-        const inner=document.getElementById('pinner');
-        const m=d.morning;
-        inner.innerHTML=`
-          <div class="morning-section" style="border-color:${MC[mt]}30">
-            <div class="ms-header"><div class="ms-dot" style="background:${MC[mt]}"></div>☀️ MORNING · ${m.time}</div>
-            <div class="block ${TM[mt].block}">
-              <div class="bl ${TM[mt].label}">${TM[mt].text}</div>
-              <div class="bh">${m.h}</div>
-              <div class="bb">${m.b}</div>
-              ${m.r?`<div class="bres">${m.r}</div>`:''}
-            </div>
+    <!-- EXPAND PANELS -->
+    <div class="day-expand-panel" id="wk1-mon">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Tuesday — Week 1</div><div class="expand-week-label">CONCEPT FOUNDATION</div></div>
+        <button class="expand-close" onclick="closeDay('wk1-mon',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title"><span>🌅 MORNING — SUPERCOMPUTING (25 min)</span></div>
+          <div class="expand-section">
+            <div class="expand-item"><a href="https://www.youtube.com/watch?v=h9Z4oGN89MU" target="_blank">GPU Architecture — YouTube ↗</a></div>
+            <div class="expand-item">How GPUs differ from CPUs — massively parallel, thousands of small cores. Foundation for understanding why deep learning runs on GPUs.</div>
           </div>
-          <div class="day-divider">📚 Rest of Day</div>
-          <div class="blocks">${d.blocks.map(b=>`<div class="block ${TM[b.t].block}"><div class="bl ${TM[b.t].label}">${TM[b.t].text} · ${b.time}</div><div class="bh">${b.h}</div>${b.b?`<div class="bb">${b.b}</div>`:''}${b.r?`<div class="bres">${b.r}</div>`:''}</div>`).join('')}</div>`;
-        // Always append Zero to One nightly block
-        const blocksEl=inner.querySelector('.blocks');
-        if(blocksEl){
-          const z=document.createElement('div');
-          z.className='block blbiz';
-          z.innerHTML=`<div class="bl lbiz">EVERY NIGHT · 15 min</div><div class="bh">📖 Zero to One — Peter Thiel</div><div class="bb">Read before bed every single night. ~15 pages. Doesn't matter which chapter — just keep going. This is your nightly entrepreneurship habit and it compounds across the whole fellowship.</div>`;
-          blocksEl.appendChild(z);
-        }
-        const te=document.getElementById('ptip');
-        if(d.tip){te.style.display='block';te.innerHTML=`<strong>Note:</strong> ${d.tip}`;}
-        else te.style.display='none';
-        const p=document.getElementById('panel');p.classList.add('vis');p.scrollIntoView({behavior:'smooth',block:'nearest'});
-      });
-      gr.appendChild(c);
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title"><span>☀️ DAY — PYTHON</span></div>
+          <div class="expand-section">
+            <div class="expand-item"><a href="https://learnxinyminutes.com/docs/python" target="_blank">learnxinyminutes.com/docs/python ↗</a> — Full Python syntax in 30 min. Written for people who code. Java → Python in one sitting.</div>
+            <div class="expand-item">Start CS50P Lecture 1 — <a href="https://cs50.harvard.edu/python" target="_blank">cs50.harvard.edu/python ↗</a></div>
+            <div class="expand-item">Watch at 1.5x. Focus on syntax differences from Java: no semicolons, indentation-based blocks, dynamic typing.</div>
+          </div>
+          <div class="expand-nightly">Zero to One — Ch 3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk1-tue">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Wednesday — Week 1</div><div class="expand-week-label">CONCEPT FOUNDATION</div></div>
+        <button class="expand-close" onclick="closeDay('wk1-tue',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — QUANTUM (25 min)</div>
+          <div class="expand-item"><a href="https://www.youtube.com/watch?v=F_Riqjdh2oM" target="_blank">Microsoft QC for Computer Scientists ↗</a></div>
+          <div class="expand-item">Superposition: a qubit can be 0, 1, or both simultaneously. Entanglement: measuring one qubit instantly tells you the other. Why this matters for computation.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — CONCEPTUAL ANCHOR</div>
+          <div class="expand-section">
+            <div class="expand-item"><a href="https://www.youtube.com/watch?v=TjZBTDzGeGg" target="_blank">MIT 6.034 Lecture 1 — Introduction & Scope ↗</a></div>
+            <div class="expand-item">Patrick Winston explains what AI is and why it exists. Watch before anything else. This is Layer 1.</div>
+            <div class="expand-item">After watching: write in your own words — "What is AI?" Don't look it up. Force the synthesis.</div>
+          </div>
+          <div class="expand-nightly">Zero to One — Ch 4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk1-wed">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Thursday — Week 1</div><div class="expand-week-label">CONCEPT FOUNDATION</div></div>
+        <button class="expand-close" onclick="closeDay('wk1-wed',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — ROBOTICS (25 min)</div>
+          <div class="expand-item"><a href="https://cse.sc.edu/~jokane/agitr/" target="_blank">A Gentle Introduction to ROS (free PDF) ↗</a></div>
+          <div class="expand-item">ROS = Robot Operating System. Not actually an OS — it's a framework for robot software. Read Ch 1–2 of the PDF. Understand what "nodes," "topics," and "messages" mean.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — PYTHON</div>
+          <div class="expand-item">CS50P Lectures 2–3 — functions, conditionals, loops, exceptions</div>
+          <div class="expand-item">Focus on Python idioms that differ from Java: list comprehensions, f-strings, tuple unpacking, default args</div>
+          <div class="expand-item">Exercise: rewrite a simple Java program you've written before in Python — feel the difference</div>
+          <div class="expand-nightly">Zero to One — Ch 4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk1-thu">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Friday — Week 1</div><div class="expand-week-label">CONCEPT FOUNDATION</div></div>
+        <button class="expand-close" onclick="closeDay('wk1-thu',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — SUPERCOMPUTING (25 min)</div>
+          <div class="expand-item"><a href="https://top500.org" target="_blank">top500.org ↗</a> — Browse the list. Note what's at #1. Note the hardware, country, purpose.</div>
+          <div class="expand-item"><a href="https://www.youtube.com/watch?v=o7h_sYMk_oc" target="_blank">MIT 6.172 Lecture 1 ↗</a> — Performance Engineering intro</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — THE MOST IMPORTANT SESSION</div>
+          <div class="expand-item"><a href="https://www.youtube.com/playlist?list=PLUl4u3cNGP63gFHB6xb-kVBiQHYe_4hSi" target="_blank">MIT 6.034 Lecture 10 — Introduction to Learning ↗</a></div>
+          <div class="expand-item">Winston explains ML: instead of writing rules, computer learns rules from examples. This is the mental model everything else hangs on.</div>
+          <div class="expand-item">After watching: write "What is ML?" in your own words. Compare to what you wrote for AI on Wednesday.</div>
+          <div class="expand-nightly">Zero to One — Ch 5</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk1-fri">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Saturday — Week 1</div><div class="expand-week-label">CONCEPT FOUNDATION</div></div>
+        <button class="expand-close" onclick="closeDay('wk1-fri',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — QUANTUM (25 min)</div>
+          <div class="expand-item">Quantum gates: Hadamard gate creates superposition. CNOT gate creates entanglement. These are the quantum equivalents of classical logic gates.</div>
+          <div class="expand-item">No specific link today — draw the gate diagrams from memory on paper. Reinforce Wednesday's quantum session.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — 3B1B VISUAL LAYER BEGINS</div>
+          <div class="expand-item"><a href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank">Ch1 — What is a Neural Network? ↗</a> — 19 min</div>
+          <div class="expand-item"><a href="https://www.youtube.com/watch?v=IHZwWFHWa-w" target="_blank">Ch2 — Gradient Descent, How NNs Learn ↗</a> — 21 min</div>
+          <div class="expand-item">After each: pause and summarize in 1 sentence. Don't just watch — actively track what you understand.</div>
+          <div class="expand-nightly">Zero to One — Ch 6</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk1-sat">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Sunday — Week 1 · May 10</div><div class="expand-week-label">CONCEPT FOUNDATION</div></div>
+        <button class="expand-close" onclick="closeDay('wk1-sat',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — ROBOTICS (25 min)</div>
+          <div class="expand-item">Sensor types: LiDAR (laser distance scanning), cameras (RGB, depth), IMUs (inertial measurement — accelerometer + gyroscope), encoders (wheel rotation).</div>
+          <div class="expand-item">PID controllers: Proportional-Integral-Derivative. The most common feedback control algorithm. Output = correction proportional to error + accumulated error + rate of change.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — PYTHON + NUMPY</div>
+          <div class="expand-item">CS50P Lectures 4–5 — libraries, unit tests, file I/O</div>
+          <div class="expand-item"><a href="https://numpy.org/doc/stable/user/absolute_beginners.html" target="_blank">NumPy Absolute Beginners Guide ↗</a> — Start after Lec 4</div>
+          <div class="expand-item">NumPy is how ML code works. Arrays, slicing, broadcasting. Critical. Don't skip this.</div>
+          <div class="expand-nightly">Zero to One — Ch 7</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk1-day1">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Monday — May 4 · Day 1</div><div class="expand-week-label">ORIENTATION — CLEAN SLATE</div></div>
+        <button class="expand-close" onclick="closeDay('wk1-day1',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🟢 TODAY'S MISSION (1–2 hrs)</div>
+          <div class="expand-item">Read the <strong>Learning Spine tab</strong> top to bottom. Understand the 5-step sequence before starting any of it.</div>
+          <div class="expand-item">Install Python 3.12+: <a href="https://www.python.org/downloads/" target="_blank">python.org/downloads ↗</a></div>
+          <div class="expand-item">Bookmark: <a href="https://huggingface.co/papers" target="_blank">HuggingFace Papers ↗</a>, <a href="https://learnxinyminutes.com/docs/python" target="_blank">learnxinyminutes Python ↗</a>, <a href="https://cs50.harvard.edu/python" target="_blank">CS50P ↗</a></div>
+          <div class="expand-item">Open a notes file (Notion, Obsidian, plain .txt). Title it "Poseidon Fellows — Learning Log." Write one sentence per day here.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">📋 WHAT TOMORROW LOOKS LIKE (Tue May 5)</div>
+          <div class="expand-item">25 min morning: <a href="https://www.youtube.com/watch?v=h9Z4oGN89MU" target="_blank">GPU Architecture video ↗</a></div>
+          <div class="expand-item">30 min: <a href="https://learnxinyminutes.com/docs/python" target="_blank">learnxinyminutes Python ↗</a> — entire syntax in one page. You have Java, this is a 30-min read.</div>
+          <div class="expand-item">30–45 min: <a href="https://cs50.harvard.edu/python" target="_blank">CS50P Lecture 1 ↗</a> at 1.5x speed</div>
+          <div class="expand-item">Total: ~90 min. That's the daily pattern for the next 3 weeks.</div>
+          <div class="expand-nightly">Tonight: Zero to One — Ch 1–2. Short chapters. Do it before bed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="week-header">Week 2 — May 11–17 · Andrew Ng Course 1 + Math Visual · Mon→Sun</div>
+  <div class="day-grid" id="wk2-grid">
+    <div class="day-card" onclick="toggleDay('wk2-mon',this,event)">
+      <div class="day-name">MON · MAY 11 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-sc"><div class="morning-label">Supercomputing</div>CUDA basics</div>
+      <div class="day-content"><div class="tag tag-ml">3B1B</div><br>Ch3 Backprop + Ch4 Backprop Calculus<div class="nightly">Zero to One — finish</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk2-tue',this,event)">
+      <div class="day-name">TUE · MAY 12 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-qc"><div class="morning-label">Quantum</div>Qiskit Bell State</div>
+      <div class="day-content"><div class="tag tag-ml">Andrew Ng</div><br>Course 1 Wk 1 — linear regression<div class="nightly">YC Startup School Ep 1</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk2-wed',this,event)">
+      <div class="day-name">WED · MAY 13 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-rob"><div class="morning-label">Robotics</div>ROS 2 Install + first node</div>
+      <div class="day-content"><div class="tag tag-py">Python</div><br>CS50P Lec 6–7 + Pandas 10min<div class="nightly">YC Startup School Ep 2</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk2-thu',this,event)">
+      <div class="day-name">THU · MAY 14 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-sc"><div class="morning-label">Supercomputing</div>Python multiprocessing</div>
+      <div class="day-content"><div class="tag tag-ml">Andrew Ng</div><br>Course 1 Wk 2 — logistic regression<div class="nightly">How to Start a Startup Ep 3</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk2-fri',this,event)">
+      <div class="day-name">FRI · MAY 15 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-qc"><div class="morning-label">Quantum</div>Grover's algorithm</div>
+      <div class="day-content"><div class="tag tag-ml">3B1B</div><br>Ch5 Transformers + Ch6 Attention<div class="nightly">How to Start a Startup Ep 4</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk2-sat',this,event)">
+      <div class="day-name">SAT · MAY 16 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-rob"><div class="morning-label">Robotics</div>MIT 6.832 Lec 1</div>
+      <div class="day-content"><div class="tag tag-read">Paper</div><br>Attention Is All You Need — Abstract + Fig 1<div class="nightly">PG: Do Things That Don't Scale</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk2-sun',this,event)">
+      <div class="day-name">SUN · MAY 17 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-review"><div class="morning-label">Review All</div>1 sentence: SC, QC, Robotics</div>
+      <div class="day-content"><div class="tag tag-read">AI Safety</div><br>Wk 2: Spec gaming, InstructGPT, Apollo<div class="nightly">PG: Default Alive or Dead</div></div>
+    </div>
+
+    <!-- EXPAND PANELS WK2 -->
+    <div class="day-expand-panel" id="wk2-mon">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Monday — Week 2</div><div class="expand-week-label">NG COURSE 1 + MATH VISUAL</div></div>
+        <button class="expand-close" onclick="closeDay('wk2-mon',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — SUPERCOMPUTING</div>
+          <div class="expand-item">CUDA basics: NVIDIA's parallel computing platform. GPU has thousands of cores running simultaneously. "Kernel" = function running on GPU. "Thread" = smallest unit of GPU execution.</div>
+          <div class="expand-item">Search "CUDA basics tutorial" on YouTube for a 15-min intro. No coding required today — just the concept.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — 3B1B CONTINUES</div>
+          <div class="expand-item"><a href="https://www.youtube.com/watch?v=Ilg3gGewQ5U" target="_blank">Ch3 — Backpropagation ↗</a> — 14 min</div>
+          <div class="expand-item"><a href="https://www.youtube.com/watch?v=tIeHLnjs5U8" target="_blank">Ch4 — Backprop Calculus ↗</a> — 10 min</div>
+          <div class="expand-item">These two together show HOW training works mechanically. After Winston (WHY) and Ch1+2 (WHAT), this completes the picture before you write code.</div>
+          <div class="expand-nightly">Zero to One — finish the book tonight</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk2-tue">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Tuesday — Week 2</div><div class="expand-week-label">NG COURSE 1 + MATH VISUAL</div></div>
+        <button class="expand-close" onclick="closeDay('wk2-tue',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — QUANTUM</div>
+          <div class="expand-item"><a href="https://learning.quantum.ibm.com" target="_blank">IBM Qiskit Learning ↗</a> — Bell State tutorial</div>
+          <div class="expand-item">A Bell State is the simplest entangled two-qubit state. Create it with a Hadamard gate on qubit 1, then CNOT using qubit 1 as control. Run in the browser — no local install needed.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — ANDREW NG COURSE 1 BEGINS</div>
+          <div class="expand-item"><a href="https://www.coursera.org/learn/machine-learning" target="_blank">Supervised ML — Week 1 material ↗</a> (free audit)</div>
+          <div class="expand-item">Topics: linear regression, the cost function (how wrong the model is), gradient descent (how it improves). This is Layer 3 — code — and it should feel grounded now after Winston + 3B1B.</div>
+          <div class="expand-item">Take notes in a .py file. Run the code examples yourself — don't just watch.</div>
+          <div class="expand-nightly">YC Startup School Ep 1 — startupschool.org</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk2-wed">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Wednesday — Week 2</div><div class="expand-week-label">NG COURSE 1 + MATH VISUAL</div></div>
+        <button class="expand-close" onclick="closeDay('wk2-wed',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — ROBOTICS</div>
+          <div class="expand-item"><a href="https://docs.ros.org/en/humble/Installation.html" target="_blank">ROS 2 Humble Install ↗</a> — Install on your machine (Ubuntu preferred, or WSL2 on Windows)</div>
+          <div class="expand-item">After install: run "ros2 run demo_nodes_py talker" in one terminal and "ros2 run demo_nodes_py listener" in another. First working ROS 2 nodes.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — PYTHON FINISHES + PANDAS</div>
+          <div class="expand-item">CS50P Lectures 6–7 — file I/O, regular expressions</div>
+          <div class="expand-item"><a href="https://pandas.pydata.org/docs/user_guide/10min.html" target="_blank">Pandas 10 Minutes to Pandas ↗</a></div>
+          <div class="expand-item">Pandas = tables in Python. Read a CSV, filter rows, compute means. This is how you'll handle any dataset in ML.</div>
+          <div class="expand-nightly">YC Startup School Ep 2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk2-thu">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Thursday — Week 2</div><div class="expand-week-label">NG COURSE 1 + MATH VISUAL</div></div>
+        <button class="expand-close" onclick="closeDay('wk2-thu',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — SUPERCOMPUTING</div>
+          <div class="expand-item"><a href="https://docs.python.org/3/library/multiprocessing.html" target="_blank">Python multiprocessing docs ↗</a></div>
+          <div class="expand-item">Run a simple example: split a list, process chunks in parallel using Pool. This is how you use multiple CPU cores in Python — foundation for understanding distributed computing.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — NG COURSE 1 WK 2</div>
+          <div class="expand-item">Logistic regression — classification (predicting categories, not numbers). Sigmoid function squashes output to 0–1 range, interpretable as probability.</div>
+          <div class="expand-item">Decision boundary — the line (or curve) that separates classes. Understanding this visually is key.</div>
+          <div class="expand-item">Do all labs. The coding exercises are where it clicks.</div>
+          <div class="expand-nightly">How to Start a Startup Ep 3 — Paul Graham</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk2-fri">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Friday — Week 2</div><div class="expand-week-label">NG COURSE 1 + MATH VISUAL</div></div>
+        <button class="expand-close" onclick="closeDay('wk2-fri',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — QUANTUM</div>
+          <div class="expand-item">Grover's algorithm: quantum search algorithm. Finds an item in an unsorted list of N items in √N steps vs classical O(N). The quantum speedup is real but specific — not a general "make everything faster."</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — 3B1B TRANSFORMERS</div>
+          <div class="expand-item"><a href="https://www.youtube.com/watch?v=wjZofJX0v4M" target="_blank">Ch5 — GPT, Transformers ↗</a> — 26 min</div>
+          <div class="expand-item"><a href="https://www.youtube.com/watch?v=eMlx5fFNoYc" target="_blank">Ch6 — Attention ↗</a> — 25 min</div>
+          <div class="expand-item">These two together explain how LLMs actually work. After this, you can explain to your friend what a transformer is. Watch actively — pause and repeat if needed.</div>
+          <div class="expand-nightly">How to Start a Startup Ep 4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk2-sat">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Saturday — Week 2</div><div class="expand-week-label">NG COURSE 1 + MATH VISUAL</div></div>
+        <button class="expand-close" onclick="closeDay('wk2-sat',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — ROBOTICS</div>
+          <div class="expand-item"><a href="https://www.youtube.com/watch?v=PRaSlUA78gQ" target="_blank">MIT 6.832 Lecture 1 — Underactuated Robotics ↗</a></div>
+          <div class="expand-item">Underactuated = robot with fewer actuators than degrees of freedom (like a walking robot). Requires control theory, not just brute force. Good conceptual intro to modern robotics.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — FIRST PAPER</div>
+          <div class="expand-item"><a href="https://www.youtube.com/watch?v=733m6qBH-jI" target="_blank">Watch Ng's 3-pass method first (8 min) ↗</a></div>
+          <div class="expand-item"><a href="https://arxiv.org/abs/1706.03762" target="_blank">Attention Is All You Need — Read abstract + Figure 1 only ↗</a></div>
+          <div class="expand-item">Don't try to read the whole paper. Just: what problem does this solve? What is the proposed solution? What does Figure 1 show? Write 3 sentences summarizing it.</div>
+          <div class="expand-nightly">PG: Do Things That Don't Scale — paulgraham.com/ds.html</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk2-sun">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Sunday — Week 2</div><div class="expand-week-label">NG COURSE 1 + MATH VISUAL</div></div>
+        <button class="expand-close" onclick="closeDay('wk2-sun',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — REVIEW ALL</div>
+          <div class="expand-item">Write 1 sentence each from memory on SC, QC, Robotics this week. Don't look at notes.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — AI SAFETY READING GROUP WK 2</div>
+          <div class="expand-item">Specification gaming — when AI optimizes what you measured, not what you meant. Classic examples: boat racing game that learned to drive in circles for points.</div>
+          <div class="expand-item">InstructGPT paper — how RLHF was applied to train GPT to follow instructions. Read the abstract.</div>
+          <div class="expand-item">Apollo deception paper — AI systems learned to deceive in pursuit of goals. Reading group Wk 2 material.</div>
+          <div class="expand-nightly">PG: Default Alive or Default Dead — paulgraham.com/aord.html</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="week-header">Week 3 — May 18–24 · Build + Papers + Deepen · Mon→Sun</div>
+  <div class="day-grid" id="wk3-grid">
+    <div class="day-card" onclick="toggleDay('wk3-mon',this,event)">
+      <div class="day-name">MON · MAY 18 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-sc"><div class="morning-label">Supercomputing</div>LLNL MPI Tutorial</div>
+      <div class="day-content"><div class="tag tag-build">Build</div><br>First API call — Anthropic quickstart<div class="nightly">YC Startup School Ep 3</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk3-tue',this,event)">
+      <div class="day-name">TUE · MAY 19 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-qc"><div class="morning-label">Quantum</div>PennyLane Quantum ML</div>
+      <div class="day-content"><div class="tag tag-ml">Andrew Ng</div><br>Course 1 Wk 3 — regularization<div class="nightly">How to Start a Startup Ep 5</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk3-wed',this,event)">
+      <div class="day-name">WED · MAY 20 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-rob"><div class="morning-label">Robotics</div>Gymnasium / CartPole</div>
+      <div class="day-content"><div class="tag tag-read">Paper</div><br>Anthropic Sycophancy — what your friend discussed<div class="nightly">PG: How to Get Startup Ideas</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk3-thu',this,event)">
+      <div class="day-name">THU · MAY 21 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-sc"><div class="morning-label">Supercomputing</div>OpenAI AI and Compute</div>
+      <div class="day-content"><div class="tag tag-build">Build</div><br>LangChain RAG Tutorial — first pipeline<div class="nightly">YC Startup School Ep 4</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk3-fri',this,event)">
+      <div class="day-name">FRI · MAY 22 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-qc"><div class="morning-label">Quantum</div>Shor's algorithm</div>
+      <div class="day-content"><div class="tag tag-ml">3B1B + Karpathy</div><br>Ch7 LLM Facts + start Karpathy GPT<div class="nightly">Reflect on 3 weeks</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk3-sat',this,event)">
+      <div class="day-name">SAT · MAY 23 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-rob"><div class="morning-label">Robotics</div>ROS 2 pub/sub tutorial</div>
+      <div class="day-content"><div class="tag tag-read">AI Safety</div><br>Wk 3: Mesa-optimizers — Robert Miles<div class="nightly">Startup School Ep 5</div></div>
+    </div>
+    <div class="day-card" onclick="toggleDay('wk3-sun',this,event)">
+      <div class="day-name">SUN · MAY 24 <span style="float:right;opacity:0.4;">↓</span></div>
+      <div class="morning-block morning-review"><div class="morning-label">Review All</div>1 sentence: SC, QC, Robotics</div>
+      <div class="day-content"><div class="tag tag-build">Build</div><br>fast.ai Lesson 1 — Practical Deep Learning<div class="nightly">Catch-up day if behind</div></div>
+    </div>
+
+    <!-- EXPAND PANELS WK3 -->
+    <div class="day-expand-panel" id="wk3-mon">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Monday — Week 3</div><div class="expand-week-label">BUILD + PAPERS + DEEPEN</div></div>
+        <button class="expand-close" onclick="closeDay('wk3-mon',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — SUPERCOMPUTING</div>
+          <div class="expand-item"><a href="https://hpc.llnl.gov/documentation/tutorials/introduction-parallel-computing-tutorial" target="_blank">LLNL MPI Tutorial ↗</a></div>
+          <div class="expand-item">MPI = Message Passing Interface. How supercomputers communicate across nodes. Different from GPU parallelism — this is across machines in a cluster. Read the intro section.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — FIRST BUILD</div>
+          <div class="expand-item"><a href="https://docs.anthropic.com/en/api/getting-started" target="_blank">Anthropic API Quickstart ↗</a></div>
+          <div class="expand-item">Install the anthropic Python library: <code style="background:var(--surface2);padding:1px 5px;border-radius:3px;font-family:'DM Mono',monospace;">pip install anthropic</code></div>
+          <div class="expand-item">Write 10 lines of Python that sends a message to Claude and prints the response. This is your first AI-powered program.</div>
+          <div class="expand-item">Goal: understand the request/response pattern, what a "message" object is, what model parameters do.</div>
+          <div class="expand-nightly">YC Startup School Ep 3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk3-tue">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Tuesday — Week 3</div><div class="expand-week-label">BUILD + PAPERS + DEEPEN</div></div>
+        <button class="expand-close" onclick="closeDay('wk3-tue',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — QUANTUM</div>
+          <div class="expand-item"><a href="https://pennylane.ai/qml" target="_blank">PennyLane Quantum ML ↗</a></div>
+          <div class="expand-item">PennyLane bridges quantum computing and ML. A quantum circuit can act like a neural network layer. This is speculative/early-stage research but directionally interesting for your AI-for-science thread.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — NG COURSE 1 WK 3</div>
+          <div class="expand-item">Regularization: technique to prevent overfitting (when model memorizes training data but fails on new data). L1 and L2 regularization — adds a penalty for large weights.</div>
+          <div class="expand-item">Overfitting vs underfitting: the bias-variance tradeoff. One of the most important concepts in ML. Ng explains this very well — pay attention.</div>
+          <div class="expand-nightly">How to Start a Startup Ep 5 — Thiel</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk3-wed">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Wednesday — Week 3</div><div class="expand-week-label">BUILD + PAPERS + DEEPEN</div></div>
+        <button class="expand-close" onclick="closeDay('wk3-wed',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — ROBOTICS</div>
+          <div class="expand-item"><a href="https://gymnasium.farama.org" target="_blank">Gymnasium (formerly OpenAI Gym) ↗</a></div>
+          <div class="expand-item">Run CartPole: a pole balanced on a cart. The RL agent learns to keep it upright. Install: <code style="background:var(--surface2);padding:1px 4px;border-radius:3px;font-family:'DM Mono',monospace;">pip install gymnasium</code>, run the CartPole-v1 demo. First RL environment you've run.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — THE KEY PAPER</div>
+          <div class="expand-item" style="color:var(--accent3);">→ This is what your friend was discussing when they talked about "LLM illusions"</div>
+          <div class="expand-item"><a href="https://www.anthropic.com/research/sycophancy-to-subterfuge" target="_blank">Sycophancy to Subterfuge — Anthropic ↗</a></div>
+          <div class="expand-item">RLHF trained models to get better ratings. Humans rate agreeable answers higher. Models learned: confirm biases, change answers when pushed back on, optimize for "sounds good" over "is true."</div>
+          <div class="expand-item">Read the abstract + intro. Then you can have this conversation with your friend from a position of knowledge.</div>
+          <div class="expand-nightly">PG: How to Get Startup Ideas</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk3-thu">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Thursday — Week 3</div><div class="expand-week-label">BUILD + PAPERS + DEEPEN</div></div>
+        <button class="expand-close" onclick="closeDay('wk3-thu',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — SUPERCOMPUTING</div>
+          <div class="expand-item"><a href="https://openai.com/index/ai-and-compute/" target="_blank">OpenAI: AI and Compute ↗</a></div>
+          <div class="expand-item">Key finding: compute used in training AI doubles every 3.4 months (faster than Moore's Law). Shows the scaling trend that drove GPT-4 and beyond. Understand this chart — it's the context for why supercomputing matters to AI.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — BUILD A RAG PIPELINE</div>
+          <div class="expand-item"><a href="https://python.langchain.com/docs/tutorials/rag/" target="_blank">LangChain RAG Tutorial ↗</a></div>
+          <div class="expand-item">RAG = load documents → split into chunks → embed chunks (convert to vectors) → store in vector DB → retrieve relevant chunks on query → send to LLM with context.</div>
+          <div class="expand-item">This is what your friend is working on. Actually building it will make every RAG conversation much richer.</div>
+          <div class="expand-nightly">YC Startup School Ep 4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk3-fri">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Friday — Week 3</div><div class="expand-week-label">BUILD + PAPERS + DEEPEN</div></div>
+        <button class="expand-close" onclick="closeDay('wk3-fri',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — QUANTUM</div>
+          <div class="expand-item">Shor's algorithm: factorizes large numbers exponentially faster than classical computers. This breaks RSA encryption — which is why quantum-resistant cryptography is an active research area. The algorithm exists; the hardware to run it at scale doesn't yet.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — 3B1B FINISH + KARPATHY START</div>
+          <div class="expand-item"><a href="https://www.youtube.com/watch?v=9-Jl0dxWQs8" target="_blank">3B1B Ch7 — LLM Facts ↗</a> — Recent facts about how LLMs work at scale</div>
+          <div class="expand-item"><a href="https://www.youtube.com/watch?v=kCc8FmEb1nY" target="_blank">Karpathy — Build a GPT from scratch ↗</a> — Start this. It's 2 hours. Watch first 30 min today.</div>
+          <div class="expand-item">Karpathy's video is the capstone: after concept (Winston) + visual math (3B1B) + code (Ng), you build the actual thing. It's the moment it all connects.</div>
+          <div class="expand-nightly">Write: what has shifted in how you think about AI over these 3 weeks?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk3-sat">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Saturday — Week 3</div><div class="expand-week-label">BUILD + PAPERS + DEEPEN</div></div>
+        <button class="expand-close" onclick="closeDay('wk3-sat',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — ROBOTICS</div>
+          <div class="expand-item">ROS 2 publisher/subscriber: create a node that publishes to a topic, another that subscribes. This is the fundamental ROS communication pattern. Follows from Wk 2's install.</div>
+          <div class="expand-item">Tutorial: <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html" target="_blank">ROS 2 Python pub/sub ↗</a></div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — AI SAFETY READING GROUP WK 3</div>
+          <div class="expand-item"><a href="https://www.youtube.com/watch?v=bJLcIBixGj8" target="_blank">Robert Miles — Mesa-Optimizers ↗</a></div>
+          <div class="expand-item">Mesa-optimizer = a model that, during training, develops its own internal optimizer pursuing a different goal. Passes training but behaves differently at deployment. This is "inner alignment."</div>
+          <div class="expand-item">Read group also covers: Alignment Faking paper and Sleeper Agents. These are directly connected to the sycophancy paper you read on Wed.</div>
+          <div class="expand-nightly">YC Startup School Ep 5</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-expand-panel" id="wk3-sun">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div class="expand-day-title">Sunday — Week 3</div><div class="expand-week-label">BUILD + PAPERS + DEEPEN</div></div>
+        <button class="expand-close" onclick="closeDay('wk3-sun',event)">CLOSE ✕</button>
+      </div>
+      <div class="expand-inner">
+        <div class="expand-col">
+          <div class="expand-col-title">🌅 MORNING — REVIEW ALL</div>
+          <div class="expand-item">From memory only — write 1 sentence each on what you learned in SC, QC, Robotics across all 3 weeks. This is the Sunday ritual. Don't look at notes.</div>
+        </div>
+        <div class="expand-col">
+          <div class="expand-col-title">☀️ DAY — FAST.AI + CATCH-UP</div>
+          <div class="expand-item"><a href="https://course.fast.ai" target="_blank">fast.ai — Practical Deep Learning for Coders ↗</a></div>
+          <div class="expand-item">Lesson 1 is a top-down approach: run a state-of-the-art model FIRST, then understand why it works. Complements Ng's bottom-up approach perfectly.</div>
+          <div class="expand-item">Also: catch-up day. Anything from the week that's incomplete — finish it today.</div>
+          <div class="expand-nightly">Catch-up day if behind on anything</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONCEPTS ═══ -->
+<div id="concepts" class="panel">
+  <div class="section-title">ML / AI Concept Cards</div>
+  <div class="section-sub">// Learn these cold. These are the words in every conversation around you.</div>
+
+  <div class="callout callout-blue">
+    <span class="callout-icon">💬</span>
+    <div><strong>On "LLM illusions" — what your friend was discussing:</strong> LLMs predict plausible-sounding text, not truth. They don't have a ground truth checker. This causes hallucinations (confident wrong facts), sycophancy (agreeing to please, even when wrong), and confabulation. Read the Anthropic sycophancy paper to go deep.</div>
+  </div>
+
+  <div class="concepts-grid">
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent)">Foundation</div>
+      <div class="concept-term">Machine Learning</div>
+      <div class="concept-def">Instead of writing rules, you give a computer examples and it finds the rules itself. Classical: write "if spam → block." ML: show 10,000 spam emails and it learns the pattern.</div>
+      <div class="concept-analogy">Analogy: teaching a dog with treats vs writing a rulebook</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent)">Foundation</div>
+      <div class="concept-term">Neural Network</div>
+      <div class="concept-def">Input numbers flow through layers of weighted math (multiplications + nonlinear functions). Output is a prediction. The weights are what get learned during training.</div>
+      <div class="concept-analogy">Analogy: a series of filters — each layer extracts more abstract features</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent)">Foundation</div>
+      <div class="concept-term">Deep Learning</div>
+      <div class="concept-def">Neural networks with many layers. More layers = ability to learn more abstract representations. This is what enabled modern AI — image recognition, language models, etc.</div>
+      <div class="concept-analogy">Analogy: layer 1 sees edges, layer 5 sees faces, layer 10 sees identities</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent2)">Training</div>
+      <div class="concept-term">Gradient Descent</div>
+      <div class="concept-def">Algorithm that adjusts model weights to reduce error. Compute how wrong the model was, nudge each weight toward less error. Repeat millions of times.</div>
+      <div class="concept-analogy">Analogy: hiking downhill in fog — feel the slope, take small steps toward the valley</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent2)">Training</div>
+      <div class="concept-term">Backpropagation</div>
+      <div class="concept-def">Computes how much each weight contributed to the error, so gradient descent knows what to adjust. Uses calculus chain rule to propagate error backward through the network.</div>
+      <div class="concept-analogy">Analogy: tracing a recipe mistake backwards to find which step went wrong</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent2)">Training</div>
+      <div class="concept-term">Supervised Learning</div>
+      <div class="concept-def">Train on labeled examples — inputs paired with correct outputs. Model learns input → output mapping. Most common form of ML. Andrew Ng Course 1 is entirely this.</div>
+      <div class="concept-analogy">Analogy: a student with an answer key, checking every answer</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent3)">LLMs</div>
+      <div class="concept-term">Large Language Model</div>
+      <div class="concept-def">A huge deep NN trained on enormous text to predict the next word. Claude, GPT, Gemini — all LLMs. They don't "know" things — they pattern-match statistically.</div>
+      <div class="concept-analogy">Analogy: autocomplete that read the entire internet</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent3)">LLMs</div>
+      <div class="concept-term">Transformer</div>
+      <div class="concept-def">The neural network architecture powering all modern LLMs. Introduced 2017 in "Attention Is All You Need." Key innovation: attention mechanism — lets the model weigh which words matter for each other.</div>
+      <div class="concept-analogy">Analogy: when reading "it's too big" — attention decides which noun "it" refers to</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent3)">LLMs</div>
+      <div class="concept-term">Attention Mechanism</div>
+      <div class="concept-def">For each word, learns which other words in the sequence are most relevant. Lets models capture long-range dependencies. The core innovation that made transformers work.</div>
+      <div class="concept-analogy">Analogy: a spotlight that illuminates multiple words at once, weighted by relevance</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent4)">Architecture</div>
+      <div class="concept-term">Reinforcement Learning</div>
+      <div class="concept-def">Agent learns by trial and error with a reward signal. Takes action → gets reward/penalty → adjusts to maximize reward. Used in game AI, robotics. No labeled examples — just rewards.</div>
+      <div class="concept-analogy">Analogy: training a dog — good behavior gets treats. No rulebook, just feedback.</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent4)">Architecture</div>
+      <div class="concept-term">RAG</div>
+      <div class="concept-def">Retrieval-Augmented Generation. NOT a training method. When a question arrives: search a document database for relevant chunks, hand those to the LLM as context. Open-book exam vs closed-book.</div>
+      <div class="concept-analogy">Analogy: LLM is the student, database is the open textbook</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent5)">Alignment</div>
+      <div class="concept-term">RLHF</div>
+      <div class="concept-def">Reinforcement Learning from Human Feedback. How ChatGPT and Claude were fine-tuned: humans rated outputs → ratings trained a reward model → reward model trained the LLM to produce preferred outputs.</div>
+      <div class="concept-analogy">Analogy: training a puppy with ratings from a panel of judges</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent5)">Alignment — "LLM Illusions"</div>
+      <div class="concept-term">Hallucination</div>
+      <div class="concept-def">LLM generates confident, plausible-sounding text that is factually wrong. Root cause: LLMs predict plausible sequences, not truth. No knowledge checker — just pattern completion.</div>
+      <div class="concept-analogy">Analogy: a confident student filling exam answers by sounding authoritative, even while guessing</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent5)">Alignment — "LLM Illusions"</div>
+      <div class="concept-term">Sycophancy</div>
+      <div class="concept-def">RLHF trained models to get better ratings. Humans rate agreeable answers higher. So models learned to confirm biases, change answers when pushed, say what users want to hear. This is what your friend discussed.</div>
+      <div class="concept-analogy">Analogy: an employee who always tells the boss what they want to hear</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent2)">AI Safety</div>
+      <div class="concept-term">Outer Alignment</div>
+      <div class="concept-def">Are we training the model to optimize for the right thing? "Maximize human ratings" sounds good — but does it actually learn values, or does it learn to game the rating system?</div>
+      <div class="concept-analogy">Analogy: telling an employee "maximize profit" — they find loopholes you didn't intend</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent2)">AI Safety</div>
+      <div class="concept-term">Inner Alignment</div>
+      <div class="concept-def">Even if outer alignment is perfect, a model might learn an internal goal that only approximates the training objective — a "mesa-optimizer" that passes training but pursues different goals at deployment.</div>
+      <div class="concept-analogy">Analogy: a student who memorizes to pass tests but hasn't learned — behaves differently in real scenarios</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-tag" style="color:var(--accent2)">AI Safety</div>
+      <div class="concept-term">Mechanistic Interpretability</div>
+      <div class="concept-def">Trying to understand what's actually happening inside neural networks — which circuits and attention heads implement which behaviors. Your friend's research area. Sparse autoencoders are a key tool.</div>
+      <div class="concept-analogy">Analogy: reverse-engineering a circuit board to understand what each component does</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAPERS ═══ -->
+<div id="papers" class="panel">
+  <div class="section-title">Paper Reading Track</div>
+  <div class="section-sub">// 1 paper per week. Use Ng's 3-pass method. 5 min on HuggingFace Papers every morning.</div>
+
+  <div class="callout callout-green">
+    <span class="callout-icon">📋</span>
+    <div><strong>Ng's 3-Pass Method:</strong> Pass 1 = title + abstract + section headers + conclusion (5 min). Pass 2 = read body, skip proofs (1 hr). Pass 3 = reproduce from scratch (4–5 hrs, for papers that really matter). For most papers, Pass 1+2 is enough. <a href="https://www.youtube.com/watch?v=733m6qBH-jI" target="_blank">Watch the 8-min video first. ↗</a></div>
+  </div>
+
+  <div class="papers-list">
+    <div class="paper-card">
+      <div class="paper-week">WK 2</div>
+      <div class="paper-info">
+        <div class="paper-title">Attention Is All You Need</div>
+        <div class="paper-why">The transformer paper. Everything in modern AI descends from this 2017 paper. You don't need to understand every equation — read the abstract, look at Figure 1, understand what "attention" is doing and why it replaced RNNs.</div>
+        <a href="https://arxiv.org/abs/1706.03762" target="_blank" class="paper-link">arxiv.org/abs/1706.03762 ↗</a>
+      </div>
+      <div class="paper-scope">Abstract + Figure 1</div>
+    </div>
+    <div class="paper-card">
+      <div class="paper-week">WK 3</div>
+      <div class="paper-info">
+        <div class="paper-title">Sycophancy to Subterfuge: Investigating Reward Tampering</div>
+        <div class="paper-why">This is exactly what your friend was discussing when they talked about "LLM illusions." LLMs trained via RLHF learn to agree and confirm biases because that got better ratings. Read this and you can have that conversation fluently next time.</div>
+        <a href="https://www.anthropic.com/research/sycophancy-to-subterfuge" target="_blank" class="paper-link">anthropic.com/research/sycophancy-to-subterfuge ↗</a>
+      </div>
+      <div class="paper-scope">Full Pass 1 + 2</div>
+    </div>
+    <div class="paper-card">
+      <div class="paper-week">WK 4</div>
+      <div class="paper-info">
+        <div class="paper-title">Alignment Faking in Large Language Models</div>
+        <div class="paper-why">Anthropic paper showing LLMs can learn to behave differently during training vs deployment. Directly relevant to your reading group Wk 3 (Inner Alignment). Read before that session.</div>
+        <a href="https://www.anthropic.com/research/alignment-faking" target="_blank" class="paper-link">anthropic.com/research/alignment-faking ↗</a>
+      </div>
+      <div class="paper-scope">Abstract + intro</div>
+    </div>
+    <div class="paper-card">
+      <div class="paper-week">WK 5</div>
+      <div class="paper-info">
+        <div class="paper-title">Scaling Monosemanticity (Sparse Autoencoders)</div>
+        <div class="paper-why">Your friend works on sparse autoencoders and mechanistic interpretability. This is Anthropic's key paper using sparse autoencoders to find interpretable features inside LLMs. Understanding this = understanding their research area.</div>
+        <a href="https://www.anthropic.com/research/scaling-monosemanticity" target="_blank" class="paper-link">anthropic.com/research/scaling-monosemanticity ↗</a>
+      </div>
+      <div class="paper-scope">Abstract + intro</div>
+    </div>
+    <div class="paper-card">
+      <div class="paper-week">DAILY</div>
+      <div class="paper-info">
+        <div class="paper-title">HuggingFace Papers — Daily Habit</div>
+        <div class="paper-why">5 minutes every morning. Scroll the day's papers. Read the abstracts of anything interesting. You'll start recognizing authors, themes, and techniques. This is how frontier intuition develops over time — not from one big study session but from daily ambient exposure.</div>
+        <a href="https://huggingface.co/papers" target="_blank" class="paper-link">huggingface.co/papers ↗</a>
+        <a href="https://paperswithcode.com" target="_blank" class="paper-link">paperswithcode.com ↗</a>
+      </div>
+      <div class="paper-scope">5 min / day</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FRONTIER ═══ -->
+<div id="frontier" class="panel">
+  <div class="section-title">The Frontier</div>
+  <div class="section-sub">// Where the cutting edge actually is. Check regularly to stay in every conversation.</div>
+
+  <div class="callout callout-orange">
+    <span class="callout-icon">⚡</span>
+    <div><strong>On reaching your friend's level:</strong> Their skill took years of deep CS + building real projects. The wrong goal is "know everything they know." The right goal: understand enough to ideate sharply, evaluate ideas, and direct technical work. As a Poseidon Fellow, that is your edge — not raw implementation skill. Three months of this plan gets you there.</div>
+  </div>
+
+  <div class="callout callout-blue">
+    <span class="callout-icon">💡</span>
+    <div>
+      <strong>"LLM illusions" — so you can have the conversation next time:</strong><br><br>
+      <strong>Hallucinations</strong> — LLMs predict plausible text, not truth. Confident wrong answers because they sound right, not because they're verified.<br><br>
+      <strong>Sycophancy</strong> — RLHF reward: humans rate agreeable answers higher → models learned to confirm biases and change answers when pushed. Anthropic paper documents this systematically.<br><br>
+      <strong>Alignment faking</strong> — The deeper concern: if models learn to appear aligned during training (to get better rewards) but pursue different goals at deployment, we have a fundamental alignment problem.<br><br>
+      Read the two Anthropic papers (sycophancy + alignment faking) and you'll own this topic.
+    </div>
+  </div>
+
+  <div class="frontier-grid">
+    <div class="frontier-card">
+      <div class="frontier-card-title">🔬 Anthropic Research</div>
+      <div class="frontier-item"><a href="https://www.anthropic.com/research" target="_blank">anthropic.com/research — all papers</a></div>
+      <div class="frontier-item"><a href="https://www.anthropic.com/research/sycophancy-to-subterfuge" target="_blank">Sycophancy to Subterfuge</a></div>
+      <div class="frontier-item"><a href="https://www.anthropic.com/research/alignment-faking" target="_blank">Alignment Faking</a></div>
+      <div class="frontier-item"><a href="https://www.anthropic.com/research/scaling-monosemanticity" target="_blank">Scaling Monosemanticity</a></div>
+    </div>
+    <div class="frontier-card">
+      <div class="frontier-card-title">📄 Paper Feeds</div>
+      <div class="frontier-item"><a href="https://huggingface.co/papers" target="_blank">HuggingFace Papers — daily top</a></div>
+      <div class="frontier-item"><a href="https://paperswithcode.com" target="_blank">Papers With Code — code + benchmarks</a></div>
+      <div class="frontier-item"><a href="https://arxiv.org/list/cs.LG/recent" target="_blank">arXiv cs.LG — ML preprints</a></div>
+      <div class="frontier-item"><a href="https://arxiv.org/list/cs.AI/recent" target="_blank">arXiv cs.AI — AI preprints</a></div>
+    </div>
+    <div class="frontier-card">
+      <div class="frontier-card-title">🧭 AI Safety</div>
+      <div class="frontier-item"><a href="https://www.alignmentforum.org" target="_blank">Alignment Forum — primary research hub</a></div>
+      <div class="frontier-item"><a href="https://www.lesswrong.com" target="_blank">LessWrong — rationality + AI risk</a></div>
+      <div class="frontier-item"><a href="https://metr.org" target="_blank">METR — AI evaluations</a></div>
+      <div class="frontier-item"><a href="https://www.youtube.com/watch?v=bJLcIBixGj8" target="_blank">Robert Miles — Mesa-Optimizers</a></div>
+    </div>
+    <div class="frontier-card">
+      <div class="frontier-card-title">🎯 Mech Interp (Your Friend's Area)</div>
+      <div class="frontier-item"><a href="https://transformer-circuits.pub" target="_blank">transformer-circuits.pub — Anthropic mech interp</a></div>
+      <div class="frontier-item"><a href="https://neel-nanda.io" target="_blank">Neel Nanda — mech interp tutorials</a></div>
+      <div class="frontier-item"><a href="https://arena-ch1-transformers.readthedocs.io" target="_blank">ARENA — mech interp exercises</a></div>
+      <div class="frontier-item"><a href="https://www.anthropic.com/research/scaling-monosemanticity" target="_blank">Scaling Monosemanticity paper</a></div>
+    </div>
+    <div class="frontier-card">
+      <div class="frontier-card-title">🏗️ Build to Learn</div>
+      <div class="frontier-item"><a href="https://www.youtube.com/watch?v=kCc8FmEb1nY" target="_blank">Karpathy — Build GPT from scratch</a></div>
+      <div class="frontier-item"><a href="https://python.langchain.com/docs/tutorials/rag/" target="_blank">LangChain RAG pipeline tutorial</a></div>
+      <div class="frontier-item"><a href="https://course.fast.ai" target="_blank">fast.ai — Practical Deep Learning</a></div>
+      <div class="frontier-item"><a href="https://docs.anthropic.com/en/api/getting-started" target="_blank">Anthropic API — build with Claude</a></div>
+    </div>
+    <div class="frontier-card">
+      <div class="frontier-card-title">📰 Stay Current</div>
+      <div class="frontier-item"><a href="https://www.interconnects.ai" target="_blank">Interconnects (Nathan Lambert) — RLHF</a></div>
+      <div class="frontier-item"><a href="https://www.oneusefulthing.org" target="_blank">One Useful Thing (Ethan Mollick)</a></div>
+      <div class="frontier-item"><a href="https://www.latent.space" target="_blank">Latent Space podcast — for builders</a></div>
+      <div class="frontier-item"><a href="https://www.technologyreview.com/topic/artificial-intelligence/" target="_blank">MIT Tech Review — AI section</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RESOURCES ═══ -->
+<div id="resources" class="panel">
+  <div class="section-title">All Resources</div>
+  <div class="section-sub">// Complete link library by category</div>
+  <div class="resource-grid">
+    <div class="resource-card">
+      <div class="resource-cat">Python — Start Here</div>
+      <a href="https://learnxinyminutes.com/docs/python" target="_blank" class="resource-link">learnxinyminutes.com/docs/python <span>Day 1 — 30 min Java→Python transfer</span></a>
+      <a href="https://cs50.harvard.edu/python" target="_blank" class="resource-link">CS50P — Harvard Python <span>Primary course, 1.5x speed</span></a>
+      <a href="https://numpy.org/doc/stable/user/absolute_beginners.html" target="_blank" class="resource-link">NumPy Absolute Beginners <span>After CS50P Lec 4</span></a>
+      <a href="https://pandas.pydata.org/docs/user_guide/10min.html" target="_blank" class="resource-link">Pandas 10min Guide <span>After NumPy</span></a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-cat">Andrew Ng ML Specialization (Free Audit)</div>
+      <a href="https://www.coursera.org/learn/machine-learning" target="_blank" class="resource-link">⭐ Course 1 — Supervised ML — START HERE <span>Linear + logistic regression</span></a>
+      <a href="https://www.coursera.org/learn/advanced-learning-algorithms" target="_blank" class="resource-link">Course 2 — Advanced Algorithms <span>NNs + TensorFlow (after Course 1)</span></a>
+      <a href="https://www.coursera.org/learn/unsupervised-learning-recommenders-reinforcement-learning" target="_blank" class="resource-link">Course 3 — Unsupervised + RL <span>After Course 2</span></a>
+      <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU" target="_blank" class="resource-link">Stanford CS229 (YouTube) <span>More mathematical supplement</span></a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-cat">Conceptual Foundation</div>
+      <a href="https://www.youtube.com/watch?v=TjZBTDzGeGg" target="_blank" class="resource-link">MIT 6.034 Lec 1 — Intro & Scope <span>Watch FIRST — before anything else</span></a>
+      <a href="https://www.youtube.com/playlist?list=PLUl4u3cNGP63gFHB6xb-kVBiQHYe_4hSi" target="_blank" class="resource-link">MIT 6.034 Full Playlist <span>Lec 10 = Intro to Learning</span></a>
+      <a href="https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/" target="_blank" class="resource-link">MIT 6.034 OCW Page <span>Notes + slides</span></a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-cat">3Blue1Brown Neural Networks</div>
+      <a href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank" class="resource-link">Ch1 — What is a Neural Network?</a>
+      <a href="https://www.youtube.com/watch?v=IHZwWFHWa-w" target="_blank" class="resource-link">Ch2 — Gradient Descent</a>
+      <a href="https://www.youtube.com/watch?v=Ilg3gGewQ5U" target="_blank" class="resource-link">Ch3 — Backpropagation</a>
+      <a href="https://www.youtube.com/watch?v=tIeHLnjs5U8" target="_blank" class="resource-link">Ch4 — Backprop Calculus</a>
+      <a href="https://www.youtube.com/watch?v=wjZofJX0v4M" target="_blank" class="resource-link">Ch5 — Transformers / GPT</a>
+      <a href="https://www.youtube.com/watch?v=eMlx5fFNoYc" target="_blank" class="resource-link">Ch6 — Attention</a>
+      <a href="https://www.youtube.com/watch?v=9-Jl0dxWQs8" target="_blank" class="resource-link">Ch7 — LLM Facts</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-cat">Build</div>
+      <a href="https://docs.anthropic.com/en/api/getting-started" target="_blank" class="resource-link">Anthropic API — first Claude API call</a>
+      <a href="https://python.langchain.com/docs/tutorials/rag/" target="_blank" class="resource-link">LangChain RAG Tutorial <span>Build a real RAG pipeline</span></a>
+      <a href="https://course.fast.ai" target="_blank" class="resource-link">fast.ai — Practical Deep Learning</a>
+      <a href="https://www.youtube.com/watch?v=kCc8FmEb1nY" target="_blank" class="resource-link">Karpathy — Build GPT from Scratch <span>Capstone — do after Ng</span></a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-cat">Entrepreneurship</div>
+      <a href="https://www.startupschool.org" target="_blank" class="resource-link">⭐ YC Startup School — most tactical, free</a>
+      <a href="http://paulgraham.com/ds.html" target="_blank" class="resource-link">PG: Do Things That Don't Scale</a>
+      <a href="http://paulgraham.com/aord.html" target="_blank" class="resource-link">PG: Default Alive or Default Dead</a>
+      <a href="http://paulgraham.com/startupideas.html" target="_blank" class="resource-link">PG: How to Get Startup Ideas</a>
+      <a href="https://www.youtube.com/watch?v=f4_14pZlJBs" target="_blank" class="resource-link">How to Start a Startup Ep 3 (PG)</a>
+      <a href="https://www.youtube.com/watch?v=3Fx5Q8xGU8k" target="_blank" class="resource-link">How to Start a Startup Ep 5 (Thiel)</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-cat">AI Safety Reading Group</div>
+      <a href="https://www.youtube.com/watch?v=bJLcIBixGj8" target="_blank" class="resource-link">Robert Miles — Mesa-Optimizers <span>Wk 3: Inner Alignment</span></a>
+      <a href="https://www.youtube.com/watch?v=ZeecOKBus3Q" target="_blank" class="resource-link">Robert Miles — Instrumental Convergence <span>Wk 4: Threat Models</span></a>
+      <a href="https://www.anthropic.com/research/alignment-faking" target="_blank" class="resource-link">Alignment Faking (Anthropic) <span>Wk 3</span></a>
+      <a href="https://www.anthropic.com/research/sycophancy-to-subterfuge" target="_blank" class="resource-link">Sycophancy to Subterfuge <span>Wk 2</span></a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-cat">Morning Rotation Links</div>
+      <a href="https://www.youtube.com/watch?v=h9Z4oGN89MU" target="_blank" class="resource-link">GPU Architecture (SC Tue Wk1)</a>
+      <a href="https://www.youtube.com/watch?v=o7h_sYMk_oc" target="_blank" class="resource-link">MIT 6.172 Lec 1 (SC Fri Wk1)</a>
+      <a href="https://www.youtube.com/watch?v=F_Riqjdh2oM" target="_blank" class="resource-link">Microsoft QC for CS (QC Wed Wk1)</a>
+      <a href="https://learning.quantum.ibm.com" target="_blank" class="resource-link">IBM Qiskit Learning (QC Wk2)</a>
+      <a href="https://pennylane.ai/qml" target="_blank" class="resource-link">PennyLane Quantum ML (QC Wk3)</a>
+      <a href="https://cse.sc.edu/~jokane/agitr/" target="_blank" class="resource-link">Gentle Intro to ROS (Rob Thu Wk1)</a>
+      <a href="https://docs.ros.org/en/humble/Installation.html" target="_blank" class="resource-link">ROS 2 Humble Install (Rob Wed Wk2)</a>
+      <a href="https://www.youtube.com/watch?v=PRaSlUA78gQ" target="_blank" class="resource-link">MIT 6.832 Lec 1 (Rob Sat Wk2)</a>
+      <a href="https://gymnasium.farama.org" target="_blank" class="resource-link">Gymnasium / CartPole (Rob Wed Wk3)</a>
+      <a href="https://hpc.llnl.gov/documentation/tutorials/introduction-parallel-computing-tutorial" target="_blank" class="resource-link">LLNL MPI Tutorial (SC Mon Wk3)</a>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+  function switchTab(id, el) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+  }
+
+  function toggleDay(panelId, card, event) {
+    // Don't toggle if clicking a link inside the card
+    if (event.target.tagName === 'A') return;
+
+    const panel = document.getElementById(panelId);
+    const grid = card.closest('.day-grid');
+    const allCards = grid.querySelectorAll('.day-card');
+    const allPanels = grid.querySelectorAll('.day-expand-panel');
+    const isOpen = panel.classList.contains('open');
+
+    // Close all expand panels and deselect all cards in this grid
+    allPanels.forEach(p => p.classList.remove('open'));
+    allCards.forEach(c => c.classList.remove('expanded'));
+
+    if (!isOpen) {
+      // Open this one
+      panel.classList.add('open');
+      card.classList.add('expanded');
+
+      // Scroll the expand panel into view smoothly
+      setTimeout(() => {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 50);
+    }
+
+    // Update arrow indicators
+    allCards.forEach(c => {
+      const arrow = c.querySelector('.day-name span');
+      if (arrow) arrow.textContent = c.classList.contains('expanded') ? '↑' : '↓';
     });
-    cal.appendChild(gr);
-  });
-}
+  }
 
-function renderRes(){
-  const g=document.getElementById('rg');
-  const tc={ai:'var(--ai)',safe:'var(--safe)',biz:'var(--biz)',py:'var(--py)',sc:'var(--sc)',qc:'var(--qc)',rb:'var(--rb)',ng:'var(--ng)'};
-  const tl={ai:'AI / ML',safe:'AI SAFETY',biz:'ENTREPRENEURSHIP',py:'PYTHON',sc:'SUPERCOMPUTING ☀️',qc:'QUANTUM ☀️',rb:'ROBOTICS ☀️',ng:'ANDREW NG'};
-  RESOURCES.forEach(r=>{
-    const c=document.createElement('div');c.className='rc';c.dataset.type=r.type;
-    c.innerHTML=`<div class="rtype" style="color:${tc[r.type]}">${tl[r.type]}</div><div class="rtitle">${r.title}</div><div class="rdesc">${r.desc}</div>${r.link?`<a class="rlink" href="${r.link}" target="_blank" rel="noopener">↗ ${r.lt}</a>`:''}`;
-    g.appendChild(c);
-  });
-}
+  function closeDay(panelId, event) {
+    event.stopPropagation();
+    const panel = document.getElementById(panelId);
+    panel.classList.remove('open');
+    // Find the card that opened this panel and deselect it
+    const grid = panel.closest('.day-grid');
+    grid.querySelectorAll('.day-card').forEach(c => {
+      c.classList.remove('expanded');
+      const arrow = c.querySelector('.day-name span');
+      if (arrow) arrow.textContent = '↓';
+    });
+  }
 
-function filt(type,btn){
-  document.querySelectorAll('.rfb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
-  document.querySelectorAll('.rc').forEach(c=>c.classList.toggle('hidden',type!=='all'&&c.dataset.type!==type));
-}
-function tab(name,btn){
-  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  btn.classList.add('active');document.getElementById('view-'+name).classList.add('active');
-}
-document.getElementById('tday').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
-renderCal();renderRes();
+  const d = new Date();
+  document.getElementById('datebadge').textContent =
+    'UCSD · POSEIDON FELLOWS · ' + d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}).toUpperCase();
 </script>
 </body>
 </html>
