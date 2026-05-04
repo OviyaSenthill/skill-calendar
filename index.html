@@ -4,44 +4,58 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Poseidon Fellows learning dashboard: 3-week schedule, spine, ML concepts, papers, and resources. Starts May 4, 2026.">
-<meta name="theme-color" content="#0a0a0f">
+<meta name="theme-color" content="#0b0e14">
 <title>Poseidon Fellows — Learning Dashboard · Started May 4</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --surface2: #16161f;
-    --border: #1e1e2e;
+    --bg: #0b0e14;
+    --surface: #12151c;
+    --surface2: #181c27;
+    --border: #232836;
     --accent: #5b8aff;
-    --accent2: #a78bfa;
-    --accent3: #34d399;
+    --accent2: #c084fc;
+    --accent3: #4ade80;
     --accent4: #fb923c;
-    --accent5: #f472b6;
-    --text: #e8e8f0;
-    --text2: #9898b0;
-    --text3: #5a5a72;
+    --accent5: #fb7185;
+    --text: #eef1f7;
+    --text2: #9aa3b5;
+    --text3: #5c6577;
     --sc: #5b8aff;
-    --qc: #a78bfa;
-    --rob: #34d399;
+    --qc: #e879f9;
+    --rob: #4ade80;
     --warning: #fbbf24;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; font-size: 14px; line-height: 1.6; }
-  header { padding: 28px 32px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; background: rgba(10,10,15,0.95); backdrop-filter: blur(12px); z-index: 100; }
-  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
+  body {
+    background:
+      radial-gradient(1200px 500px at 15% -10%, rgba(91,138,255,0.12), transparent 55%),
+      radial-gradient(1000px 450px at 95% 0%, rgba(192,132,252,0.1), transparent 45%),
+      var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  header { padding: 24px 32px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; position: sticky; top: 0; background: rgba(11,14,20,0.92); backdrop-filter: blur(12px); z-index: 100; }
+  .brand { max-width: min(560px, 72vw); }
+  .brand-title { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; line-height: 1; }
+  .brand-serif { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(28px, 4vw, 36px); font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+  .brand-italic { font-family: 'Inter', sans-serif; font-size: clamp(28px, 4vw, 36px); font-weight: 700; font-style: italic; color: var(--accent); letter-spacing: -0.03em; }
+  .brand-tagline { font-size: 12.5px; color: var(--text2); line-height: 1.55; }
   .logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(91,138,255,0.4)} 50%{opacity:0.7;box-shadow:0 0 0 6px rgba(91,138,255,0)} }
   @media (prefers-reduced-motion: reduce) {
     .logo-dot { animation: none; }
     .day-card { transition: none; }
   }
-  .date-badge { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text3); letter-spacing: 0.05em; }
-  .tabs { display: flex; gap: 2px; padding: 0 32px; border-bottom: 1px solid var(--border); background: var(--surface); overflow-x: auto; }
-  .tab { padding: 14px 20px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; color: var(--text3); border: none; background: none; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
-  .tab:hover { color: var(--text2); }
-  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-  main { padding: 32px; max-width: 1400px; margin: 0 auto; }
+  .date-pill { flex-shrink: 0; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.02em; color: var(--accent); background: rgba(91,138,255,0.12); border: 1px solid rgba(91,138,255,0.35); padding: 10px 16px; border-radius: 999px; }
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; padding: 14px 32px 18px; border-bottom: 1px solid var(--border); background: rgba(8,10,16,0.7); overflow-x: auto; position: sticky; top: 86px; z-index: 90; backdrop-filter: blur(10px); }
+  .tab { padding: 9px 16px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; color: var(--text2); border: 1px solid var(--border); border-radius: 999px; background: var(--surface); transition: all 0.2s; white-space: nowrap; }
+  .tab:hover { color: var(--text); border-color: rgba(91,138,255,0.35); }
+  .tab.active { color: #fff; background: linear-gradient(135deg, #4f7cff 0%, #5b8aff 52%, #7ca3ff 100%); border-color: transparent; box-shadow: 0 6px 22px rgba(91,138,255,0.4); }
+  main { padding: 28px 32px 48px; max-width: 1420px; margin: 0 auto; }
   .panel { display: none; }
   .panel.active { display: block; }
   .section-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 22px; margin-bottom: 6px; letter-spacing: -0.02em; }
@@ -76,18 +90,59 @@
   .concept-analogy { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text3); border-left: 2px solid var(--border); padding-left: 10px; line-height: 1.5; }
 
   /* SCHEDULE */
-  .week-header { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; margin: 32px 0 16px; display: flex; align-items: center; gap: 12px; }
-  .week-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-  .day-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 12px; }
-  .day-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; min-height: 180px; }
-  .day-name { padding: 8px 10px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border); }
+  .insight-row { display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px; margin-bottom: 22px; }
+  @media (max-width: 900px) { .insight-row { grid-template-columns: 1fr; } }
+  .rotation-card, .spotlight-card { border-radius: 12px; padding: 18px 20px; border: 1px solid var(--border); background: linear-gradient(165deg, var(--surface) 0%, rgba(24,28,39,0.9) 100%); }
+  .rc-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; margin-bottom: 14px; color: var(--text2); }
+  .rotation-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 6px; font-family: 'DM Mono', monospace; font-size: 11px; margin-bottom: 12px; }
+  .rf { padding: 8px 12px; border-radius: 8px; font-weight: 600; letter-spacing: 0.06em; }
+  .rf-sc { background: rgba(91,138,255,0.15); color: var(--sc); border: 1px solid rgba(91,138,255,0.35); }
+  .rf-qc { background: rgba(232,121,249,0.12); color: var(--qc); border: 1px solid rgba(232,121,249,0.35); }
+  .rf-rob { background: rgba(74,222,128,0.12); color: var(--rob); border: 1px solid rgba(74,222,128,0.35); }
+  .rf-rev { background: rgba(251,191,36,0.1); color: var(--warning); border: 1px solid rgba(251,191,36,0.35); }
+  .rf-arrow { color: var(--text3); font-size: 14px; opacity: 0.85; }
+  .rotation-hint { font-size: 12px; color: var(--text3); line-height: 1.5; }
+  .spotlight-ng { display: flex; gap: 14px; align-items: flex-start; background: linear-gradient(135deg, rgba(74,222,128,0.08) 0%, rgba(24,28,39,0.95) 100%); border-color: rgba(74,222,128,0.25); }
+  .spotlight-icon { font-size: 24px; line-height: 1; flex-shrink: 0; }
+  .spotlight-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent3); margin-bottom: 4px; }
+  .spotlight-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 6px; letter-spacing: -0.02em; }
+  .spotlight-desc { font-size: 12px; color: var(--text2); line-height: 1.55; }
+  .filter-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .fpill { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); color: var(--text2); background: var(--surface); }
+  .fp-sc { border-color: rgba(91,138,255,0.45); color: var(--sc); }
+  .fp-qc { border-color: rgba(232,121,249,0.45); color: var(--qc); }
+  .fp-rob { border-color: rgba(74,222,128,0.45); color: var(--rob); }
+  .fp-rev { border-color: rgba(251,191,36,0.45); color: var(--warning); }
+  .fp-py { border-color: rgba(251,146,60,0.45); color: var(--accent4); }
+  .fp-ml { border-color: rgba(91,138,255,0.45); color: var(--accent); }
+  .fp-safe { border-color: rgba(251,113,133,0.45); color: var(--accent5); }
+  .fp-build { border-color: rgba(244,114,182,0.45); color: var(--accent5); }
+  .fp-ai { border-color: rgba(192,132,252,0.45); color: var(--accent2); }
+  .day-grid-labels { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-bottom: 8px; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); text-align: center; }
+  .week-header { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.14em; margin: 28px 0 14px; display: flex; align-items: center; gap: 12px; }
+  .week-header::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+  .day-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-bottom: 14px; }
+  .day-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; min-height: 180px; }
+  .day-name { padding: 9px 10px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.2); }
   .morning-block { padding: 8px 10px; border-bottom: 1px solid var(--border); font-size: 11px; }
   .morning-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px; opacity: 0.7; }
-  .morning-sc { color: var(--sc); border-left: 2px solid var(--sc); padding-left: 6px; }
-  .morning-qc { color: var(--qc); border-left: 2px solid var(--qc); padding-left: 6px; }
-  .morning-rob { color: var(--rob); border-left: 2px solid var(--rob); padding-left: 6px; }
-  .morning-review { color: var(--warning); border-left: 2px solid var(--warning); padding-left: 6px; }
-  .day-content { padding: 10px; font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .morning-sc { color: var(--sc); border-left: 3px solid var(--sc); padding-left: 8px; }
+  .morning-qc { color: var(--qc); border-left: 3px solid var(--qc); padding-left: 8px; }
+  .morning-rob { color: var(--rob); border-left: 3px solid var(--rob); padding-left: 8px; }
+  .morning-review { color: var(--warning); border-left: 3px solid var(--warning); padding-left: 8px; }
+  .day-content { padding: 12px; font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .day-content::after {
+    content: '';
+    display: block;
+    width: 34px;
+    height: 7px;
+    margin-top: 10px;
+    background:
+      radial-gradient(circle at 3.5px 3.5px, var(--sc) 0 3px, transparent 3.2px),
+      radial-gradient(circle at 16px 3.5px, var(--qc) 0 3px, transparent 3.2px),
+      radial-gradient(circle at 28px 3.5px, var(--rob) 0 3px, transparent 3.2px);
+    opacity: 0.9;
+  }
   .day-content a { color: var(--accent); text-decoration: none; font-family: 'DM Mono', monospace; font-size: 10px; }
   .day-content a:hover { text-decoration: underline; }
   .tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px; padding: 1px 6px; border-radius: 3px; margin-bottom: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
@@ -143,24 +198,24 @@
 
   /* TODAY highlight */
   .day-card.today {
-    border-color: var(--accent3);
-    box-shadow: 0 0 0 1px var(--accent3), 0 0 20px rgba(52,211,153,0.1);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(91,138,255,0.55), 0 0 28px rgba(91,138,255,0.35);
   }
   .day-card.today .day-name {
-    background: rgba(52,211,153,0.12);
-    color: var(--accent3);
+    background: rgba(91,138,255,0.12);
+    color: var(--accent);
   }
   .today-pill {
     display: inline-block;
-    background: var(--accent3);
-    color: #0a0a0f;
+    background: var(--accent);
+    color: #0b0e14;
     font-family: 'DM Mono', monospace;
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 700;
     letter-spacing: 0.08em;
-    padding: 1px 6px;
-    border-radius: 3px;
-    margin-left: 6px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    margin-left: 4px;
     vertical-align: middle;
   }
   .restart-banner {
@@ -334,13 +389,16 @@
 <body>
 
 <header>
-  <div class="logo"><span class="logo-dot"></span>POSEIDON FELLOWS — LEARNING OS</div>
-  <div class="date-badge" id="datebadge">UCSD · INAUGURAL COHORT · 2026</div>
+  <div class="brand">
+    <div class="brand-title"><span class="brand-serif">Poseidon</span><span class="brand-italic">Fellows</span></div>
+    <p class="brand-tagline">☀️ Morning rotation (25–30 min) · 🍃 Main block after · Pace 1–2 hrs/day · Started May 4, 2026</p>
+  </div>
+  <div class="date-pill" id="datebadge">Monday, May 4</div>
 </header>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('spine',this)">LEARNING SPINE</button>
-  <button class="tab" onclick="switchTab('schedule',this)">SCHEDULE</button>
+  <button class="tab active" onclick="switchTab('schedule',this)">SCHEDULE</button>
+  <button class="tab" onclick="switchTab('spine',this)">LEARNING SPINE</button>
   <button class="tab" onclick="switchTab('concepts',this)">ML CONCEPTS</button>
   <button class="tab" onclick="switchTab('papers',this)">PAPERS</button>
   <button class="tab" onclick="switchTab('frontier',this)">FRONTIER</button>
@@ -350,7 +408,7 @@
 <main>
 
 <!-- ═══ SPINE ═══ -->
-<div id="spine" class="panel active">
+<div id="spine" class="panel">
   <div class="section-title">The Optimized Learning Spine</div>
   <div class="section-sub">// Started May 4, 2026 · Do these in order. Don't skip layers. Each one enables the next.</div>
 
@@ -497,9 +555,30 @@
 </div>
 
 <!-- ═══ SCHEDULE ═══ -->
-<div id="schedule" class="panel">
+<div id="schedule" class="panel active">
   <div class="section-title">3-Week Schedule</div>
   <div class="section-sub">// Started May 4, 2026 · 1–2 hours/day · Morning rotation (25-30 min) before everything else</div>
+
+  <div class="insight-row">
+    <div class="rotation-card">
+      <div class="rc-title">Daily morning rotation</div>
+      <div class="rotation-flow">
+        <span class="rf rf-sc">SC</span><span class="rf-arrow">→</span>
+        <span class="rf rf-qc">QC</span><span class="rf-arrow">→</span>
+        <span class="rf rf-rob">ROB</span><span class="rf-arrow">→</span>
+        <span class="rf rf-rev">REVIEW</span>
+      </div>
+      <p class="rotation-hint"><strong>Mon+Thu</strong> supercomputing · <strong>Tue+Fri</strong> quantum · <strong>Wed+Sat</strong> robotics · <strong>Sun</strong> review · Week 1 starts with May 4 orientation.</p>
+    </div>
+    <div class="spotlight-card spotlight-ng">
+      <div class="spotlight-icon">🏆</div>
+      <div>
+        <div class="spotlight-label">Course focus</div>
+        <div class="spotlight-title">Andrew Ng — ML Specialization</div>
+        <p class="spotlight-desc">Keep this as the implementation backbone while MIT 6.034 + 3B1B build the concept layer.</p>
+      </div>
+    </div>
+  </div>
 
   <div class="restart-banner">
     <div class="restart-banner-icon">🟢</div>
@@ -509,12 +588,20 @@
     </div>
   </div>
 
-  <div class="legend">
-    <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);">MORNING:</span>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--sc)"></span>SUPERCOMPUTING (Mon+Thu; Wk1 Tue after May 4 orientation)</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--qc)"></span>QUANTUM (Tue+Fri)</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--rob)"></span>ROBOTICS (Wed+Sat)</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--warning)"></span>REVIEW ALL 3 (Sun)</div>
+  <div class="filter-pills">
+    <span class="fpill fp-sc">Supercomputing</span>
+    <span class="fpill fp-qc">Quantum</span>
+    <span class="fpill fp-rob">Robotics</span>
+    <span class="fpill fp-rev">Review</span>
+    <span class="fpill fp-py">Python</span>
+    <span class="fpill fp-ml">Ng / ML</span>
+    <span class="fpill fp-ai">MIT + 3B1B</span>
+    <span class="fpill fp-build">Build</span>
+    <span class="fpill fp-safe">AI Safety</span>
+  </div>
+
+  <div class="day-grid-labels" aria-hidden="true">
+    <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
   </div>
 
   <div class="week-header">Week 1 — May 4–10 · Concept Foundation · Mon→Sun</div>
@@ -713,6 +800,9 @@
     </div>
   </div>
 
+  <div class="day-grid-labels" aria-hidden="true">
+    <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+  </div>
   <div class="week-header">Week 2 — May 11–17 · Andrew Ng Course 1 + Math Visual · Mon→Sun</div>
   <div class="day-grid" id="wk2-grid">
     <div class="day-card" onclick="toggleDay('wk2-mon',this,event)">
@@ -898,6 +988,9 @@
     </div>
   </div>
 
+  <div class="day-grid-labels" aria-hidden="true">
+    <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+  </div>
   <div class="week-header">Week 3 — May 18–24 · Build + Papers + Deepen · Mon→Sun</div>
   <div class="day-grid" id="wk3-grid">
     <div class="day-card" onclick="toggleDay('wk3-mon',this,event)">
@@ -1439,7 +1532,7 @@
 
     // Update arrow indicators
     allCards.forEach(c => {
-      const arrow = c.querySelector('.day-name span');
+      const arrow = c.querySelector('.day-name span:last-child');
       if (arrow) arrow.textContent = c.classList.contains('expanded') ? '↑' : '↓';
     });
   }
@@ -1452,14 +1545,14 @@
     const grid = panel.closest('.day-grid');
     grid.querySelectorAll('.day-card').forEach(c => {
       c.classList.remove('expanded');
-      const arrow = c.querySelector('.day-name span');
+      const arrow = c.querySelector('.day-name span:last-child');
       if (arrow) arrow.textContent = '↓';
     });
   }
 
   const d = new Date();
   document.getElementById('datebadge').textContent =
-    'UCSD · POSEIDON FELLOWS · ' + d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}).toUpperCase();
+    d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
 </script>
 </body>
 </html>
